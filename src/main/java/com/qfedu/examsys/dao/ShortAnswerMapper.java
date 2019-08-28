@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.ShortAnswer;
+
+import com.qfedu.examsys.pojo.ShortAnswer;
 
 public interface ShortAnswerMapper {
     int deleteByPrimaryKey(Integer id);

@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.Answer;
+
+import com.qfedu.examsys.pojo.Answer;
 
 public interface AnswerMapper {
     int deleteByPrimaryKey(Integer id);

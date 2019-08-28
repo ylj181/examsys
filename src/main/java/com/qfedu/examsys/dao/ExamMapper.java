@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.Exam;
+
+import com.qfedu.examsys.pojo.Exam;
 
 public interface ExamMapper {
     int deleteByPrimaryKey(Integer id);

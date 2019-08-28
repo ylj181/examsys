@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.Role;
+
+import com.qfedu.examsys.pojo.Role;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);

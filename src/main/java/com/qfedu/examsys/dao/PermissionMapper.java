@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.Permission;
+
+import com.qfedu.examsys.pojo.Permission;
 
 public interface PermissionMapper {
     int deleteByPrimaryKey(Integer id);

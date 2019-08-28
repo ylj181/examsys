@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.Judge;
+
+import com.qfedu.examsys.pojo.Judge;
 
 public interface JudgeMapper {
     int deleteByPrimaryKey(Integer id);

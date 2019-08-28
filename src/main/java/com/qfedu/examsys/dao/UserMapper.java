@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.User;
+
+import com.qfedu.examsys.pojo.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);

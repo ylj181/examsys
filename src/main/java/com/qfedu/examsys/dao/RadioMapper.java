@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
-import pojo.Radio;
+
+import com.qfedu.examsys.pojo.Radio;
 
 public interface RadioMapper {
     int deleteByPrimaryKey(Integer id);

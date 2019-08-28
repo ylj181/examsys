@@ -1,5 +1,7 @@
 package com.qfedu.examsys.dao;
-import pojo.RolePermission;
+
+
+import com.qfedu.examsys.pojo.RolePermission;
 
 public interface RolePermissionMapper {
     int deleteByPrimaryKey(Integer id);

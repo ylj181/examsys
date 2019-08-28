@@ -1,5 +1,7 @@
 package com.qfedu.examsys.dao;
-import pojo.Subject;
+
+
+import com.qfedu.examsys.pojo.Subject;
 
 public interface SubjectMapper {
     int deleteByPrimaryKey(Integer id);
