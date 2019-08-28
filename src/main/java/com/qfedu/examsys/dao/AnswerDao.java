@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Answer;
 
-public interface AnswerMapper {
+public interface AnswerDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Answer record);

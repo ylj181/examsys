@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Exam;
 
-public interface ExamMapper {
+public interface ExamDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Exam record);

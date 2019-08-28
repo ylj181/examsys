@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Radio;
 
-public interface RadioMapper {
+public interface RadioDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Radio record);

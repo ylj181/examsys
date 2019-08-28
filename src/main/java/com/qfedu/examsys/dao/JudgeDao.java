@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Judge;
 
-public interface JudgeMapper {
+public interface JudgeDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Judge record);

@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Subject;
 
-public interface SubjectMapper {
+public interface SubjectDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Subject record);

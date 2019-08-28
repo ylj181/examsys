@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Role;
 
-public interface RoleMapper {
+public interface RoleDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Role record);

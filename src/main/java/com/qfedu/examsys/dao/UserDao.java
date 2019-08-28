@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.User;
 
-public interface UserMapper {
+public interface UserDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);

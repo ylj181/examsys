@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.ShortAnswer;
 
-public interface ShortAnswerMapper {
+public interface ShortAnswerDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ShortAnswer record);

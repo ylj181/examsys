@@ -3,7 +3,7 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Permission;
 
-public interface PermissionMapper {
+public interface PermissionDao {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Permission record);
