@@ -1,4 +1,4 @@
-package pojo;
+package com.qfedu.examsys.pojo;
 
 public class Judge {
     private Integer id;

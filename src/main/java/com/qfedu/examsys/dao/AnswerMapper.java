@@ -11,7 +11,7 @@ public interface AnswerMapper {
 
     Answer selectByPrimaryKey(Integer id);
 
-    public int updateByPrimaryKeySelective(Answer record);
+    int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);
 }

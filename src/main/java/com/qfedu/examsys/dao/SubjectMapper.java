@@ -1,5 +1,4 @@
-package dao;
-
+package com.qfedu.examsys.dao;
 import pojo.Subject;
 
 public interface SubjectMapper {

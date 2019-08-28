@@ -1,4 +1,4 @@
-package pojo;
+package com.qfedu.examsys.pojo;
 
 public class ETest {
     private Integer id;

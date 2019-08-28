@@ -1,5 +1,4 @@
-package dao;
-
+package com.qfedu.examsys.dao;
 import pojo.RolePermission;
 
 public interface RolePermissionMapper {

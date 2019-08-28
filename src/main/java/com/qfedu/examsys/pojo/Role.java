@@ -1,4 +1,4 @@
-package pojo;
+package com.qfedu.examsys.pojo;
 
 public class Role {
     private Integer id;

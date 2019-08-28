@@ -1,4 +1,4 @@
-package dao;
+package com.qfedu.examsys.dao;
 
 import pojo.Permission;
 

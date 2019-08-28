@@ -1,4 +1,4 @@
-package pojo;
+package com.qfedu.examsys.pojo;
 
 import java.util.Date;
 
