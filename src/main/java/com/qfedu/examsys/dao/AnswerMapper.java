@@ -1,4 +1,4 @@
-package dao;
+package com.qfedu.examsys.dao;
 
 import pojo.Answer;
 
@@ -11,7 +11,7 @@ public interface AnswerMapper {
 
     Answer selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Answer record);
+    public int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);
 }
