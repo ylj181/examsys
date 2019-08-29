@@ -5,7 +5,7 @@ import com.qfedu.examsys.pojo.Answer;
 
 public interface AnswerDao {
     int deleteByPrimaryKey(Integer id);
-//   nkjvkdb
+
     int insert(Answer record);
 
     int insertSelective(Answer record);
