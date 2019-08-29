@@ -2,7 +2,9 @@ package com.qfedu.examsys.beforecontroller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qfedu.examsys.pojo.Judge;
 import com.qfedu.examsys.pojo.Radio;
+import com.qfedu.examsys.service.JudgeService;
 import com.qfedu.examsys.service.RadioService;
 import com.qfedu.examsys.utils.ExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,15 @@ public class ImportController {
     @Autowired
     private RadioService radioService;
 
+    @Autowired
+    private JudgeService judgeService;
+
 
     @RequestMapping("/importRadio")
-    public String importExcel(@RequestParam MultipartFile upfile) {
+    public String importExcelRadio(@RequestParam MultipartFile upfile) {
         // 获取上传文件的输入流对象
         try {
             InputStream inputStream = upfile.getInputStream();
-
             String filename = upfile.getOriginalFilename();
             List<Map<String, Object>> list = ExcelUtils.readExcel(filename, inputStream);
 
@@ -39,13 +43,30 @@ public class ImportController {
             });
             System.out.println(ulist);
             radioService.insertMany(ulist);
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "redirect:/index.html";
+    }
 
+    @RequestMapping("/importJudge")
+    public String importExcelJudge(@RequestParam MultipartFile upfile) {
+        // 获取上传文件的输入流对象
+        try {
+            InputStream inputStream = upfile.getInputStream();
+            String filename = upfile.getOriginalFilename();
+            List<Map<String, Object>> list = ExcelUtils.readExcel(filename, inputStream);
 
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonStr = objectMapper.writeValueAsString(list);
+
+            List<Judge> ulist = objectMapper.readValue(jsonStr, new TypeReference<List<Judge>>() {
+            });
+            System.out.println(ulist);
+            judgeService.insertManyJudges(ulist);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:/index.html";
     }
 }
