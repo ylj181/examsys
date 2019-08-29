@@ -24,7 +24,7 @@ public class UserController {
     public JsonResult login(String username,String password){
         User user = userService.login( username );
         String password1 = user.getPassword();
-        if (password == password1){
+        if (password.equals( password1 ) ){
             return new JsonResult( 1,"登陆成功" );
         }else {
             return new JsonResult( 0,"账号或密码错误" );
@@ -44,6 +44,19 @@ public class UserController {
         return new JsonResult( 1,"添加成功" );
     }
 
+    //管理员给老师进行注册 自动注册成老师
+    @RequestMapping("/addTeacher")
+    @ResponseBody
+    public JsonResult addTeacher(User record){
+        record.setRid(2);
+        Date date = new Date( );
+        record.setCreatetime( date );
+        userService.insert(record);
+
+        return new JsonResult( 1,"添加成功" );
+    }
+
+
     //前端给出rid  查询出
     @RequestMapping("/findAllRole.do")
     @ResponseBody
@@ -51,6 +64,8 @@ public class UserController {
         List<User> userList = userService.findAllRole( rid );
         return new JsonResult( 1,userList );
     }
+
+    //修改个人密码
 
 
 }
