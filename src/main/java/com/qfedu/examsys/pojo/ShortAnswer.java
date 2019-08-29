@@ -7,6 +7,16 @@ public class ShortAnswer {
 
     private String answer;
 
+    private Integer subjectId;
+
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
+    }
+
     public Integer getId() {
         return id;
     }

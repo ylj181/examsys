@@ -1,19 +1,22 @@
 package com.qfedu.examsys.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Radio {
     private Integer id;
 
-    private Integer subjectid;
+    private Integer subjectId;
 
     private String title;
 
-    private String choicea;
+    private String choiceA;
 
-    private String choiceb;
+    private String choiceB;
 
-    private String choicec;
+    private String choiceC;
 
-    private String choiced;
+    private String choiceD;
 
     private String answer;
 
@@ -25,12 +28,12 @@ public class Radio {
         this.id = id;
     }
 
-    public Integer getSubjectid() {
-        return subjectid;
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubjectid(Integer subjectid) {
-        this.subjectid = subjectid;
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String getTitle() {
@@ -38,39 +41,39 @@ public class Radio {
     }
 
     public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+        this.title = title;
     }
 
-    public String getChoicea() {
-        return choicea;
+    public String getChoiceA() {
+        return choiceA;
     }
 
-    public void setChoicea(String choicea) {
-        this.choicea = choicea == null ? null : choicea.trim();
+    public void setChoiceA(String choiceA) {
+        this.choiceA = choiceA;
     }
 
-    public String getChoiceb() {
-        return choiceb;
+    public String getChoiceB() {
+        return choiceB;
     }
 
-    public void setChoiceb(String choiceb) {
-        this.choiceb = choiceb == null ? null : choiceb.trim();
+    public void setChoiceB(String choiceB) {
+        this.choiceB = choiceB;
     }
 
-    public String getChoicec() {
-        return choicec;
+    public String getChoiceC() {
+        return choiceC;
     }
 
-    public void setChoicec(String choicec) {
-        this.choicec = choicec == null ? null : choicec.trim();
+    public void setChoiceC(String choiceC) {
+        this.choiceC = choiceC;
     }
 
-    public String getChoiced() {
-        return choiced;
+    public String getChoiceD() {
+        return choiceD;
     }
 
-    public void setChoiced(String choiced) {
-        this.choiced = choiced == null ? null : choiced.trim();
+    public void setChoiceD(String choiceD) {
+        this.choiceD = choiceD;
     }
 
     public String getAnswer() {
@@ -78,6 +81,20 @@ public class Radio {
     }
 
     public void setAnswer(String answer) {
-        this.answer = answer == null ? null : answer.trim();
+        this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return "Radio{" +
+                "id=" + id +
+                ", subjectId=" + subjectId +
+                ", title='" + title + '\'' +
+                ", choiceA='" + choiceA + '\'' +
+                ", choiceB='" + choiceB + '\'' +
+                ", choiceC='" + choiceC + '\'' +
+                ", choiceD='" + choiceD + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
     }
 }
