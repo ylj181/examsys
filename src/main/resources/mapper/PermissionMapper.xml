@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.PermissionMapper" >
-  <resultMap id="BaseResultMap" type="pojo.Permission" >
+<mapper namespace="com.qfedu.examsys.dao.PermissionDao" >
+  <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Permission" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
@@ -18,11 +18,11 @@
     delete from permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="pojo.Permission" >
+  <insert id="insert" parameterType="com.qfedu.examsys.pojo.Permission" >
     insert into permission (id, name)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="pojo.Permission" >
+  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Permission" >
     insert into permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -41,7 +41,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.Permission" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Permission" >
     update permission
     <set >
       <if test="name != null" >
@@ -50,7 +50,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.Permission" >
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Permission" >
     update permission
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.ETestMapper" >
-  <resultMap id="BaseResultMap" type="pojo.ETest" >
+<mapper namespace="com.qfedu.examsys.dao." >
+  <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.ETest" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
     delete from etest
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="pojo.ETest" >
+  <insert id="insert" parameterType="com.qfedu.examsys.pojo.ETest" >
     insert into etest (id, subjectId, name, 
       radioId, judgeId, shortAnswerId
       )
@@ -30,7 +30,7 @@
       #{radioid,jdbcType=INTEGER}, #{judgeid,jdbcType=INTEGER}, #{shortanswerid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="pojo.ETest" >
+  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.ETest" >
     insert into etest
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.ETest" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.ETest" >
     update etest
     <set >
       <if test="subjectid != null" >
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.ETest" >
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.ETest" >
     update etest
     set subjectId = #{subjectid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},

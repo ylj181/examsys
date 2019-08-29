@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.ExamMapper" >
-  <resultMap id="BaseResultMap" type="pojo.Exam" >
+<mapper namespace="com.qfedu.examsys.dao.ExamDao" >
+  <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Exam" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
     <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
@@ -20,13 +20,13 @@
     delete from exam
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="pojo.Exam" >
+  <insert id="insert" parameterType="com.qfedu.examsys.pojo.Exam" >
     insert into exam (id, subjectId, startTime, 
       endTime)
     values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
       #{endtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="pojo.Exam" >
+  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Exam" >
     insert into exam
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="pojo.Exam" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Exam" >
     update exam
     <set >
       <if test="subjectid != null" >
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="pojo.Exam" >
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Exam" >
     update exam
     set subjectId = #{subjectid,jdbcType=INTEGER},
       startTime = #{starttime,jdbcType=TIMESTAMP},

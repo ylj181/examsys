@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+</head>
+<body>
+
+<form action=""  onsubmit="return false" >
+    username<input type="text" name="username" /><br />
+    passwrod<input type="text" name="password" /><br />
+    <input type="submit"  value="login"  /><br />
+</form>
+
+<script type="text/javascript">
+
+    $("form").submit(function(){
+        $.ajax({
+            type:"post",
+            url:"login",
+            data: $("form").serialize(),
+            dataType:"json",
+            success:function(data){
+                if(data.code == 1){
+                    window.location.href = "index.html";
+                }else {
+                    alert(data.info);
+                }
+            }
+        })
+    })
+
+
+</script>
+</body>
+</html>
