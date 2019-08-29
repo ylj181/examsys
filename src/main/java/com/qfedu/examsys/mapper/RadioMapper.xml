@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dao.RadioMapper" >
+<mapper namespace="com.qfedu.examsys.dao.RadioDao" >
   <resultMap id="BaseResultMap" type="pojo.Radio" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
@@ -125,4 +125,16 @@
       answer = #{answer,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<!--
+陈曦创建：
+时间8.29 18:00
+-->
+  <insert id="insertMany">
+    insert into radio(subjectId, title, choiceA, choiceB, choiceC, choiceD, answer)
+    values
+    <foreach collection="list" item="radio" separator=",">
+      (#{radio.subjectId},#{radio.title},#{radio.choiceA},#{radio.choiceB},#{radio.choiceC},#{radio.choiceD},#{radio.answer})
+    </foreach>
+  </insert>
 </mapper>
