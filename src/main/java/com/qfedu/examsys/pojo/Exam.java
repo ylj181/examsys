@@ -3,6 +3,7 @@ package com.qfedu.examsys.pojo;
 import java.util.Date;
 
 public class Exam {
+
     private Integer id;
 
     private Integer subjectid;
