@@ -2,10 +2,7 @@ package com.qfedu.examsys.service.serviceImpl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qfedu.examsys.dao.ETestDao;
-import com.qfedu.examsys.dao.JudgeDao;
-import com.qfedu.examsys.dao.RadioDao;
-import com.qfedu.examsys.dao.ShortAnswerDao;
+import com.qfedu.examsys.dao.*;
 import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.utils.TestMapperUtils;
@@ -43,6 +40,9 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Autowired(required = false)
     private ETestDao eTestDao;
 
+    @Autowired(required = false)
+    private AnswerDao answerDao;
+
 
     //根据subjectId 获取题库  判断题 Judge 10道 单选题 Radio 10  ShortAnswer简单题 5道题
     @Override
@@ -75,9 +75,9 @@ public class TestPaperServiceImpl implements TestPaperService {
 
         return allTestList;
     }
-    //保存学生的操作  ————考试 需要讲师阅卷
+    //生成考试卷子 并保存到eTest表 ————考试 需要讲师阅卷
     @Override
-    public void saveStudentExamMapper(Exam exam,String eTestName)  {
+    public JsonResult saveStudentExamMapper(Exam exam,String eTestName)  {
         AllTestList allTestList = getTestMapper(1);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -117,6 +117,24 @@ public class TestPaperServiceImpl implements TestPaperService {
 
        eTestDao.insertSelective(eTest);
 
+        JsonResult jsonResult = new JsonResult();
+
+        jsonResult.setInfo(eTest);
+
+        jsonResult.setCode(1);
+
+        return  jsonResult;
+    }
+
+    //  练习为 1  考试为 0
+    @Override
+    public void saveAnswer(Answer answer,Integer flag) {
+
+        if (flag==1){
+
+        }
+
+        answerDao.insertSelective(answer);
 
     }
 
