@@ -1,13 +1,14 @@
 package com.qfedu.examsys.service.serviceImpl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qfedu.examsys.dao.ETestDao;
 import com.qfedu.examsys.dao.JudgeDao;
 import com.qfedu.examsys.dao.RadioDao;
 import com.qfedu.examsys.dao.ShortAnswerDao;
-import com.qfedu.examsys.pojo.JsonResult;
-import com.qfedu.examsys.pojo.Judge;
-import com.qfedu.examsys.pojo.Radio;
-import com.qfedu.examsys.pojo.ShortAnswer;
+import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
+import com.qfedu.examsys.utils.TestMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,10 @@ import java.util.Random;
 @Service
 public class TestPaperServiceImpl implements TestPaperService {
 
+    @Autowired
+    private TestMapperUtils mapperUtils;
+
+
     @Autowired(required = false)
     private RadioDao radioDao;
 
@@ -35,45 +40,84 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Autowired(required = false)
     private ShortAnswerDao shortAnswerdao;
 
+    @Autowired(required = false)
+    private ETestDao eTestDao;
+
 
     //根据subjectId 获取题库  判断题 Judge 10道 单选题 Radio 10  ShortAnswer简单题 5道题
     @Override
-    public String getpaperTest(Integer id) {
+    public  AllTestList  getTestMapper(Integer id) {
 
         List<Radio> radios = radioDao.findRadios(id);
 
-        //List<Judge> judges = judgeDao.findJudges(id);
+        List<Judge> judges = judgeDao.findJudges(id);
 
-       // List<ShortAnswer> shortAnswers = shortAnswerdao.findShortAnswers(id);
+        List<ShortAnswer> shortAnswers = shortAnswerdao.findShortAnswers(id);
 
         //随机获取各科题库
-        List<Radio> radioList = new ArrayList<>(); // 准备radio 随机题
-        List<Judge> judgeList = new ArrayList<>(); // 准备Judge 随机题
-        List<ShortAnswer> answerList = new ArrayList<>(); // 准备ShortAnswes 随机题
-
-        //判断随机数是否多次出现
-        StringBuffer sb = new StringBuffer();
+        List<Radio> radioList =null; // 准备radio 随机题
+        List<Judge> judgeList = null; // 准备Judge 随机题
+        List<ShortAnswer> shortAnswerList = null; // 准备ShortAnswes 随机题
 
         //随机获取radios 10道题
-        if(radios.size()>5) {
-            Random random = new Random();
-            for (int i = 0; i < 5; i++) {
-                int i1 = random.nextInt(radios.size()-1);
-                if(!sb.toString().contains(String.valueOf(i1))){
-                    sb.append(i1);
-                    radioList.add(radios.get(i1));
+        radioList = mapperUtils.getRandomList(radios, 10);
 
-                   continue;
-                }
-                i--;
-            }
+        // 随机获取 judges 10道题
+        judgeList = mapperUtils.getRandomList(judges, 10);
 
+        // 随机获取 shortAnswers 5道题
+
+        shortAnswerList = mapperUtils.getRandomList(shortAnswers,5);
+
+       // JsonResult jsonResult = new JsonResult();
+
+        AllTestList allTestList  = new AllTestList(radioList,judgeList,shortAnswerList);
+
+        return allTestList;
+    }
+    //保存学生的操作  ————考试 需要讲师阅卷
+    @Override
+    public void saveStudentExamMapper(Exam exam,String eTestName)  {
+        AllTestList allTestList = getTestMapper(1);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ETest eTest = new ETest();
+
+        String radioStr = null;
+        String answerStr =null;
+        String  judgeStr= null;
+        try {
+            radioStr = objectMapper.writeValueAsString(allTestList.getRadioList());
+
+            answerStr  = objectMapper.writeValueAsString(allTestList.getAnswerList());
+
+            judgeStr = objectMapper.writeValueAsString(allTestList.getJudgeList());
+
+
+            //关联的exam
+            eTest.setEid(1);
+
+            //考卷名称
+            eTest.setName(eTestName);
+
+            //考卷所属科目
+            eTest.setSubjectid(exam.getSubjectid());
+
+            eTest.setJudgejson(judgeStr);
+
+            eTest.setRadiojson(radioStr);
+
+            eTest.setShortanswerjson(answerStr);
+
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
 
-        JsonResult jsonResult = new JsonResult();
+       eTestDao.insertSelective(eTest);
 
 
-
-        return null;
     }
+
 }
