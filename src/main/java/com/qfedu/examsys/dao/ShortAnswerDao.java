@@ -3,6 +3,8 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.ShortAnswer;
 
+import java.util.List;
+
 public interface ShortAnswerDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,4 +17,7 @@ public interface ShortAnswerDao {
     int updateByPrimaryKeySelective(ShortAnswer record);
 
     int updateByPrimaryKey(ShortAnswer record);
+
+    //根据subjectId 返回shortAnswer集合
+    List<ShortAnswer> findShortAnswers(Integer subjectId );
 }

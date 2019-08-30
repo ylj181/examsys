@@ -3,19 +3,19 @@
 <mapper namespace="com.qfedu.examsys.dao.RadioDao" >
   <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Radio" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
+    <result column="subjectId" property="subjectId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="choiceA" property="choicea" jdbcType="VARCHAR" />
-    <result column="choiceB" property="choiceb" jdbcType="VARCHAR" />
-    <result column="choiceC" property="choicec" jdbcType="VARCHAR" />
-    <result column="choiceD" property="choiced" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="choiceA" property="choiceA" jdbcType="VARCHAR" />
+    <result column="choiceB" property="choiceB" jdbcType="VARCHAR" />
+    <result column="choiceC" property="choiceC" jdbcType="VARCHAR" />
+    <result column="choiceD" property="choiceD" jdbcType="VARCHAR" />
+    <!--  <result column="answer" property="answer" jdbcType="VARCHAR" />-->
   </resultMap>
   <sql id="Base_Column_List" >
     id, subjectId, title, choiceA, choiceB, choiceC, choiceD, answer
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from radio
     where id = #{id,jdbcType=INTEGER}
@@ -25,12 +25,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.qfedu.examsys.pojo.Radio" >
-    insert into radio (id, subjectId, title, 
-      choiceA, choiceB, choiceC, 
-      choiceD, answer)
-    values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{choicea,jdbcType=VARCHAR}, #{choiceb,jdbcType=VARCHAR}, #{choicec,jdbcType=VARCHAR}, 
-      #{choiced,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR})
+    insert into radio (id, subjectId, title,
+                       choiceA, choiceB, choiceC,
+                       choiceD, answer)
+    values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+            #{choiceA,jdbcType=VARCHAR}, #{choiceB,jdbcType=VARCHAR}, #{choiceC,jdbcType=VARCHAR},
+            #{choiceD,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Radio" >
     insert into radio
@@ -44,16 +44,16 @@
       <if test="title != null" >
         title,
       </if>
-      <if test="choicea != null" >
+      <if test="choiceA != null" >
         choiceA,
       </if>
-      <if test="choiceb != null" >
+      <if test="choiceB != null" >
         choiceB,
       </if>
-      <if test="choicec != null" >
+      <if test="choiceC != null" >
         choiceC,
       </if>
-      <if test="choiced != null" >
+      <if test="choiceD != null" >
         choiceD,
       </if>
       <if test="answer != null" >
@@ -70,17 +70,17 @@
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="choicea != null" >
-        #{choicea,jdbcType=VARCHAR},
+      <if test="choiceA != null" >
+        #{choiceA,jdbcType=VARCHAR},
       </if>
-      <if test="choiceb != null" >
-        #{choiceb,jdbcType=VARCHAR},
+      <if test="choiceB != null" >
+        #{choiceB,jdbcType=VARCHAR},
       </if>
-      <if test="choicec != null" >
-        #{choicec,jdbcType=VARCHAR},
+      <if test="choiceC != null" >
+        #{choiceC,jdbcType=VARCHAR},
       </if>
-      <if test="choiced != null" >
-        #{choiced,jdbcType=VARCHAR},
+      <if test="choiceD != null" >
+        #{choiceD,jdbcType=VARCHAR},
       </if>
       <if test="answer != null" >
         #{answer,jdbcType=VARCHAR},
@@ -96,17 +96,17 @@
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="choicea != null" >
-        choiceA = #{choicea,jdbcType=VARCHAR},
+      <if test="choiceA != null" >
+        choiceA = #{choiceA,jdbcType=VARCHAR},
       </if>
-      <if test="choiceb != null" >
-        choiceB = #{choiceb,jdbcType=VARCHAR},
+      <if test="choiceB != null" >
+        choiceB = #{choiceB,jdbcType=VARCHAR},
       </if>
-      <if test="choicec != null" >
-        choiceC = #{choicec,jdbcType=VARCHAR},
+      <if test="choiceC != null" >
+        choiceC = #{choiceC,jdbcType=VARCHAR},
       </if>
-      <if test="choiced != null" >
-        choiceD = #{choiced,jdbcType=VARCHAR},
+      <if test="choiceD != null" >
+        choiceD = #{choiceD,jdbcType=VARCHAR},
       </if>
       <if test="answer != null" >
         answer = #{answer,jdbcType=VARCHAR},
@@ -117,19 +117,19 @@
   <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Radio" >
     update radio
     set subjectId = #{subjectid,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      choiceA = #{choicea,jdbcType=VARCHAR},
-      choiceB = #{choiceb,jdbcType=VARCHAR},
-      choiceC = #{choicec,jdbcType=VARCHAR},
-      choiceD = #{choiced,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR}
+        title = #{title,jdbcType=VARCHAR},
+        choiceA = #{choiceA,jdbcType=VARCHAR},
+        choiceB = #{choiceB,jdbcType=VARCHAR},
+        choiceC = #{choiceC,jdbcType=VARCHAR},
+        choiceD = #{choiceD,jdbcType=VARCHAR},
+        answer = #{answer,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-<!--
-陈曦创建：
-时间8.29 18:00
--->
+  <!--
+  陈曦创建：
+  时间8.29 18:00
+  -->
   <insert id="insertMany">
     insert into radio(subjectId, title, choiceA, choiceB, choiceC, choiceD, answer)
     values
@@ -137,4 +137,14 @@
       (#{radio.subjectId},#{radio.title},#{radio.choiceA},#{radio.choiceB},#{radio.choiceC},#{radio.choiceD},#{radio.answer})
     </foreach>
   </insert>
+  <!--
+   Lei创建：
+  时间8-29 22:08
+  findRadios集合查找 根据subjectId
+  -->
+  <select id="findRadios" parameterType="int" resultMap="BaseResultMap">
+    select * from examsys.radio where  examsys.radio.subjectId = #{subjectId}
+  </select>
+
+
 </mapper>

@@ -18,6 +18,9 @@ public interface JudgeDao {
 
     int updateByPrimaryKey(Judge record);
 
+    //根据subjectId 返回Juede集合
+    List<Judge> findJudges(Integer subjectId );
+
     // 导入判断题
     void insertManyJudges(List<Judge> judges);
 }

@@ -19,4 +19,7 @@ public interface RadioDao {
     int updateByPrimaryKey(Radio record);
     // 导入选择题
     void insertMany (List<Radio> radios);
+
+    //根据subjectId  返回Radio集合
+    List<Radio> findRadios(Integer subjectId);
 }

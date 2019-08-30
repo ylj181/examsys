@@ -68,4 +68,13 @@
       answer = #{answer,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--
+  Lei创建：
+  时间8-29 22:08
+  findJudges集合查找 根据subjectId
+  -->
+  <select id="findJudges" parameterType="int" resultMap="BaseResultMap">
+    select * from examsys.judge where  examsys.judge.subjectId = #{subjectId}
+  </select>
 </mapper>
