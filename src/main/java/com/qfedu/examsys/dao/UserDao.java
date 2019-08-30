@@ -13,6 +13,7 @@ public interface UserDao {
 
     int insertSelective(User record);
 
+    //根据Id查user
     User selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(User record);
@@ -25,6 +26,7 @@ public interface UserDao {
 
     //根据角色Id查询
     List<User> findAllRole(Integer rid);
+
 
     //根据用户Id查询用户信息
     User findUserById(Integer id);

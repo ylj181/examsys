@@ -4,7 +4,9 @@ import com.qfedu.examsys.pojo.JsonResult;
 import com.qfedu.examsys.pojo.User;
 import com.qfedu.examsys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,25 +18,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     //登录
 
+    @CrossOrigin
     @RequestMapping("/login")
     @ResponseBody
-    public JsonResult login(HttpSession session,String username, String password){
+    public JsonResult login(String username, String password){
         User user = userService.login( username );
         String password1 = user.getPassword();
-        if (password.equals( password1 ) ){
-            session.setAttribute( "user",user );
-            return new JsonResult( 1,"登陆成功" );
-        }else {
-            return new JsonResult( 0,"账号或密码错误" );
-        }
+
+        return new JsonResult( 1,user );
+
     }
 
     //退出
@@ -97,12 +101,14 @@ public class UserController {
     }
 
     //查出rid前端进行rid角色判断 隐藏不同权限菜单
+    @CrossOrigin
     @RequestMapping("/findUserRid.do")
     @ResponseBody
-    public JsonResult findUserRid(HttpSession session){
-        User user = (User) session.getAttribute( "user" );
-        Integer rid = user.getRid();
-        return new JsonResult( 1,rid );
+    public JsonResult findUserRid(Integer id){
+        System.out.println(id);
+
+
+        return new JsonResult( 1,id );
     }
 
     /**
