@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.examsys.dao.EnrollDao">
+
+    <resultMap id="enrollMap" type="enroll">
+        <id column="id" property="id"></id>
+        <result column="uid" property="uid"></result>
+        <result column="eid" property="eid"></result>
+        <result column="subjectId" property="subjectId"></result>
+        <result column="createtime" property="createTime"></result>
+        <association property="user" column="uid" select="com.qfedu.examsys.dao.UserDao.findUserById"></association>
+        <association property="exam" column="eid" select="com.qfedu.examsys.dao.ExamDao.findExamById"></association>
+        <association property="subject" column="subjectId" select="com.qfedu.examsys.dao.SubjectDao.findBySubjectId"></association>
+    </resultMap>
+
+
+    <!--向报名表中添加报名信息-->
+    <insert id="addEnrollInfo" parameterType="subject">
+        insert into enroll(
+        <trim suffixOverrides=",">
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="eid != null">
+                eid,
+            </if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="uid != null">
+                #{uid},
+            </if>
+            <if test="eid != null">
+                #{eid},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <select id="selectEnrollById" parameterType="int" resultMap="enrollMap">
+        select * from enroll where id = #{id}
+    </select>
+
+
+
+</mapper>

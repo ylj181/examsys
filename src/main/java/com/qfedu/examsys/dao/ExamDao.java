@@ -3,6 +3,8 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Exam;
 
+import java.util.List;
+
 public interface ExamDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,4 +17,11 @@ public interface ExamDao {
     int updateByPrimaryKeySelective(Exam record);
 
     int updateByPrimaryKey(Exam record);
+
+    //查询所有的考试信息列表
+    List<Exam> findAllExams();
+
+    //根据考试表的Id查询对应的考试信息
+    Exam findExamById(Integer id);
+
 }

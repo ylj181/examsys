@@ -41,4 +41,14 @@ public class UserServiceImpl implements UserService {
         userDao.deleteByPrimaryKey( id );
     }
 
+    /**
+     * 根据用户Id查询用户信息
+     * @param id 用户Id
+     * @return  用户对象
+     */
+    @Override
+    public User findUserById(Integer id) {
+        return userDao.findUserById(id);
+    }
+
 }

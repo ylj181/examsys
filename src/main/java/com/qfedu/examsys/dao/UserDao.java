@@ -26,6 +26,8 @@ public interface UserDao {
     //根据角色Id查询
     List<User> findAllRole(Integer rid);
 
+    //根据用户Id查询用户信息
+    User findUserById(Integer id);
 
 
 

@@ -9,6 +9,10 @@
     <result column="judgeJson" property="judgejson" jdbcType="VARCHAR" />
     <result column="radioJson" property="radiojson" jdbcType="VARCHAR" />
     <result column="shortAnswerJson" property="shortanswerjson" jdbcType="VARCHAR" />
+
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <!--    <association property="subject" column="subjectId" select="com.qfedu.examsys.dao.SubjectDao.findBySubjectId"></association>-->
   </resultMap>
   <sql id="Base_Column_List" >
     id, eid, subjectId, name, judgeJson, radioJson, shortAnswerJson
@@ -114,4 +118,15 @@
         shortAnswerJson = #{shortanswerjson,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--查询所有的考试信息-->
+  <select id="findAllExams" resultType="exam">
+    select * from exam
+  </select>
+
+  <!--根据考试表的Id查询对应的考试信息-->
+  <select id="findExamById" parameterType="int" resultMap="BaseResultMap">
+    select * from exam where id = #{id}
+  </select>
+
 </mapper>

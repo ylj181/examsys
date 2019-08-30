@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -101,6 +103,26 @@ public class UserController {
         User user = (User) session.getAttribute( "user" );
         Integer rid = user.getRid();
         return new JsonResult( 1,rid );
+    }
+
+    /**
+     * 根据用户Id查询用户信息
+     * @param id 用户Id
+     * @return  map
+     */
+    @RequestMapping("/findUserById.do")
+    @ResponseBody
+    public Map<String,Object> findUserById(Integer id){
+        Map<String, Object> map = new HashMap<>();
+
+        User user = userService.findUserById(id);
+
+        if (user != null){
+            map.put("code",1);
+            map.put("info",user);
+        }
+
+        return map;
     }
 
 }

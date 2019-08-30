@@ -19,7 +19,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">考试科目</label>
             <div class="layui-input-block">
-                <select name="subject" id="sid" lay-filter="subject"></select>
+                <select name="subjectId" id="sid" lay-filter="subject"></select>
             </div>
         </div>
         <div class="layui-form-item">
@@ -32,6 +32,21 @@
 
 <script type="text/javascript">
 
+    $.ajax({
+        type:"get",
+        url:"subject/findAllSubject.do",
+        dataType:"json",
+        success:function (data) {
+            if (data.code == 1){
+                var infos = data.info;
+                $(infos).each(function () {
+                    var html = '<option value="' + this.id + '">' + this.subjectName + '</option>';
+                    $("#sid").append($(html))
+                })
+            }
+        }
+    });
+
     layui.use(['layer', 'form'], function(){
         var layer = layui.layer
             ,form = layui.form;
@@ -40,14 +55,12 @@
         form.on('submit(demo1)', function(data){
             $.ajax({
                 type:"post",
-                url:"enroll/addEnrollSubject.do",
+                url:"enroll/addEnrollInfo.do",
                 data:data.field,
                 dataType:"json",
                 success:function(data){
                     if(data.code == 1){
-                        window.location.href="enroll/addEnrollInfo.html"
-                    }else{
-                        alert(data.info);
+                        window.location.href="enroll/personal.html"
                     }
                 }
             })

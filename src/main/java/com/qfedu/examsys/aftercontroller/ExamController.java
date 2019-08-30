@@ -1,7 +1,7 @@
 package com.qfedu.examsys.aftercontroller;
 
-import com.qfedu.examsys.pojo.Subject;
-import com.qfedu.examsys.service.SubjectService;
+import com.qfedu.examsys.pojo.Exam;
+import com.qfedu.examsys.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,22 +12,26 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class SubjectController {
+public class ExamController {
 
     @Autowired
-    private SubjectService subjectService;
+    private ExamService examService;
 
-    @RequestMapping("/subject/findAllSubject.do")
+    /**
+     * 展示所有的考试信息列表
+     * @return  map
+     */
+    @RequestMapping("/exam/findAllExams.do")
     @ResponseBody
-    public Map<String,Object> findAllSubject(){
+    public Map<String,Object> findAllExams(){
 
         Map<String, Object> map = new HashMap<>();
 
-        List<Subject> subjectList = subjectService.findAllSubject();
+        List<Exam> examList = examService.findAllExams();
 
-        if (subjectList.size() != 0){
+        if (examList.size() != 0){
             map.put("code",1);
-            map.put("info",subjectList);
+            map.put("info",examList);
         }
 
         return map;

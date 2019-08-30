@@ -55,4 +55,14 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--查询所有的学科信息-->
+  <select id="findAllSubject" resultType="subject">
+    select * from subject
+  </select>
+
+  <!--根据学科Id查询学科信息-->
+  <select id="findBySubjectId" parameterType="int" resultType="subject">
+    select * from subject where id = #{id}
+  </select>
 </mapper>

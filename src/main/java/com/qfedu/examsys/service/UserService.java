@@ -15,6 +15,9 @@ public interface UserService {
 
     public void deleteByPrimaryKey(Integer id);
 
+    //根据用户Id查询用户信息
+    public User findUserById(Integer id);
+
 
 
 }
