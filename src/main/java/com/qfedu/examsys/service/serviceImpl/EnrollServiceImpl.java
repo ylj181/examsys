@@ -6,6 +6,8 @@ import com.qfedu.examsys.service.EnrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EnrollServiceImpl implements EnrollService {
 
@@ -23,13 +25,24 @@ public class EnrollServiceImpl implements EnrollService {
         return enrollDao.addEnrollInfo(uid, eid);
     }
 
+
+//    /**
+//     * 根据报名时报名表中生成的id,展示本次考试的报名信息
+//     * @param id  报名表中生成的id
+//     * @return  Enroll对象
+//     */
+//    @Override
+//    public Enroll selectEnrollById(Integer id) {
+//        return enrollDao.selectEnrollById(id);
+//    }
+
     /**
-     * 根据报名时报名表中生成的id,展示本次考试的报名信息
-     * @param id  报名表中生成的id
-     * @return  Enroll对象
+     * 查询指定学生所有的考试信息
+     * @return  该用户所有考试信息列表
      */
     @Override
-    public Enroll selectEnrollById(Integer id) {
-        return enrollDao.selectEnrollById(id);
+    public List<Enroll> findAllEnroll(Integer uid) {
+        return enrollDao.findAllEnroll(uid);
     }
+
 }

@@ -37,8 +37,14 @@
         )
     </insert>
 
-    <select id="selectEnrollById" parameterType="int" resultMap="enrollMap">
-        select * from enroll where id = #{id}
+<!--    &lt;!&ndash;根据报名时报名表中生成的id,展示本次考试的报名信息&ndash;&gt;-->
+<!--    <select id="selectEnrollByUserId" parameterType="int" resultMap="enrollMap">-->
+<!--        select * from enroll where id = #{id}-->
+<!--    </select>-->
+
+    <!--查询所有的考试信息-->
+    <select id="findAllEnroll" parameterType="int" resultMap="enrollMap">
+        select * from enroll where uid = #{uid}
     </select>
 
 
