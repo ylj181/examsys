@@ -9,25 +9,25 @@ public class Answer {
 
     private Integer etid;
 
-    private String choice1;
+    private String radio1;
 
-    private String choice2;
+    private String radio2;
 
-    private String choice3;
+    private String radio3;
 
-    private String choice4;
+    private String radio4;
 
-    private String choice5;
+    private String radio5;
 
-    private String choice6;
+    private String radio6;
 
-    private String choice7;
+    private String radio7;
 
-    private String choice8;
+    private String radio8;
 
-    private String choice9;
+    private String radio9;
 
-    private String choice10;
+    private String radio10;
 
     private Integer judge1;
 
@@ -97,84 +97,84 @@ public class Answer {
         this.etid = etid;
     }
 
-    public String getChoice1() {
-        return choice1;
+    public String getRadio1() {
+        return radio1;
     }
 
-    public void setChoice1(String choice1) {
-        this.choice1 = choice1 == null ? null : choice1.trim();
+    public void setRadio1(String radio1) {
+        this.radio1 = radio1 == null ? null : radio1.trim();
     }
 
-    public String getChoice2() {
-        return choice2;
+    public String getRadio2() {
+        return radio2;
     }
 
-    public void setChoice2(String choice2) {
-        this.choice2 = choice2 == null ? null : choice2.trim();
+    public void setRadio2(String radio2) {
+        this.radio2 = radio2 == null ? null : radio2.trim();
     }
 
-    public String getChoice3() {
-        return choice3;
+    public String getRadio3() {
+        return radio3;
     }
 
-    public void setChoice3(String choice3) {
-        this.choice3 = choice3 == null ? null : choice3.trim();
+    public void setRadio3(String radio3) {
+        this.radio3 = radio3 == null ? null : radio3.trim();
     }
 
-    public String getChoice4() {
-        return choice4;
+    public String getRadio4() {
+        return radio4;
     }
 
-    public void setChoice4(String choice4) {
-        this.choice4 = choice4 == null ? null : choice4.trim();
+    public void setRadio4(String radio4) {
+        this.radio4 = radio4 == null ? null : radio4.trim();
     }
 
-    public String getChoice5() {
-        return choice5;
+    public String getRadio5() {
+        return radio5;
     }
 
-    public void setChoice5(String choice5) {
-        this.choice5 = choice5 == null ? null : choice5.trim();
+    public void setRadio5(String radio5) {
+        this.radio5 = radio5 == null ? null : radio5.trim();
     }
 
-    public String getChoice6() {
-        return choice6;
+    public String getRadio6() {
+        return radio6;
     }
 
-    public void setChoice6(String choice6) {
-        this.choice6 = choice6 == null ? null : choice6.trim();
+    public void setRadio6(String radio6) {
+        this.radio6 = radio6 == null ? null : radio6.trim();
     }
 
-    public String getChoice7() {
-        return choice7;
+    public String getRadio7() {
+        return radio7;
     }
 
-    public void setChoice7(String choice7) {
-        this.choice7 = choice7 == null ? null : choice7.trim();
+    public void setRadio7(String radio7) {
+        this.radio7 = radio7 == null ? null : radio7.trim();
     }
 
-    public String getChoice8() {
-        return choice8;
+    public String getRadio8() {
+        return radio8;
     }
 
-    public void setChoice8(String choice8) {
-        this.choice8 = choice8 == null ? null : choice8.trim();
+    public void setRadio8(String radio8) {
+        this.radio8 = radio8 == null ? null : radio8.trim();
     }
 
-    public String getChoice9() {
-        return choice9;
+    public String getRadio9() {
+        return radio9;
     }
 
-    public void setChoice9(String choice9) {
-        this.choice9 = choice9 == null ? null : choice9.trim();
+    public void setRadio9(String radio9) {
+        this.radio9 = radio9 == null ? null : radio9.trim();
     }
 
-    public String getChoice10() {
-        return choice10;
+    public String getRadio10() {
+        return radio10;
     }
 
-    public void setChoice10(String choice10) {
-        this.choice10 = choice10 == null ? null : choice10.trim();
+    public void setRadio10(String radio10) {
+        this.radio10 = radio10 == null ? null : radio10.trim();
     }
 
     public Integer getJudge1() {

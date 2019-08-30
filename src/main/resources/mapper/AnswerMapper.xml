@@ -5,16 +5,16 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="eTid" property="etid" jdbcType="INTEGER" />
-    <result column="choice1" property="choice1" jdbcType="VARCHAR" />
-    <result column="choice2" property="choice2" jdbcType="VARCHAR" />
-    <result column="choice3" property="choice3" jdbcType="VARCHAR" />
-    <result column="choice4" property="choice4" jdbcType="VARCHAR" />
-    <result column="choice5" property="choice5" jdbcType="VARCHAR" />
-    <result column="choice6" property="choice6" jdbcType="VARCHAR" />
-    <result column="choice7" property="choice7" jdbcType="VARCHAR" />
-    <result column="choice8" property="choice8" jdbcType="VARCHAR" />
-    <result column="choice9" property="choice9" jdbcType="VARCHAR" />
-    <result column="choice10" property="choice10" jdbcType="VARCHAR" />
+    <result column="radio1" property="radio1" jdbcType="VARCHAR" />
+    <result column="radio2" property="radio2" jdbcType="VARCHAR" />
+    <result column="radio3" property="radio3" jdbcType="VARCHAR" />
+    <result column="radio4" property="radio4" jdbcType="VARCHAR" />
+    <result column="radio5" property="radio5" jdbcType="VARCHAR" />
+    <result column="radio6" property="radio6" jdbcType="VARCHAR" />
+    <result column="radio7" property="radio7" jdbcType="VARCHAR" />
+    <result column="radio8" property="radio8" jdbcType="VARCHAR" />
+    <result column="radio9" property="radio9" jdbcType="VARCHAR" />
+    <result column="radio10" property="radio10" jdbcType="VARCHAR" />
     <result column="judge1" property="judge1" jdbcType="INTEGER" />
     <result column="judge2" property="judge2" jdbcType="INTEGER" />
     <result column="judge3" property="judge3" jdbcType="INTEGER" />
@@ -39,8 +39,8 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, uid, eTid, choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, 
-    choice9, choice10, judge1, judge2, judge3, judge4, judge5, judge6, judge7, judge8, 
+    id, uid, eTid, radio1, radio2, radio3, radio4, radio5, radio6, radio7, radio8,
+    radio9, radio10, judge1, judge2, judge3, judge4, judge5, judge6, judge7, judge8,
     judge9, judge10, shortAnswer1, shortAnswer1Score, shortAnswer2, shortAnswer2Score, 
     shortAnswer3, shortAnswer3Score, shortAnswer4, shortAnswer4Score, shortAnswer5, shortAnswer5Score, 
     score, createtime
@@ -57,10 +57,10 @@
   </delete>
   <insert id="insert" parameterType="com.qfedu.examsys.pojo.Answer" >
     insert into answer (id, uid, eTid, 
-      choice1, choice2, choice3, 
-      choice4, choice5, choice6, 
-      choice7, choice8, choice9, 
-      choice10, judge1, judge2, 
+      radio1, radio2, radio3,
+      radio4, radio5, radio6,
+      radio7, radio8, radio9,
+      radio10, judge1, judge2,
       judge3, judge4, judge5, 
       judge6, judge7, judge8, 
       judge9, judge10, shortAnswer1, 
@@ -69,10 +69,10 @@
       shortAnswer4Score, shortAnswer5, shortAnswer5Score, 
       score, createtime)
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{etid,jdbcType=INTEGER}, 
-      #{choice1,jdbcType=VARCHAR}, #{choice2,jdbcType=VARCHAR}, #{choice3,jdbcType=VARCHAR}, 
-      #{choice4,jdbcType=VARCHAR}, #{choice5,jdbcType=VARCHAR}, #{choice6,jdbcType=VARCHAR}, 
-      #{choice7,jdbcType=VARCHAR}, #{choice8,jdbcType=VARCHAR}, #{choice9,jdbcType=VARCHAR}, 
-      #{choice10,jdbcType=VARCHAR}, #{judge1,jdbcType=INTEGER}, #{judge2,jdbcType=INTEGER}, 
+      #{radio1,jdbcType=VARCHAR}, #{radio2,jdbcType=VARCHAR}, #{radio3,jdbcType=VARCHAR},
+      #{radio4,jdbcType=VARCHAR}, #{radio5,jdbcType=VARCHAR}, #{radio6,jdbcType=VARCHAR},
+      #{radio7,jdbcType=VARCHAR}, #{radio8,jdbcType=VARCHAR}, #{radio9,jdbcType=VARCHAR},
+      #{radio10,jdbcType=VARCHAR}, #{judge1,jdbcType=INTEGER}, #{judge2,jdbcType=INTEGER},
       #{judge3,jdbcType=INTEGER}, #{judge4,jdbcType=INTEGER}, #{judge5,jdbcType=INTEGER}, 
       #{judge6,jdbcType=INTEGER}, #{judge7,jdbcType=INTEGER}, #{judge8,jdbcType=INTEGER}, 
       #{judge9,jdbcType=INTEGER}, #{judge10,jdbcType=INTEGER}, #{shortanswer1,jdbcType=VARCHAR}, 
@@ -93,35 +93,35 @@
       <if test="etid != null" >
         eTid,
       </if>
-      <if test="choice1 != null" >
-        choice1,
+      <if test="radio1 != null" >
+        radio1,
       </if>
-      <if test="choice2 != null" >
-        choice2,
+      <if test="radio2 != null" >
+        radio2,
       </if>
-      <if test="choice3 != null" >
-        choice3,
+      <if test="radio3 != null" >
+        radio3,
       </if>
-      <if test="choice4 != null" >
-        choice4,
+      <if test="radio4 != null" >
+        radio4,
       </if>
-      <if test="choice5 != null" >
-        choice5,
+      <if test="radio5 != null" >
+        radio5,
       </if>
-      <if test="choice6 != null" >
-        choice6,
+      <if test="radio6 != null" >
+        radio6,
       </if>
-      <if test="choice7 != null" >
-        choice7,
+      <if test="radio7 != null" >
+        radio7,
       </if>
-      <if test="choice8 != null" >
-        choice8,
+      <if test="radio8 != null" >
+        radio8,
       </if>
-      <if test="choice9 != null" >
-        choice9,
+      <if test="radio9 != null" >
+        radio9,
       </if>
-      <if test="choice10 != null" >
-        choice10,
+      <if test="radio10 != null" >
+        radio10,
       </if>
       <if test="judge1 != null" >
         judge1,
@@ -200,35 +200,35 @@
       <if test="etid != null" >
         #{etid,jdbcType=INTEGER},
       </if>
-      <if test="choice1 != null" >
-        #{choice1,jdbcType=VARCHAR},
+      <if test="radio1 != null" >
+        #{radio1,jdbcType=VARCHAR},
       </if>
-      <if test="choice2 != null" >
-        #{choice2,jdbcType=VARCHAR},
+      <if test="radio2 != null" >
+        #{radio2,jdbcType=VARCHAR},
       </if>
-      <if test="choice3 != null" >
-        #{choice3,jdbcType=VARCHAR},
+      <if test="radio3 != null" >
+        #{radio3,jdbcType=VARCHAR},
       </if>
-      <if test="choice4 != null" >
-        #{choice4,jdbcType=VARCHAR},
+      <if test="radio4 != null" >
+        #{radio4,jdbcType=VARCHAR},
       </if>
-      <if test="choice5 != null" >
-        #{choice5,jdbcType=VARCHAR},
+      <if test="radio5 != null" >
+        #{radio5,jdbcType=VARCHAR},
       </if>
-      <if test="choice6 != null" >
-        #{choice6,jdbcType=VARCHAR},
+      <if test="radio6 != null" >
+        #{radio6,jdbcType=VARCHAR},
       </if>
-      <if test="choice7 != null" >
-        #{choice7,jdbcType=VARCHAR},
+      <if test="radio7 != null" >
+        #{radio7,jdbcType=VARCHAR},
       </if>
-      <if test="choice8 != null" >
-        #{choice8,jdbcType=VARCHAR},
+      <if test="radio8 != null" >
+        #{radio8,jdbcType=VARCHAR},
       </if>
-      <if test="choice9 != null" >
-        #{choice9,jdbcType=VARCHAR},
+      <if test="radio9 != null" >
+        #{radio9,jdbcType=VARCHAR},
       </if>
-      <if test="choice10 != null" >
-        #{choice10,jdbcType=VARCHAR},
+      <if test="radio10 != null" >
+        #{radio10,jdbcType=VARCHAR},
       </if>
       <if test="judge1 != null" >
         #{judge1,jdbcType=INTEGER},
@@ -307,35 +307,35 @@
       <if test="etid != null" >
         eTid = #{etid,jdbcType=INTEGER},
       </if>
-      <if test="choice1 != null" >
-        choice1 = #{choice1,jdbcType=VARCHAR},
+      <if test="radio1 != null" >
+        radio1 = #{radio1,jdbcType=VARCHAR},
       </if>
-      <if test="choice2 != null" >
-        choice2 = #{choice2,jdbcType=VARCHAR},
+      <if test="radio2 != null" >
+        radio2 = #{radio2,jdbcType=VARCHAR},
       </if>
-      <if test="choice3 != null" >
-        choice3 = #{choice3,jdbcType=VARCHAR},
+      <if test="radio3 != null" >
+        radio3 = #{radio3,jdbcType=VARCHAR},
       </if>
-      <if test="choice4 != null" >
-        choice4 = #{choice4,jdbcType=VARCHAR},
+      <if test="radio4 != null" >
+        radio4 = #{radio4,jdbcType=VARCHAR},
       </if>
-      <if test="choice5 != null" >
-        choice5 = #{choice5,jdbcType=VARCHAR},
+      <if test="radio5 != null" >
+        radio5 = #{radio5,jdbcType=VARCHAR},
       </if>
-      <if test="choice6 != null" >
-        choice6 = #{choice6,jdbcType=VARCHAR},
+      <if test="radio6 != null" >
+        radio6 = #{radio6,jdbcType=VARCHAR},
       </if>
-      <if test="choice7 != null" >
-        choice7 = #{choice7,jdbcType=VARCHAR},
+      <if test="radio7 != null" >
+        radio7 = #{radio7,jdbcType=VARCHAR},
       </if>
-      <if test="choice8 != null" >
-        choice8 = #{choice8,jdbcType=VARCHAR},
+      <if test="radio8 != null" >
+        radio8 = #{radio8,jdbcType=VARCHAR},
       </if>
-      <if test="choice9 != null" >
-        choice9 = #{choice9,jdbcType=VARCHAR},
+      <if test="radio9 != null" >
+        radio9 = #{radio9,jdbcType=VARCHAR},
       </if>
-      <if test="choice10 != null" >
-        choice10 = #{choice10,jdbcType=VARCHAR},
+      <if test="radio10 != null" >
+        radio10 = #{radio10,jdbcType=VARCHAR},
       </if>
       <if test="judge1 != null" >
         judge1 = #{judge1,jdbcType=INTEGER},
@@ -410,16 +410,16 @@
     update answer
     set uid = #{uid,jdbcType=INTEGER},
       eTid = #{etid,jdbcType=INTEGER},
-      choice1 = #{choice1,jdbcType=VARCHAR},
-      choice2 = #{choice2,jdbcType=VARCHAR},
-      choice3 = #{choice3,jdbcType=VARCHAR},
-      choice4 = #{choice4,jdbcType=VARCHAR},
-      choice5 = #{choice5,jdbcType=VARCHAR},
-      choice6 = #{choice6,jdbcType=VARCHAR},
-      choice7 = #{choice7,jdbcType=VARCHAR},
-      choice8 = #{choice8,jdbcType=VARCHAR},
-      choice9 = #{choice9,jdbcType=VARCHAR},
-      choice10 = #{choice10,jdbcType=VARCHAR},
+      radio1 = #{radio1,jdbcType=VARCHAR},
+      radio2 = #{radio2,jdbcType=VARCHAR},
+      radio3 = #{radio3,jdbcType=VARCHAR},
+      radio4 = #{radio4,jdbcType=VARCHAR},
+      radio5 = #{radio5,jdbcType=VARCHAR},
+      radio6 = #{radio6,jdbcType=VARCHAR},
+      radio7 = #{radio7,jdbcType=VARCHAR},
+      radio8 = #{radio8,jdbcType=VARCHAR},
+      radio9 = #{radio9,jdbcType=VARCHAR},
+      radio10 = #{radio10,jdbcType=VARCHAR},
       judge1 = #{judge1,jdbcType=INTEGER},
       judge2 = #{judge2,jdbcType=INTEGER},
       judge3 = #{judge3,jdbcType=INTEGER},
