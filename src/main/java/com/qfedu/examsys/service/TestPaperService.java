@@ -20,9 +20,10 @@ public interface TestPaperService {
 
     //保存随机生成的试卷 到Etest
 
-    void saveStudentExamMapper(Exam exam,String eTestName);
+    JsonResult saveStudentExamMapper(Exam exam,String eTestName);
 
-    //保存学生的操作  ———— 练习  系统柜给出答案 并评判分数
+    //保存学生的操作 判断是
 
+    void saveAnswer(Answer answer,Integer flag);
 
 }
