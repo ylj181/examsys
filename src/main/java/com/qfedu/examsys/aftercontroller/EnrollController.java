@@ -31,6 +31,7 @@ public class EnrollController {
         Map<String, Object> map = new HashMap<>();
 
         //从session中获取登录用户对象
+
         User user = (User) session.getAttribute("user");
         //获取登录用户的Id
         Integer uid = user.getId();
