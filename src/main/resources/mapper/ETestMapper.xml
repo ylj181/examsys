@@ -1,74 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.examsys.dao." >
+<mapper namespace="com.qfedu.examsys.dao.ETestDao" >
   <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.ETest" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="eid" property="eid" jdbcType="INTEGER" />
     <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="radio1" property="radio1" jdbcType="VARCHAR" />
-    <result column="radio2" property="radio2" jdbcType="VARCHAR" />
-    <result column="radio3" property="radio3" jdbcType="VARCHAR" />
-    <result column="radio4" property="radio4" jdbcType="VARCHAR" />
-    <result column="radio5" property="radio5" jdbcType="VARCHAR" />
-    <result column="radio6" property="radio6" jdbcType="VARCHAR" />
-    <result column="radio7" property="radio7" jdbcType="VARCHAR" />
-    <result column="radio8" property="radio8" jdbcType="VARCHAR" />
-    <result column="radio9" property="radio9" jdbcType="VARCHAR" />
-    <result column="radio10" property="radio10" jdbcType="VARCHAR" />
-    <result column="judge1" property="judge1" jdbcType="INTEGER" />
-    <result column="judge2" property="judge2" jdbcType="INTEGER" />
-    <result column="judge3" property="judge3" jdbcType="INTEGER" />
-    <result column="judge4" property="judge4" jdbcType="INTEGER" />
-    <result column="judge5" property="judge5" jdbcType="INTEGER" />
-    <result column="judge6" property="judge6" jdbcType="INTEGER" />
-    <result column="judge7" property="judge7" jdbcType="INTEGER" />
-    <result column="judge8" property="judge8" jdbcType="INTEGER" />
-    <result column="judge9" property="judge9" jdbcType="INTEGER" />
-    <result column="judge10" property="judge10" jdbcType="INTEGER" />
-    <result column="shortAnswer1" property="shortanswer1" jdbcType="VARCHAR" />
-    <result column="shortAnswer2" property="shortanswer2" jdbcType="VARCHAR" />
-    <result column="shortAnswer3" property="shortanswer3" jdbcType="VARCHAR" />
-    <result column="shortAnswer4" property="shortanswer4" jdbcType="VARCHAR" />
-    <result column="shortAnswer5" property="shortanswer5" jdbcType="VARCHAR" />
+    <result column="judgeJson" property="judgejson" jdbcType="VARCHAR" />
+    <result column="radioJson" property="radiojson" jdbcType="VARCHAR" />
+    <result column="shortAnswerJson" property="shortanswerjson" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, eid, subjectId, name, radio1, radio2, radio3, radio4, radio5, radio6, radio7,
-    radio8, radio9, radio10, judge1, judge2, judge3, judge4, judge5, judge6, judge7,
-    judge8, judge9, judge10, shortAnswer1, shortAnswer2, shortAnswer3, shortAnswer4,
-    shortAnswer5
+    id, eid, subjectId, name, judgeJson, radioJson, shortAnswerJson
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
-    from etest
+    from eTest
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from etest
+    delete from eTest
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.qfedu.examsys.pojo.ETest" >
     insert into eTest (id, eid, subjectId,
-      name, radio1, radio2,
-      radio3, radio4, radio5,
-      radio6, radio7, radio8,
-      radio9, radio10, judge1,
-      judge2, judge3, judge4,
-      judge5, judge6, judge7,
-      judge8, judge9, judge10,
-      shortAnswer1, shortAnswer2, shortAnswer3,
-      shortAnswer4, shortAnswer5)
+                       name, judgeJson, radioJson,
+                       shortAnswerJson)
     values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER},
-      #{name,jdbcType=VARCHAR}, #{radio1,jdbcType=VARCHAR}, #{radio2,jdbcType=VARCHAR},
-      #{radio3,jdbcType=VARCHAR}, #{radio4,jdbcType=VARCHAR}, #{radio5,jdbcType=VARCHAR},
-      #{radio6,jdbcType=VARCHAR}, #{radio7,jdbcType=VARCHAR}, #{radio8,jdbcType=VARCHAR},
-      #{radio9,jdbcType=VARCHAR}, #{radio10,jdbcType=VARCHAR}, #{judge1,jdbcType=INTEGER},
-      #{judge2,jdbcType=INTEGER}, #{judge3,jdbcType=INTEGER}, #{judge4,jdbcType=INTEGER},
-      #{judge5,jdbcType=INTEGER}, #{judge6,jdbcType=INTEGER}, #{judge7,jdbcType=INTEGER},
-      #{judge8,jdbcType=INTEGER}, #{judge9,jdbcType=INTEGER}, #{judge10,jdbcType=INTEGER},
-      #{shortanswer1,jdbcType=VARCHAR}, #{shortanswer2,jdbcType=VARCHAR}, #{shortanswer3,jdbcType=VARCHAR},
-      #{shortanswer4,jdbcType=VARCHAR}, #{shortanswer5,jdbcType=VARCHAR})
+            #{name,jdbcType=VARCHAR}, #{judgejson,jdbcType=VARCHAR}, #{radiojson,jdbcType=VARCHAR},
+            #{shortanswerjson,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.ETest" >
     insert into eTest
@@ -85,80 +46,14 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="radio1 != null" >
-        radio1,
+      <if test="judgejson != null" >
+        judgeJson,
       </if>
-      <if test="radio2 != null" >
-        radio2,
+      <if test="radiojson != null" >
+        radioJson,
       </if>
-      <if test="radio3 != null" >
-        radio3,
-      </if>
-      <if test="radio4 != null" >
-        radio4,
-      </if>
-      <if test="radio5 != null" >
-        radio5,
-      </if>
-      <if test="radio6 != null" >
-        radio6,
-      </if>
-      <if test="radio7 != null" >
-        radio7,
-      </if>
-      <if test="radio8 != null" >
-        radio8,
-      </if>
-      <if test="radio9 != null" >
-        radio9,
-      </if>
-      <if test="radio10 != null" >
-        radio10,
-      </if>
-      <if test="judge1 != null" >
-        judge1,
-      </if>
-      <if test="judge2 != null" >
-        judge2,
-      </if>
-      <if test="judge3 != null" >
-        judge3,
-      </if>
-      <if test="judge4 != null" >
-        judge4,
-      </if>
-      <if test="judge5 != null" >
-        judge5,
-      </if>
-      <if test="judge6 != null" >
-        judge6,
-      </if>
-      <if test="judge7 != null" >
-        judge7,
-      </if>
-      <if test="judge8 != null" >
-        judge8,
-      </if>
-      <if test="judge9 != null" >
-        judge9,
-      </if>
-      <if test="judge10 != null" >
-        judge10,
-      </if>
-      <if test="shortanswer1 != null" >
-        shortAnswer1,
-      </if>
-      <if test="shortanswer2 != null" >
-        shortAnswer2,
-      </if>
-      <if test="shortanswer3 != null" >
-        shortAnswer3,
-      </if>
-      <if test="shortanswer4 != null" >
-        shortAnswer4,
-      </if>
-      <if test="shortanswer5 != null" >
-        shortAnswer5,
+      <if test="shortanswerjson != null" >
+        shortAnswerJson,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -174,80 +69,14 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="radio1 != null" >
-        #{radio1,jdbcType=VARCHAR},
+      <if test="judgejson != null" >
+        #{judgejson,jdbcType=VARCHAR},
       </if>
-      <if test="radio2 != null" >
-        #{radio2,jdbcType=VARCHAR},
+      <if test="radiojson != null" >
+        #{radiojson,jdbcType=VARCHAR},
       </if>
-      <if test="radio3 != null" >
-        #{radio3,jdbcType=VARCHAR},
-      </if>
-      <if test="radio4 != null" >
-        #{radio4,jdbcType=VARCHAR},
-      </if>
-      <if test="radio5 != null" >
-        #{radio5,jdbcType=VARCHAR},
-      </if>
-      <if test="radio6 != null" >
-        #{radio6,jdbcType=VARCHAR},
-      </if>
-      <if test="radio7 != null" >
-        #{radio7,jdbcType=VARCHAR},
-      </if>
-      <if test="radio8 != null" >
-        #{radio8,jdbcType=VARCHAR},
-      </if>
-      <if test="radio9 != null" >
-        #{radio9,jdbcType=VARCHAR},
-      </if>
-      <if test="radio10 != null" >
-        #{radio10,jdbcType=VARCHAR},
-      </if>
-      <if test="judge1 != null" >
-        #{judge1,jdbcType=INTEGER},
-      </if>
-      <if test="judge2 != null" >
-        #{judge2,jdbcType=INTEGER},
-      </if>
-      <if test="judge3 != null" >
-        #{judge3,jdbcType=INTEGER},
-      </if>
-      <if test="judge4 != null" >
-        #{judge4,jdbcType=INTEGER},
-      </if>
-      <if test="judge5 != null" >
-        #{judge5,jdbcType=INTEGER},
-      </if>
-      <if test="judge6 != null" >
-        #{judge6,jdbcType=INTEGER},
-      </if>
-      <if test="judge7 != null" >
-        #{judge7,jdbcType=INTEGER},
-      </if>
-      <if test="judge8 != null" >
-        #{judge8,jdbcType=INTEGER},
-      </if>
-      <if test="judge9 != null" >
-        #{judge9,jdbcType=INTEGER},
-      </if>
-      <if test="judge10 != null" >
-        #{judge10,jdbcType=INTEGER},
-      </if>
-      <if test="shortanswer1 != null" >
-        #{shortanswer1,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer2 != null" >
-        #{shortanswer2,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer3 != null" >
-        #{shortanswer3,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer4 != null" >
-        #{shortanswer4,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer5 != null" >
-        #{shortanswer5,jdbcType=VARCHAR},
+      <if test="shortanswerjson != null" >
+        #{shortanswerjson,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -263,80 +92,14 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="radio1 != null" >
-        radio1 = #{radio1,jdbcType=VARCHAR},
+      <if test="judgejson != null" >
+        judgeJson = #{judgejson,jdbcType=VARCHAR},
       </if>
-      <if test="radio2 != null" >
-        radio2 = #{radio2,jdbcType=VARCHAR},
+      <if test="radiojson != null" >
+        radioJson = #{radiojson,jdbcType=VARCHAR},
       </if>
-      <if test="radio3 != null" >
-        radio3 = #{radio3,jdbcType=VARCHAR},
-      </if>
-      <if test="radio4 != null" >
-        radio4 = #{radio4,jdbcType=VARCHAR},
-      </if>
-      <if test="radio5 != null" >
-        radio5 = #{radio5,jdbcType=VARCHAR},
-      </if>
-      <if test="radio6 != null" >
-        radio6 = #{radio6,jdbcType=VARCHAR},
-      </if>
-      <if test="radio7 != null" >
-        radio7 = #{radio7,jdbcType=VARCHAR},
-      </if>
-      <if test="radio8 != null" >
-        radio8 = #{radio8,jdbcType=VARCHAR},
-      </if>
-      <if test="radio9 != null" >
-        radio9 = #{radio9,jdbcType=VARCHAR},
-      </if>
-      <if test="radio10 != null" >
-        radio10 = #{radio10,jdbcType=VARCHAR},
-      </if>
-      <if test="judge1 != null" >
-        judge1 = #{judge1,jdbcType=INTEGER},
-      </if>
-      <if test="judge2 != null" >
-        judge2 = #{judge2,jdbcType=INTEGER},
-      </if>
-      <if test="judge3 != null" >
-        judge3 = #{judge3,jdbcType=INTEGER},
-      </if>
-      <if test="judge4 != null" >
-        judge4 = #{judge4,jdbcType=INTEGER},
-      </if>
-      <if test="judge5 != null" >
-        judge5 = #{judge5,jdbcType=INTEGER},
-      </if>
-      <if test="judge6 != null" >
-        judge6 = #{judge6,jdbcType=INTEGER},
-      </if>
-      <if test="judge7 != null" >
-        judge7 = #{judge7,jdbcType=INTEGER},
-      </if>
-      <if test="judge8 != null" >
-        judge8 = #{judge8,jdbcType=INTEGER},
-      </if>
-      <if test="judge9 != null" >
-        judge9 = #{judge9,jdbcType=INTEGER},
-      </if>
-      <if test="judge10 != null" >
-        judge10 = #{judge10,jdbcType=INTEGER},
-      </if>
-      <if test="shortanswer1 != null" >
-        shortAnswer1 = #{shortanswer1,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer2 != null" >
-        shortAnswer2 = #{shortanswer2,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer3 != null" >
-        shortAnswer3 = #{shortanswer3,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer4 != null" >
-        shortAnswer4 = #{shortanswer4,jdbcType=VARCHAR},
-      </if>
-      <if test="shortanswer5 != null" >
-        shortAnswer5 = #{shortanswer5,jdbcType=VARCHAR},
+      <if test="shortanswerjson != null" >
+        shortAnswerJson = #{shortanswerjson,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -344,33 +107,11 @@
   <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.ETest" >
     update eTest
     set eid = #{eid,jdbcType=INTEGER},
-      subjectId = #{subjectid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      radio1 = #{radio1,jdbcType=VARCHAR},
-      radio2 = #{radio2,jdbcType=VARCHAR},
-      radio3 = #{radio3,jdbcType=VARCHAR},
-      radio4 = #{radio4,jdbcType=VARCHAR},
-      radio5 = #{radio5,jdbcType=VARCHAR},
-      radio6 = #{radio6,jdbcType=VARCHAR},
-      radio7 = #{radio7,jdbcType=VARCHAR},
-      radio8 = #{radio8,jdbcType=VARCHAR},
-      radio9 = #{radio9,jdbcType=VARCHAR},
-      radio10 = #{radio10,jdbcType=VARCHAR},
-      judge1 = #{judge1,jdbcType=INTEGER},
-      judge2 = #{judge2,jdbcType=INTEGER},
-      judge3 = #{judge3,jdbcType=INTEGER},
-      judge4 = #{judge4,jdbcType=INTEGER},
-      judge5 = #{judge5,jdbcType=INTEGER},
-      judge6 = #{judge6,jdbcType=INTEGER},
-      judge7 = #{judge7,jdbcType=INTEGER},
-      judge8 = #{judge8,jdbcType=INTEGER},
-      judge9 = #{judge9,jdbcType=INTEGER},
-      judge10 = #{judge10,jdbcType=INTEGER},
-      shortAnswer1 = #{shortanswer1,jdbcType=VARCHAR},
-      shortAnswer2 = #{shortanswer2,jdbcType=VARCHAR},
-      shortAnswer3 = #{shortanswer3,jdbcType=VARCHAR},
-      shortAnswer4 = #{shortanswer4,jdbcType=VARCHAR},
-      shortAnswer5 = #{shortanswer5,jdbcType=VARCHAR}
+        subjectId = #{subjectid,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        judgeJson = #{judgejson,jdbcType=VARCHAR},
+        radioJson = #{radiojson,jdbcType=VARCHAR},
+        shortAnswerJson = #{shortanswerjson,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,6 +1,4 @@
 package com.qfedu.examsys.aftercontroller;
-
-import com.qfedu.examsys.pojo.AllTestList;
 import com.qfedu.examsys.pojo.Answer;
 import com.qfedu.examsys.pojo.Exam;
 import com.qfedu.examsys.pojo.JsonResult;
@@ -32,29 +30,26 @@ public class TestPaperController {
     @ResponseBody
     public JsonResult getPaperTest(Exam exam,String eTestName){
 
-        return  testPaperService.saveStudentExamMapper(exam, eTestName);
+
+
+        return  testPaperService.getStudentExamMapper(exam, eTestName);
     }
 
     //用户测试练习使用的测试题 随机生成  需要学科Id
-
+    @ResponseBody
+    @RequestMapping("/getTestMapper.do")
     public JsonResult getTestMapper(Integer subjectId){
 
-        AllTestList testMapper = testPaperService.getTestMapper(subjectId);
+        return  testPaperService.getStudentTestMapper();
 
-        JsonResult jsonResult = new JsonResult();
-
-        jsonResult.setCode(1);
-
-        jsonResult.setInfo(testMapper);
-
-        return jsonResult;
     }
 
     //用户提交试卷操作 需要answer对象 和 是否是测试或者考试
     // 练习题为 1  考试为 0
-    public  String saveTestMapper(Answer answer){
+    public  String saveTestMapper(Answer answer,Integer flag){
 
         testPaperService.saveAnswer(answer,1);
+
 
 
         return  null;

@@ -8,8 +8,6 @@ import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.utils.TestMapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -77,7 +75,7 @@ public class TestPaperServiceImpl implements TestPaperService {
     }
     //生成考试卷子 并保存到eTest表 ————考试 需要讲师阅卷
     @Override
-    public JsonResult saveStudentExamMapper(Exam exam,String eTestName)  {
+    public JsonResult getStudentExamMapper(Exam exam,String eTestName)  {
         AllTestList allTestList = getTestMapper(1);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -102,7 +100,8 @@ public class TestPaperServiceImpl implements TestPaperService {
             eTest.setName(eTestName);
 
             //考卷所属科目
-            eTest.setSubjectid(exam.getSubjectid());
+           // eTest.setSubjectid(exam.getSubjectid());
+            eTest.setSubjectid(1);
 
             eTest.setJudgejson(judgeStr);
 
@@ -115,7 +114,7 @@ public class TestPaperServiceImpl implements TestPaperService {
             e.printStackTrace();
         }
 
-       eTestDao.insertSelective(eTest);
+        eTestDao.insertSelective(eTest);
 
         JsonResult jsonResult = new JsonResult();
 
@@ -126,15 +125,41 @@ public class TestPaperServiceImpl implements TestPaperService {
         return  jsonResult;
     }
 
+    //生成学生测试使用的练习题 从eTest中随机抽取
+    @Override
+    public JsonResult getStudentTestMapper() {
+
+        //获取eTest coutn()个数
+
+        int count = eTestDao.getCount();
+
+        Random random = new Random();
+
+        int i = random.nextInt(count);
+
+        ETest eTest = eTestDao.selectByPrimaryKey(i);
+
+        JsonResult jsonResult = new JsonResult();
+
+        jsonResult.setCode(1);
+
+        jsonResult.setInfo(eTest);
+
+        return  jsonResult;
+    }
+
     //  练习为 1  考试为 0
     @Override
     public void saveAnswer(Answer answer,Integer flag) {
 
         if (flag==1){
 
-        }
+            answerDao.insertSelective(answer);
 
-        answerDao.insertSelective(answer);
+        }else {
+
+
+        }
 
     }
 

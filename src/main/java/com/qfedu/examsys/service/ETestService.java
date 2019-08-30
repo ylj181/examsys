@@ -1,9 +1,13 @@
-package com.qfedu.examsys.dao;
+package com.qfedu.examsys.service;
 
 import com.qfedu.examsys.pojo.ETest;
-import org.apache.ibatis.annotations.Select;
 
-public interface ETestDao {
+/**
+ * @Author Lei
+ * @Date 2019-8-30 21:31
+ */
+
+public interface ETestService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ETest record);
@@ -16,6 +20,4 @@ public interface ETestDao {
 
     int updateByPrimaryKey(ETest record);
 
-    @Select("select count(1) from eTest")
-    int  getCount();
 }
