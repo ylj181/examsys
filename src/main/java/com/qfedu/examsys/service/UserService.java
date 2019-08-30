@@ -11,4 +11,10 @@ public interface UserService {
 
     public List<User> findAllRole(Integer rid);
 
+    public void updatePassword(User user);
+
+    public void deleteByPrimaryKey(Integer id);
+
+
+
 }

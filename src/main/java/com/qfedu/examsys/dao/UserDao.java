@@ -17,13 +17,16 @@ public interface UserDao {
 
     int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+    //修改密码
+    void updateByPrimaryKey(User user);
 
     //登录
     User login(String username);
 
     //根据角色Id查询
     List<User> findAllRole(Integer rid);
+
+
 
 
 }

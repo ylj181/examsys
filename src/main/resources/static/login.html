@@ -6,6 +6,7 @@
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
 </head>
 <body>
+<a href="zhuce.html">注册</a>
 
 <form action=""  onsubmit="return false" >
     username<input type="text" name="username" /><br />
@@ -23,14 +24,13 @@
             dataType:"json",
             success:function(data){
                 if(data.code == 1){
-                    window.location.href = "index.html";
+                    window.location.href = "Usermanage.html";
                 }else {
                     alert(data.info);
                 }
             }
         })
     })
-
 
 </script>
 </body>

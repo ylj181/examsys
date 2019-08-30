@@ -21,7 +21,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
+    delete from examsys.user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.qfedu.examsys.pojo.User" >
@@ -115,23 +115,17 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.User" >
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      subjectId = #{subjectid,jdbcType=INTEGER},
-      rid = #{rid,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    update examsys.user set password = #{password}
+    where id = #{id}
   </update>
 
   <select id="login" parameterType="string" resultType="com.qfedu.examsys.pojo.User">
     select * from examsys.user where username = #{username}
   </select>
 
-<select id="findAllRole" parameterType="int" resultType="com.qfedu.examsys.pojo.User">
+  <select id="findAllRole" parameterType="int" resultType="com.qfedu.examsys.pojo.User">
     select * from examsys.user where rid = #{rid}
 </select>
+
 
 </mapper>

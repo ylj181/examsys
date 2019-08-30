@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+</head>
+<body>
+<td id="aa">
+<a href="updatepassword.html" >修改密码：所有都展示</a><br>
+<a id="cc" href="111" style="">修改权限：管理员展示</a><br>
+<a href="dwad" style="display: none">添加老师：管理员展示</a><br>
+</td>
+<script type="text/javascript">
+    $.ajax({
+        type:"post",
+        url:"findUserRid.do",
+        dataType:"json",
+        success:function (data) {
+            if (data.code == 1){
+                if (data.info == 2) {
+                    $("#cc").attr("style","display:none");
+                }
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>

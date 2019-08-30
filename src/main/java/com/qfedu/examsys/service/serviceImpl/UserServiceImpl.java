@@ -31,4 +31,14 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
+    @Override
+    public void updatePassword(User user) {
+        userDao.updateByPrimaryKey( user );
+    }
+
+    @Override
+    public void deleteByPrimaryKey(Integer id) {
+        userDao.deleteByPrimaryKey( id );
+    }
+
 }
