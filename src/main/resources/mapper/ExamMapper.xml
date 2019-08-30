@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.examsys.dao.ExamDao" >
-    <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Exam" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
-        <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
-        <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+<mapper namespace="com.qfedu.examsys.dao.ExamDao">
+    <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Exam">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="subjectId" property="subjectid" jdbcType="INTEGER"/>
+        <result column="startTime" property="starttime" jdbcType="TIMESTAMP"/>
+        <result column="endTime" property="endtime" jdbcType="TIMESTAMP"/>
     </resultMap>
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
     id, subjectId, startTime, endTime
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from exam
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from exam
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.qfedu.examsys.pojo.Exam" >
+    <insert id="insert" parameterType="com.qfedu.examsys.pojo.Exam">
     insert into exam (id, subjectId, startTime,
                       endTime)
     values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP},
             #{endtime,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Exam" >
+    <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Exam">
         insert into exam
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 id,
             </if>
-            <if test="subjectid != null" >
+            <if test="subjectid != null">
                 subjectId,
             </if>
-            <if test="starttime != null" >
+            <if test="starttime != null">
                 startTime,
             </if>
-            <if test="endtime != null" >
+            <if test="endtime != null">
                 endTime,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="subjectid != null" >
+            <if test="subjectid != null">
                 #{subjectid,jdbcType=INTEGER},
             </if>
-            <if test="starttime != null" >
+            <if test="starttime != null">
                 #{starttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="endtime != null" >
+            <if test="endtime != null">
                 #{endtime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Exam" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Exam">
         update exam
-        <set >
-            <if test="subjectid != null" >
+        <set>
+            <if test="subjectid != null">
                 subjectId = #{subjectid,jdbcType=INTEGER},
             </if>
-            <if test="starttime != null" >
+            <if test="starttime != null">
                 startTime = #{starttime,jdbcType=TIMESTAMP},
             </if>
-            <if test="endtime != null" >
+            <if test="endtime != null">
                 endTime = #{endtime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Exam" >
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Exam">
     update exam
     set subjectId = #{subjectid,jdbcType=INTEGER},
         startTime = #{starttime,jdbcType=TIMESTAMP},
@@ -82,13 +82,11 @@
 
     <!--查询所有的考试信息-->
     <select id="findAllExams" resultType="exam">
-    select * from exam
-  </select>
+        select * from exam
+    </select>
 
     <!--根据考试表的Id查询对应的考试信息-->
     <select id="findExamById" parameterType="int" resultMap="BaseResultMap">
-    select * from exam where id = #{id}
-  </select>
-
-
+        select * from exam where id = #{id}
+    </select>
 </mapper>
