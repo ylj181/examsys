@@ -77,4 +77,14 @@
   <select id="findJudges" parameterType="int" resultMap="BaseResultMap">
     select * from examsys.judge where  examsys.judge.subjectId = #{subjectId}
   </select>
+
+
+<!--  批量导入判断题-->
+  <insert id="insertManyJudges">
+    insert into judge(title, answer, subjectId)
+    values
+    <foreach collection="list" item="judge" separator=",">
+      (#{judge.title},#{judge.answer},#{judge.subjectId})
+    </foreach>
+  </insert>
 </mapper>

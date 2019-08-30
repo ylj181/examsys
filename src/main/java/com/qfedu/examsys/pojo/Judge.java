@@ -1,11 +1,14 @@
 package com.qfedu.examsys.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+// 对多数据导入处理
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Judge {
     private Integer id;
 
     private String title;
 
-    private Integer answer;
+    private String answer;
 
     private Integer subjectId;
 
@@ -33,11 +36,11 @@ public class Judge {
         this.title = title == null ? null : title.trim();
     }
 
-    public Integer getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Integer answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 }

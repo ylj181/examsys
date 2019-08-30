@@ -18,6 +18,10 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author lexo
+ *  导入选择题，判断题，简答题
+ */
 @Controller
 public class ImportController {
 
@@ -69,4 +73,7 @@ public class ImportController {
         }
         return "redirect:/index.html";
     }
+
+
+
 }
