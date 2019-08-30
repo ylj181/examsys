@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -45,22 +46,42 @@ public class EnrollController {
     }
 
 
+//    /**
+//     * 展示本次报名的考试信息
+//     * @param id  报名的考试Id
+//     * @return  map
+//     */
+//    @RequestMapping("/enroll/selectEnrollById.do")
+//    @ResponseBody
+//    public Map<String,Object> selectEnrollById(Integer id){
+//        Map<String, Object> map = new HashMap<>();
+//
+//        Enroll enroll = enrollService.selectEnrollById(id);
+//
+//        if (enroll != null){
+//            map.put("code",1);
+//            map.put("info",enroll);
+//            System.out.println(enroll.getSubjectId());
+//        }
+//
+//        return map;
+//    }
+
     /**
-     * 展示本次报名的考试信息
-     * @param id  报名的考试Id
-     * @return  map
+     * 展示该学生所有的考试信息
+     * @return map
      */
-    @RequestMapping("/enroll/selectEnrollById.do")
+    @RequestMapping("/enroll/findAllEnroll.do")
     @ResponseBody
-    public Map<String,Object> selectEnrollById(Integer id){
+    public Map<String,Object> findAllEnroll(Integer uid){
         Map<String, Object> map = new HashMap<>();
 
-        Enroll enroll = enrollService.selectEnrollById(id);
 
-        if (enroll != null){
+        List<Enroll> enrollList = enrollService.findAllEnroll(uid);
+
+        if (enrollList.size() != 0){
             map.put("code",1);
-            map.put("info",enroll);
-            System.out.println(enroll.getSubjectId());
+            map.put("info",enrollList);
         }
 
         return map;
