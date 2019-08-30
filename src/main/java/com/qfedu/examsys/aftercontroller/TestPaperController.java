@@ -30,8 +30,6 @@ public class TestPaperController {
     @ResponseBody
     public JsonResult getPaperTest(Exam exam,String eTestName){
 
-
-
         return  testPaperService.getStudentExamMapper(exam, eTestName);
     }
 
