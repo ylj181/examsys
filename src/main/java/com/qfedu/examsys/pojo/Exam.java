@@ -12,6 +12,8 @@ public class Exam {
 
     private Date endtime;
 
+    private Subject subject;
+
     public Integer getId() {
         return id;
     }
@@ -42,5 +44,13 @@ public class Exam {
 
     public void setEndtime(Date endtime) {
         this.endtime = endtime;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 }

@@ -1,5 +1,6 @@
 package com.qfedu.examsys.service.serviceImpl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.EnrollDao;
 import com.qfedu.examsys.pojo.Enroll;
 import com.qfedu.examsys.service.EnrollService;
@@ -37,12 +38,17 @@ public class EnrollServiceImpl implements EnrollService {
 //    }
 
     /**
-     * 查询指定学生所有的考试信息
+     * 查询指定学生所有的报名信息
      * @return  该用户所有考试信息列表
      */
     @Override
-    public List<Enroll> findAllEnroll(Integer uid) {
-        return enrollDao.findAllEnroll(uid);
+    public List<Enroll> findAllEnroll(Integer uid,Integer page,Integer limit) {
+
+        PageHelper.startPage(page,limit);
+
+        List<Enroll> enrollList = enrollDao.findAllEnroll(uid);
+
+        return enrollList;
     }
 
 }

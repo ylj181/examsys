@@ -1,15 +1,15 @@
 package com.qfedu.examsys.aftercontroller;
 
 
+import com.github.pagehelper.Page;
 import com.qfedu.examsys.pojo.Enroll;
-import com.qfedu.examsys.pojo.User;
 import com.qfedu.examsys.service.EnrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,19 +22,15 @@ public class EnrollController {
 
     /**
      * 向报名表中添加报名信息
-     * @param session  HttpSession对象
-     * @return  返回 map
+     * @param uid  用户Id
+     * @param eid  报名表Id
+     * @return map
      */
+    @CrossOrigin
     @RequestMapping("/enroll/addEnrollInfo.do")
     @ResponseBody
-    public Map<String,Object> addEnrollInfo(HttpSession session,Integer eid){
+    public Map<String,Object> addEnrollInfo(Integer uid,Integer eid){
         Map<String, Object> map = new HashMap<>();
-
-        //从session中获取登录用户对象
-
-        User user = (User) session.getAttribute("user");
-        //获取登录用户的Id
-        Integer uid = user.getId();
 
         int i = enrollService.addEnrollInfo(uid, eid);
 
@@ -72,18 +68,20 @@ public class EnrollController {
      * 展示该学生所有的考试信息
      * @return map
      */
+    @CrossOrigin
     @RequestMapping("/enroll/findAllEnroll.do")
     @ResponseBody
-    public Map<String,Object> findAllEnroll(Integer uid){
+    public Map<String,Object> findAllEnroll(Integer uid,Integer page,Integer limit){
         Map<String, Object> map = new HashMap<>();
 
+        List<Enroll> enrollList = enrollService.findAllEnroll(uid,page,limit);
 
-        List<Enroll> enrollList = enrollService.findAllEnroll(uid);
+        long total = ((Page) enrollList).getTotal();
 
-        if (enrollList.size() != 0){
-            map.put("code",1);
-            map.put("info",enrollList);
-        }
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",total);
+        map.put("data",enrollList);
 
         return map;
     }

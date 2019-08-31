@@ -11,6 +11,6 @@ public interface EnrollService {
 //    //通过报名表的id查询相应的报名信息
 //    public Enroll selectEnrollById(Integer id);
 
-    //查询指定学生所有的考试信息
-    public List<Enroll> findAllEnroll(Integer uid);
+    //查询指定学生所有的报名信息
+    public List<Enroll> findAllEnroll(Integer uid,Integer page,Integer limit);
 }
