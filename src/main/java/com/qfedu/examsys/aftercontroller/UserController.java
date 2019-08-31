@@ -1,5 +1,6 @@
 package com.qfedu.examsys.aftercontroller;
 
+import com.github.pagehelper.Page;
 import com.qfedu.examsys.pojo.JsonResult;
 import com.qfedu.examsys.pojo.User;
 import com.qfedu.examsys.service.UserService;
@@ -25,8 +26,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+
 
     //登录
 
@@ -36,12 +36,16 @@ public class UserController {
     public JsonResult login(String username, String password){
         User user = userService.login( username );
         String password1 = user.getPassword();
-
-        return new JsonResult( 1,user );
-
+        if (password.equals( password1 )){
+            return new JsonResult( 1,user );
+        }
+        return new JsonResult( 0,"账号或者密码错误" );
     }
 
     //退出
+    @CrossOrigin
+    @RequestMapping("/loout.do")
+    @ResponseBody
     public JsonResult loout(HttpSession session){
         session.removeAttribute( "user" );
         session.invalidate();
@@ -50,6 +54,7 @@ public class UserController {
 
     //注册  默认注册成为学生
 
+    @CrossOrigin
     @RequestMapping("/addUser")
     @ResponseBody
     public JsonResult insert(User record){
@@ -75,21 +80,30 @@ public class UserController {
 
 
     //前端给出rid  查询出不同角色信息
+    @CrossOrigin
     @RequestMapping("/findAllRole.do")
     @ResponseBody
-    public JsonResult findAllRole(Integer rid){
-        List<User> userList = userService.findAllRole( rid );
-        return new JsonResult( 1,userList );
+    public Map<String,Object> findAllRole(Integer rid,Integer page,Integer limit){
+        List<User> list = userService.findAllRole(rid, page, limit );
+        long total = ((Page) list).getTotal();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0); // 结合layui的表格组件，0表示成功
+        map.put("msg", "");
+        map.put("count", total);// 表中总记录数
+        map.put("data", list); // 获取到的分页数据
+        return map;
     }
 
     //修改个人密码
+    @CrossOrigin
     @RequestMapping("/updatePassword.do")
-    public void updatePassword(HttpSession session, HttpServletResponse response , String password) throws IOException {
-        User user = (User) session.getAttribute( "user" );
+    @ResponseBody
+    public JsonResult updatePassword(Integer id, String password) {
+        User user = userService.findUserById( id );
         user.setPassword( password );
         userService.updatePassword( user );
-        session.removeAttribute( "user" );
-        response.sendRedirect( "login.html" );
+
+        return new JsonResult(1, "修改成功，请重新登陆" );
     }
 
     //管理员删除指定id用户
@@ -106,9 +120,9 @@ public class UserController {
     @ResponseBody
     public JsonResult findUserRid(Integer id){
         System.out.println(id);
-
-
-        return new JsonResult( 1,id );
+        User userById = userService.findUserById( id );
+        Integer rid = userById.getRid();
+        return new JsonResult( 1,rid );
     }
 
     /**
@@ -116,19 +130,14 @@ public class UserController {
      * @param id 用户Id
      * @return  map
      */
+    @CrossOrigin
     @RequestMapping("/findUserById.do")
     @ResponseBody
-    public Map<String,Object> findUserById(Integer id){
-        Map<String, Object> map = new HashMap<>();
-
+    public JsonResult findUserById(Integer id){
         User user = userService.findUserById(id);
-
-        if (user != null){
-            map.put("code",1);
-            map.put("info",user);
-        }
-
-        return map;
+        return new JsonResult( 1,user );
     }
+
+
 
 }
