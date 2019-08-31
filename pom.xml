@@ -19,6 +19,15 @@
     </properties>
 
     <dependencies>
+
+
+        <!--        验证码 -->
+        <dependency>
+            <groupId>com.imlee</groupId>
+            <artifactId>leekai</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
