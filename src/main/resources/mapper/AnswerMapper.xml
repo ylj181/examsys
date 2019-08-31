@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.examsys.dao.AnswerDao" >
-  <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Answer" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="eTid" property="etid" jdbcType="INTEGER" />
-    <result column="score" property="score" jdbcType="INTEGER" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="judges" property="judges" jdbcType="VARCHAR" />
-    <result column="shorts" property="shorts" jdbcType="VARCHAR" />
-    <result column="radios" property="radios" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.qfedu.examsys.dao.AnswerDao">
+    <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Answer">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="eTid" property="etid" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="judges" property="judges" jdbcType="VARCHAR"/>
+        <result column="shorts" property="shorts" jdbcType="VARCHAR"/>
+        <result column="radios" property="radios" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, uid, eTid, score, createtime, judges, shorts, radios
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from answer
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from answer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from answer
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.qfedu.examsys.pojo.Answer" >
+    <insert id="insert" parameterType="com.qfedu.examsys.pojo.Answer">
     insert into answer (id, uid, eTid,
                         score, createtime, judges,
                         shorts, radios)
@@ -32,89 +32,89 @@
             #{score,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{judges,jdbcType=VARCHAR},
             #{shorts,jdbcType=VARCHAR}, #{radios,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Answer" >
-    insert into answer
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="uid != null" >
-        uid,
-      </if>
-      <if test="etid != null" >
-        eTid,
-      </if>
-      <if test="score != null" >
-        score,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-      <if test="judges != null" >
-        judges,
-      </if>
-      <if test="shorts != null" >
-        shorts,
-      </if>
-      <if test="radios != null" >
-        radios,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="etid != null" >
-        #{etid,jdbcType=INTEGER},
-      </if>
-      <if test="score != null" >
-        #{score,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="judges != null" >
-        #{judges,jdbcType=VARCHAR},
-      </if>
-      <if test="shorts != null" >
-        #{shorts,jdbcType=VARCHAR},
-      </if>
-      <if test="radios != null" >
-        #{radios,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Answer" >
-    update answer
-    <set >
-      <if test="uid != null" >
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="etid != null" >
-        eTid = #{etid,jdbcType=INTEGER},
-      </if>
-      <if test="score != null" >
-        score = #{score,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="judges != null" >
-        judges = #{judges,jdbcType=VARCHAR},
-      </if>
-      <if test="shorts != null" >
-        shorts = #{shorts,jdbcType=VARCHAR},
-      </if>
-      <if test="radios != null" >
-        radios = #{radios,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Answer" >
+    <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Answer">
+        insert into answer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="etid != null">
+                eTid,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="judges != null">
+                judges,
+            </if>
+            <if test="shorts != null">
+                shorts,
+            </if>
+            <if test="radios != null">
+                radios,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="etid != null">
+                #{etid,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="judges != null">
+                #{judges,jdbcType=VARCHAR},
+            </if>
+            <if test="shorts != null">
+                #{shorts,jdbcType=VARCHAR},
+            </if>
+            <if test="radios != null">
+                #{radios,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Answer">
+        update answer
+        <set>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="etid != null">
+                eTid = #{etid,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="judges != null">
+                judges = #{judges,jdbcType=VARCHAR},
+            </if>
+            <if test="shorts != null">
+                shorts = #{shorts,jdbcType=VARCHAR},
+            </if>
+            <if test="radios != null">
+                radios = #{radios,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Answer">
     update answer
     set uid = #{uid,jdbcType=INTEGER},
         eTid = #{etid,jdbcType=INTEGER},
@@ -125,4 +125,17 @@
         radios = #{radios,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <!--根据考试表Id和用户Id查询本次考试的成绩-->
+    <select id="selectAnswerByExamIdAndUserId" parameterType="map" resultMap="BaseResultMap">
+    select * FROM
+    answer a
+    INNER JOIN eTest et
+    on a.eTid = et.id
+    INNER JOIN exam e
+    on et.eid = e.id
+    INNER JOIN user u
+    ON a.uid = u.id
+    where e.id = #{eid} and u.id = #{uid}
+  </select>
 </mapper>
