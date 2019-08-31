@@ -23,4 +23,5 @@ public class SubjectServiceImpl implements SubjectService {
     public List<Subject> findAllSubject() {
         return subjectDao.findAllSubject();
     }
+
 }

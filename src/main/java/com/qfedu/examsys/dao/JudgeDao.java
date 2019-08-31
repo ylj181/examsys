@@ -2,6 +2,7 @@ package com.qfedu.examsys.dao;
 
 
 import com.qfedu.examsys.pojo.Judge;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface JudgeDao {
 
     // 导入判断题
     void insertManyJudges(List<Judge> judges);
+
+    List<Judge> findAllJudges(@Param("name") String name);
 }

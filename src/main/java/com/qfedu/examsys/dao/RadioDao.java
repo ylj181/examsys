@@ -2,6 +2,7 @@ package com.qfedu.examsys.dao;
 
 
 import com.qfedu.examsys.pojo.Radio;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface RadioDao {
 
     //根据subjectId  返回Radio集合
     List<Radio> findRadios(Integer subjectId);
+
+    // 查询所有选择题
+    List<Radio> findAllRadios(@Param("name") String name);
 }

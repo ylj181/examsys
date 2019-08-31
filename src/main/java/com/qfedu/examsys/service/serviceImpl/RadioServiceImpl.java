@@ -1,5 +1,6 @@
 package com.qfedu.examsys.service.serviceImpl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.RadioDao;
 import com.qfedu.examsys.pojo.Radio;
 import com.qfedu.examsys.service.RadioService;
@@ -16,5 +17,12 @@ public class RadioServiceImpl implements RadioService {
     @Override
     public void insertMany(List<Radio> radios) {
         radioDao.insertMany(radios);
+    }
+
+    @Override
+    public List<Radio> findAllRadios(String name,Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<Radio> allRadios = radioDao.findAllRadios(name);
+        return allRadios;
     }
 }

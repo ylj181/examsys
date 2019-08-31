@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #content {
+            margin: 20px auto;
+        }
+    </style>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+
+
+<div id="content" >
+    <div class="layui-form searchDiv">
+
+        <div class="layui-form-item"><span style="font-size: 20px;color: #8D8D8D">按科目进行搜索</span>
+            <div class="layui-inline">
+
+                <div class="layui-input-inline">
+                    <select id="test3">
+                        <option value="">-请选择科目-</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="layui-btn" data-type="reload">搜索</button>
+
+            <button type="button" class="layui-btn" onclick="add()">添加</button>
+
+
+
+        </div>
+        <!--				<div class="layui-inline">-->
+        <!--					<label class="layui-form-label">结束日期</label>-->
+        <!--					<div class="layui-input-inline">-->
+        <!--						<input type="text" class="layui-input" id="test2" placeholder="yyyy-MM-dd">-->
+        <!--					</div>-->
+        <!--				</div>-->
+    </div>
+</div>
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+</script>
+</div>
+<script>
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function () {
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , element = layui.element; //元素操作
+        //  ;element.render(),
+
+        // laydate.render({
+        //     elem: '#test1'
+        // });
+        // laydate.render({
+        // 	elem: '#test2'
+        // });
+        //执行一个 table 实例
+
+        element.on('tab(demo)', function (data) {
+            layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
+                tips: 1
+            }); //
+        });
+        table.render({
+            elem: '#demo'
+            , id: "judgeAll"
+            , height: 520
+            , url: 'radios/listAllJudges.do' //数据接口
+            , title: '用户表'
+            // , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            , page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                //,groups: 1 //只显示 1 个连续页码
+                , page: true
+                , first: false //不显示首页
+                , last: false //不显示尾页
+                , limits: [5, 10, 20]
+
+            } //开启分页
+            , cols: [[ //表头
+                // {type: 'checkbox', fixed: 'left'},
+                {field: 'title', title: '题目', width: 700,height:200, sort: true, fixed: 'left'}
+                , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
+                , {field: 'answer', title: '答案', align: 'center',width: 110, sort: true}
+                , {fixed: 'right', title:'操作',width: 100, align: 'center', toolbar: '#barDemo'}
+
+            ]]
+        });
+        //监听行工具事件
+        table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.ajax({
+                        type: "get",
+                        url: "video/delete.do?id=" + data.id,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code == 1) {
+                                table.reload('itemSS');
+                            } else {
+                                alert(data.info);
+                            }
+                        }
+                    })
+                });
+            } else if (layEvent === 'edit') {
+                //layer.msg('编辑操作');
+                layer.open({
+                    type: 2 //此处以iframe举例
+                    , title: '项目信息维护'
+                    , area: ['800px', '600px']
+                    , content: 'updateItem.jsp?id=' + data.id
+                })
+            }
+        });
+
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id)
+                , data = checkStatus.data; //获取选中的数据
+            switch (obj.event) {
+                case 'add':
+                    layer.msg('添加');
+                    break;
+                case 'update':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else if (data.length > 1) {
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：' + checkStatus.data[0].id);
+                    }
+                    break;
+                case 'delete':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+
+                    }
+                    if (data.length === 1) {
+                        layer.msg('再选一个呗');
+                    } else {
+                        var ids = "";
+                        if (data.length > 0) {
+                            for (var i = 0; i < data.length; i++) {
+                                ids += data[i].id + ",";
+                            }
+                        }
+                        layer.confirm('真的删除行么', function (index) {
+                            layer.close(index);
+                            $.ajax({
+                                type: "get",
+                                url: "video/deletes.do?",
+                                data: {"ids": ids},
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.code == 1) {
+                                        table.reload('itemSS');
+                                    } else {
+                                        alert(data.info);
+                                    }
+                                }
+                            })
+                        })
+                    }
+                    break;
+            }
+            ;
+        });
+
+        var active = {
+            reload: function () {
+                if ($("#test3").val() == "") {
+                    alert("请选择类型搜索");
+                }
+                //执行重载
+                table.reload('judgeAll', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    , where: { // 额外需要提交的参数
+
+
+                        name: $("#test3").val(),
+                    }
+
+                });
+            }
+        };
+
+        $('.searchDiv .layui-btn').on('click', function () {
+
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+
+        });
+    });
+
+
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "radios/findSubjectName.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+                        var html = '<option value ="' + this.name + '">' + this.name + '</option>';
+                        $("#test3").append(html)
+                    })
+                } else {
+                    alert(data.info);
+                }
+            }
+        })
+    })
+
+
+</script>
+<script type="text/javascript">
+    function add() {
+        layer.open({
+            type: 2 //此处以iframe举例
+            , title: '添加员工'
+            , area: ['800px', '600px']
+            , content: 'addItem.html'
+        })
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+
+</script>
+</body>
+</html>

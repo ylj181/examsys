@@ -8,4 +8,5 @@ public interface SubjectService {
 
     //查询所有的学科
     List<Subject> findAllSubject();
+
 }

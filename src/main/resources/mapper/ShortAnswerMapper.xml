@@ -76,4 +76,44 @@
   <select id="findShortAnswers" parameterType="int" resultMap="BaseResultMap">
     select * from examsys.shortAnswer where  examsys.shortAnswer.subjectId =#{subjectId}
   </select>
+
+  <!--
+陈曦创建：
+时间8.30 15:00
+-->
+  <insert id="insertManyShortAnswer">
+    insert into shortAnswer(title, answer, subjectId)
+    values
+    <foreach collection="list" item="shortAnswer" separator=",">
+      (#{shortAnswer.title},#{shortAnswer.answer},#{shortAnswer.subjectId})
+    </foreach>
+  </insert>
+
+
+  <!--
+   陈曦创建：
+   时间8.31 10:00
+   -->
+  <resultMap id="ShortAnswerAllMap" type="shortAnswer">
+    <id column="id" property="id"></id>
+    <result column="title" property="title"></result>
+    <result column="answer" property="answer"></result>
+    <result column="subjectId" property="subjectId"></result>
+    <association property="subject" resultMap="com.qfedu.examsys.dao.SubjectDao.subjectMapOne">
+
+    </association>
+  </resultMap>
+  <select id="findAllShortAnswers" parameterType="int" resultMap="ShortAnswerAllMap">
+    select sa.*, s.name
+    from shortAnswer sa
+    inner join subject s on sa.subjectId = s.id
+    <where>
+      <if test="name!=null">
+        name like "%${name}%"
+      </if>
+      <!--            <if test="typename==null">-->
+      <!--                and typename like "%1%"-->
+      <!--            </if>-->
+    </where>
+  </select>
 </mapper>

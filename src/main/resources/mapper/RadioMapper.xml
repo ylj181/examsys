@@ -1,150 +1,184 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qfedu.examsys.dao.RadioDao" >
-  <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Radio" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="subjectId" property="subjectId" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="choiceA" property="choiceA" jdbcType="VARCHAR" />
-    <result column="choiceB" property="choiceB" jdbcType="VARCHAR" />
-    <result column="choiceC" property="choiceC" jdbcType="VARCHAR" />
-    <result column="choiceD" property="choiceD" jdbcType="VARCHAR" />
-    <!--  <result column="answer" property="answer" jdbcType="VARCHAR" />-->
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, subjectId, title, choiceA, choiceB, choiceC, choiceD, answer
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from radio
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from radio
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.qfedu.examsys.pojo.Radio" >
-    insert into radio (id, subjectId, title,
-                       choiceA, choiceB, choiceC,
-                       choiceD, answer)
-    values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
-            #{choiceA,jdbcType=VARCHAR}, #{choiceB,jdbcType=VARCHAR}, #{choiceC,jdbcType=VARCHAR},
-            #{choiceD,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Radio" >
-    insert into radio
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="subjectid != null" >
-        subjectId,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="choiceA != null" >
-        choiceA,
-      </if>
-      <if test="choiceB != null" >
-        choiceB,
-      </if>
-      <if test="choiceC != null" >
-        choiceC,
-      </if>
-      <if test="choiceD != null" >
-        choiceD,
-      </if>
-      <if test="answer != null" >
-        answer,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="subjectid != null" >
-        #{subjectid,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceA != null" >
-        #{choiceA,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceB != null" >
-        #{choiceB,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceC != null" >
-        #{choiceC,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceD != null" >
-        #{choiceD,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Radio" >
-    update radio
-    <set >
-      <if test="subjectid != null" >
-        subjectId = #{subjectid,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceA != null" >
-        choiceA = #{choiceA,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceB != null" >
-        choiceB = #{choiceB,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceC != null" >
-        choiceC = #{choiceC,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceD != null" >
-        choiceD = #{choiceD,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null" >
-        answer = #{answer,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Radio" >
-    update radio
-    set subjectId = #{subjectid,jdbcType=INTEGER},
-        title = #{title,jdbcType=VARCHAR},
-        choiceA = #{choiceA,jdbcType=VARCHAR},
-        choiceB = #{choiceB,jdbcType=VARCHAR},
-        choiceC = #{choiceC,jdbcType=VARCHAR},
-        choiceD = #{choiceD,jdbcType=VARCHAR},
-        answer = #{answer,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.qfedu.examsys.dao.RadioDao">
+    <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.Radio">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="subjectId" property="subjectId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="choiceA" property="choiceA" jdbcType="VARCHAR"/>
+        <result column="choiceB" property="choiceB" jdbcType="VARCHAR"/>
+        <result column="choiceC" property="choiceC" jdbcType="VARCHAR"/>
+        <result column="choiceD" property="choiceD" jdbcType="VARCHAR"/>
+        <!--  <result column="answer" property="answer" jdbcType="VARCHAR" />-->
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, subjectId, title, choiceA, choiceB, choiceC, choiceD, answer
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from radio
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from radio
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.qfedu.examsys.pojo.Radio">
+        insert into radio (id, subjectId, title,
+                           choiceA, choiceB, choiceC,
+                           choiceD, answer)
+        values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+                #{choiceA,jdbcType=VARCHAR}, #{choiceB,jdbcType=VARCHAR}, #{choiceC,jdbcType=VARCHAR},
+                #{choiceD,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Radio">
+        insert into radio
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="subjectid != null">
+                subjectId,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="choiceA != null">
+                choiceA,
+            </if>
+            <if test="choiceB != null">
+                choiceB,
+            </if>
+            <if test="choiceC != null">
+                choiceC,
+            </if>
+            <if test="choiceD != null">
+                choiceD,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="subjectid != null">
+                #{subjectid,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceA != null">
+                #{choiceA,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceB != null">
+                #{choiceB,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceC != null">
+                #{choiceC,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceD != null">
+                #{choiceD,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.Radio">
+        update radio
+        <set>
+            <if test="subjectid != null">
+                subjectId = #{subjectid,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceA != null">
+                choiceA = #{choiceA,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceB != null">
+                choiceB = #{choiceB,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceC != null">
+                choiceC = #{choiceC,jdbcType=VARCHAR},
+            </if>
+            <if test="choiceD != null">
+                choiceD = #{choiceD,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Radio">
+        update radio
+        set subjectId = #{subjectid,jdbcType=INTEGER},
+            title     = #{title,jdbcType=VARCHAR},
+            choiceA   = #{choiceA,jdbcType=VARCHAR},
+            choiceB   = #{choiceB,jdbcType=VARCHAR},
+            choiceC   = #{choiceC,jdbcType=VARCHAR},
+            choiceD   = #{choiceD,jdbcType=VARCHAR},
+            answer    = #{answer,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <!--
-  陈曦创建：
-  时间8.29 18:00
-  -->
-  <insert id="insertMany">
-    insert into radio(subjectId, title, choiceA, choiceB, choiceC, choiceD, answer)
-    values
-    <foreach collection="list" item="radio" separator=",">
-      (#{radio.subjectId},#{radio.title},#{radio.choiceA},#{radio.choiceB},#{radio.choiceC},#{radio.choiceD},#{radio.answer})
-    </foreach>
-  </insert>
-  <!--
-   Lei创建：
-  时间8-29 22:08
-  findRadios集合查找 根据subjectId
-  -->
-  <select id="findRadios" parameterType="int" resultMap="BaseResultMap">
-    select * from examsys.radio where  examsys.radio.subjectId = #{subjectId}
-  </select>
+    <!--
+    陈曦创建：
+    时间8.29 18:00
+    -->
+    <insert id="insertMany">
+        insert into radio(subjectId, title, choiceA, choiceB, choiceC, choiceD, answer)
+        values
+        <foreach collection="list" item="radio" separator=",">
+            (#{radio.subjectId},#{radio.title},#{radio.choiceA},#{radio.choiceB},#{radio.choiceC},#{radio.choiceD},#{radio.answer})
+        </foreach>
+    </insert>
+    <!--
+     Lei创建：
+    时间8-29 22:08
+    findRadios集合查找 根据subjectId
+    -->
+    <select id="findRadios" parameterType="int" resultMap="BaseResultMap">
+        select *
+        from examsys.radio
+        where examsys.radio.subjectId = #{subjectId}
+    </select>
+
+    <!--
+    陈曦创建：
+    时间8.30 19:00
+    -->
+    <resultMap id="radioAllMap" type="radio">
+        <id column="id" property="id"></id>
+        <result column="subjectId" property="subjectId"></result>
+        <result column="title" property="title"></result>
+        <result column="choiceA" property="choiceA"></result>
+        <result column="choiceB" property="choiceB"></result>
+        <result column="choiceC" property="choiceC"></result>
+        <result column="choiceD" property="choiceD"></result>
+        <result column="answer" property="answer"></result>
+        <association property="subject" resultMap="com.qfedu.examsys.dao.SubjectDao.subjectMapOne">
+
+        </association>
+    </resultMap>
+    <select id="findAllRadios" parameterType="int" resultMap="radioAllMap">
+        select r.*, s.name
+        from radio r
+                 inner join subject s on r.subjectId = s.id
+        <where>
+            <if test="name!=null">
+                name like "%${name}%"
+            </if>
+<!--            <if test="typename==null">-->
+<!--                and typename like "%1%"-->
+<!--            </if>-->
+        </where>
+    </select>
 
 
 </mapper>
