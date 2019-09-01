@@ -1,7 +1,7 @@
 package com.qfedu.examsys.aftercontroller;
-import com.qfedu.examsys.pojo.Answer;
 import com.qfedu.examsys.pojo.Exam;
 import com.qfedu.examsys.pojo.JsonResult;
+import com.qfedu.examsys.pojo.TestType;
 import com.qfedu.examsys.service.TestPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,22 +36,14 @@ public class TestPaperController {
     //用户测试练习使用的测试题 随机生成  需要学科Id
     @ResponseBody
     @RequestMapping("/getTestMapper.do")
-    public JsonResult getTestMapper(Integer subjectId){
+    public JsonResult getTestMapper(TestType TestType){
 
-        return  testPaperService.getStudentTestMapper();
+        return  testPaperService.getStudentTestMapper(TestType);
 
     }
 
     //用户提交试卷操作 需要answer对象 和 是否是测试或者考试
     // 练习题为 1  考试为 0
-    public  String saveTestMapper(Answer answer,Integer flag){
 
-        testPaperService.saveAnswer(answer,1);
-
-
-
-        return  null;
-
-    }
 
 }

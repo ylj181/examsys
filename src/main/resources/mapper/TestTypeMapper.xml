@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.examsys.dao.TestTypeDao" >
+  <resultMap id="BaseResultMap" type="com.qfedu.examsys.pojo.TestType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="p_section_remarks" property="p_section_remarks" jdbcType="VARCHAR" />
+    <result column="p_dbids" property="p_dbids" jdbcType="VARCHAR" />
+    <result column="p_qtypes" property="p_qtypes" jdbcType="VARCHAR" />
+    <result column="p_levels" property="p_levels" jdbcType="VARCHAR" />
+    <result column="p_qnums" property="p_qnums" jdbcType="VARCHAR" />
+    <result column="p_section_names" property="p_section_names" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="beginTime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="p_name" property="p_name" jdbcType="VARCHAR" />
+    <result column="p_duration" property="p_duration" jdbcType="VARCHAR" />
+    <result column="eTestId" property="eTestId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, p_section_remarks, p_dbids, p_qtypes, p_levels, p_qnums, p_section_names,
+    startTime, beginTime, p_name, p_duration, eTestId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from testType
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from testType
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qfedu.examsys.pojo.TestType" >
+    insert into testType (id, uid, p_section_remarks,
+                          p_dbids, p_qtypes, p_levels,
+                          p_qnums, p_section_names, startTime,
+                          beginTime, p_name, p_duration,
+                          eTestId)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{p_section_remarks,jdbcType=VARCHAR},
+            #{p_dbids,jdbcType=VARCHAR}, #{p_qtypes,jdbcType=VARCHAR}, #{p_levels,jdbcType=INTEGER},
+            #{p_qnums,jdbcType=INTEGER}, #{p_section_names,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP},
+            #{begintime,jdbcType=TIMESTAMP}, #{p_name,jdbcType=VARCHAR}, #{p_duration,jdbcType=VARCHAR},
+            #{eTestId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.TestType" >
+    insert into testType
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="p_section_remarks != null" >
+        p_section_remarks,
+      </if>
+      <if test="p_dbids != null" >
+        p_dbids,
+      </if>
+      <if test="p_qtypes != null" >
+        p_qtypes,
+      </if>
+      <if test="p_levels != null" >
+        p_levels,
+      </if>
+      <if test="p_qnums != null" >
+        p_qnums,
+      </if>
+      <if test="p_section_names != null" >
+        p_section_names,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="p_name != null" >
+        p_name,
+      </if>
+      <if test="p_duration != null" >
+        p_duration,
+      </if>
+      <if test="eTestId != null" >
+        eTestId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="p_section_remarks != null" >
+        #{p_section_remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="p_dbids != null" >
+        #{p_dbids,jdbcType=VARCHAR},
+      </if>
+      <if test="p_qtypes != null" >
+        #{p_qtypes,jdbcType=VARCHAR},
+      </if>
+      <if test="p_levels != null" >
+        #{p_levels,jdbcType=INTEGER},
+      </if>
+      <if test="p_qnums != null" >
+        #{p_qnums,jdbcType=INTEGER},
+      </if>
+      <if test="p_section_names != null" >
+        #{p_section_names,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        now(),
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="p_name != null" >
+        #{p_name,jdbcType=VARCHAR},
+      </if>
+      <if test="p_duration != null" >
+        #{p_duration,jdbcType=VARCHAR},
+      </if>
+      <if test="eTestId != null" >
+        #{eTestId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.examsys.pojo.TestType" >
+    update testType
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="p_section_remarks != null" >
+        p_section_remarks = #{p_section_remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="p_dbids != null" >
+        p_dbids = #{p_dbids,jdbcType=VARCHAR},
+      </if>
+      <if test="p_qtypes != null" >
+        p_qtypes = #{p_qtypes,jdbcType=VARCHAR},
+      </if>
+      <if test="p_levels != null" >
+        p_levels = #{p_levels,jdbcType=INTEGER},
+      </if>
+      <if test="p_qnums != null" >
+        p_qnums = #{p_qnums,jdbcType=INTEGER},
+      </if>
+      <if test="p_section_names != null" >
+        p_section_names = #{p_section_names,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="p_name != null" >
+        p_name = #{p_name,jdbcType=VARCHAR},
+      </if>
+      <if test="p_duration != null" >
+        p_duration = #{p_duration,jdbcType=VARCHAR},
+      </if>
+      <if test="eTestId != null" >
+        eTestId = #{eTestId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.TestType" >
+    update testType
+    set uid = #{uid,jdbcType=INTEGER},
+        p_section_remarks = #{p_section_remarks,jdbcType=VARCHAR},
+        p_dbids = #{p_dbids,jdbcType=VARCHAR},
+        p_qtypes = #{p_qtypes,jdbcType=VARCHAR},
+        p_levels = #{p_levels,jdbcType=INTEGER},
+        p_qnums = #{p_qnums,jdbcType=INTEGER},
+        p_section_names = #{p_section_names,jdbcType=VARCHAR},
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+        beginTime = #{begintime,jdbcType=TIMESTAMP},
+        p_name = #{p_name,jdbcType=VARCHAR},
+        p_duration = #{p_duration,jdbcType=VARCHAR},
+        eTestId = #{eTestId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

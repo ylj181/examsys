@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qfedu.examsys.dao.*;
 import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
+import com.qfedu.examsys.utils.SaveMapper;
 import com.qfedu.examsys.utils.TestMapperUtils;
+import com.qfedu.examsys.utils.TestTypeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @Author Lei
@@ -36,10 +39,13 @@ public class TestPaperServiceImpl implements TestPaperService {
     private ShortAnswerDao shortAnswerdao;
 
     @Autowired(required = false)
-    private ETestDao eTestDao;
+    private TestTypeDao testTypeDao;
 
     @Autowired(required = false)
-    private AnswerDao answerDao;
+    private SaveMapper saveMapper;
+
+    @Autowired(required = false)
+    private TestTypeUtils testTypeUtils;
 
 
     //根据subjectId 获取题库  判断题 Judge 10道 单选题 Radio 10  ShortAnswer简单题 5道题
@@ -58,10 +64,10 @@ public class TestPaperServiceImpl implements TestPaperService {
         List<ShortAnswer> shortAnswerList = null; // 准备ShortAnswes 随机题
 
         //随机获取radios 10道题
-        radioList = mapperUtils.getRandomList(radios, 10);
+        radioList = mapperUtils.getRandomList(radios, 9);
 
         // 随机获取 judges 10道题
-        judgeList = mapperUtils.getRandomList(judges, 10);
+        judgeList = mapperUtils.getRandomList(judges, 9);
 
         // 随机获取 shortAnswers 5道题
 
@@ -78,88 +84,46 @@ public class TestPaperServiceImpl implements TestPaperService {
     public JsonResult getStudentExamMapper(Exam exam,String eTestName)  {
         AllTestList allTestList = getTestMapper(1);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        ETest eTest = new ETest();
-
-        String radioStr = null;
-        String answerStr =null;
-        String  judgeStr= null;
-        try {
-            radioStr = objectMapper.writeValueAsString(allTestList.getRadioList());
-
-            answerStr  = objectMapper.writeValueAsString(allTestList.getAnswerList());
-
-            judgeStr = objectMapper.writeValueAsString(allTestList.getJudgeList());
-
-
-            //关联的exam
-            eTest.setEid(1);
-
-            //考卷名称
-            eTest.setName(eTestName);
-
-            //考卷所属科目
-           // eTest.setSubjectid(exam.getSubjectid());
-            eTest.setSubjectid(1);
-
-            eTest.setJudgejson(judgeStr);
-
-            eTest.setRadiojson(radioStr);
-
-            eTest.setShortanswerjson(answerStr);
-
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        eTestDao.insertSelective(eTest);
-
-        JsonResult jsonResult = new JsonResult();
-
-        jsonResult.setInfo(eTest);
-
-        jsonResult.setCode(1);
+        JsonResult jsonResult = saveMapper.saveMapper(allTestList, exam.getSubjectid(), exam.getId(), eTestName);
 
         return  jsonResult;
     }
 
     //生成学生测试使用的练习题 从eTest中随机抽取
     @Override
-    public JsonResult getStudentTestMapper() {
+    public JsonResult getStudentTestMapper(TestType itemSelects ) {
 
-        //获取eTest coutn()个数
 
-        int count = eTestDao.getCount();
+     /*   private String p_name; //试卷名称
+        private String p_duration;  // 考试时长
+        private String p_section_names[];//章节名称
+        // private  String  p_section_remarks[];  //单选或者多选或是判断
+        private String p_dbids[]; // 题库名称
+        private String p_qtypes[];//题型 判断/选择/简答
+        private Integer p_levels[]; //难易级别
+        private Integer p_qnums[];//试题数量*/
 
-        Random random = new Random();
+        itemSelects.setUid(1);
 
-        int i = random.nextInt(count);
 
-        ETest eTest = eTestDao.selectByPrimaryKey(i);
+        //保存选择的试题
+        HashMap<Object, Object> testmapperList = testTypeUtils.getTestmapperList(itemSelects);
 
-        JsonResult jsonResult = new JsonResult();
+        //获取添加eTest试题的ID主键
+        //学生选择的试题类型保存
 
+        String eTestId  =  testmapperList.get("eTestId").toString();
+
+
+        itemSelects.seteTestId(eTestId);
+        testTypeDao.insertSelective(itemSelects);
+
+        JsonResult jsonResult =new JsonResult();
+
+        jsonResult.setInfo(testmapperList.get("allTesttLists"));
         jsonResult.setCode(1);
 
-        jsonResult.setInfo(eTest);
-
-        return  jsonResult;
-    }
-
-    //  练习为 1  考试为 0
-    @Override
-    public void saveAnswer(Answer answer,Integer flag) {
-
-        if (flag==1){
-
-            answerDao.insertSelective(answer);
-
-        }else {
-
-
-        }
+        return jsonResult;
 
     }
 

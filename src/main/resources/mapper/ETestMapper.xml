@@ -14,7 +14,7 @@
     id, eid, subjectId, name, judgeJson, radioJson, shortAnswerJson
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
+    select 
     <include refid="Base_Column_List" />
     from eTest
     where id = #{id,jdbcType=INTEGER}
@@ -24,14 +24,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.qfedu.examsys.pojo.ETest" >
-    insert into eTest (id, eid, subjectId,
-                       name, judgeJson, radioJson,
-                       shortAnswerJson)
-    values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER},
-            #{name,jdbcType=VARCHAR}, #{judgejson,jdbcType=VARCHAR}, #{radiojson,jdbcType=VARCHAR},
-            #{shortanswerjson,jdbcType=VARCHAR})
+    insert into eTest (id, eid, subjectId, 
+      name, judgeJson, radioJson, 
+      shortAnswerJson)
+    values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{judgejson,jdbcType=VARCHAR}, #{radiojson,jdbcType=VARCHAR}, 
+      #{shortanswerjson,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.ETest" >
+  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.ETest" useGeneratedKeys="true" keyProperty="id">
     insert into eTest
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -107,11 +107,11 @@
   <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.ETest" >
     update eTest
     set eid = #{eid,jdbcType=INTEGER},
-        subjectId = #{subjectid,jdbcType=INTEGER},
-        name = #{name,jdbcType=VARCHAR},
-        judgeJson = #{judgejson,jdbcType=VARCHAR},
-        radioJson = #{radiojson,jdbcType=VARCHAR},
-        shortAnswerJson = #{shortanswerjson,jdbcType=VARCHAR}
+      subjectId = #{subjectid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      judgeJson = #{judgejson,jdbcType=VARCHAR},
+      radioJson = #{radiojson,jdbcType=VARCHAR},
+      shortAnswerJson = #{shortanswerjson,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

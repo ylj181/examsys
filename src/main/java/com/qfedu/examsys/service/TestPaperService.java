@@ -1,6 +1,5 @@
 package com.qfedu.examsys.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.qfedu.examsys.pojo.*;
 
 
@@ -24,11 +23,11 @@ public interface TestPaperService {
 
     //生成学生测试使用的练习题 从eTest中随机抽取
 
-    JsonResult getStudentTestMapper();
+    JsonResult getStudentTestMapper(TestType TestType);
 
     //保存学生考试答案
 
-    void saveAnswer(Answer answer,Integer flag);
+   // void saveAnswer(Answer answer,Integer flag);
 
     // 判断学生练习题答案 正确个数
 

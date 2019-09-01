@@ -32,7 +32,7 @@ public class  TestMapperUtils{
             for (int i = 0; i < size; i++) {
                 int i1 = random.nextInt(tList.size()-1);
                 if(!sb.toString().contains(String.valueOf(i1))){
-                    sb.append(i1);;
+                    sb.append(i1);
                     ts.add(tList.get(i1));
                     continue;
                 }
