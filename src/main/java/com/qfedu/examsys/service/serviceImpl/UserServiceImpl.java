@@ -59,6 +59,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int signUpFirst(String telephoneNumber) {
+        return userDao.signUpFirst(telephoneNumber);
+    }
+
+    @Override
+    public int signUp(String username, String password, String telephoneNumber) {
+        return userDao.signUp(username, password, telephoneNumber);
+    }
+
+    @Override
     public User signInByTelephoneNumber(String telephoneNumber) {
         return userDao.signInByTelephoneNumber(telephoneNumber);
     }

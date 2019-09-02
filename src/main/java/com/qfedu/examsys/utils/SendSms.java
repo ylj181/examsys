@@ -27,8 +27,6 @@ public class SendSms {
     private static final String signName = "LifeIsCooool";
     //  自己账号的   短信模板ID  备用:SMS_173340245
     private static final String templateCode = "SMS_173347124";
-    //  随机生成 6位 验证码
-    private static final String validateCode = String.valueOf((int)((Math.random() * 9 + 1) * 100000));
 
     /**
      *         发送短信验证码
@@ -37,6 +35,9 @@ public class SendSms {
      * @return validateCode     该用户此次操作的短信验证码
      */
     public static String sendMessage(String telephoneNumber) {
+
+        //  随机生成 6位 验证码
+        String validateCode = String.valueOf((int)((Math.random() * 9 + 1) * 100000));
 
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
