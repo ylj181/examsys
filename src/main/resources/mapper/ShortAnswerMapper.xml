@@ -116,4 +116,17 @@
       <!--            </if>-->
     </where>
   </select>
+
+  <!--    根据id查询-->
+  <select id="QueryShortAnswerById" parameterType="int" resultType="shortAnswer">
+    select *
+    from shortAnswer
+    where id = #{id}
+  </select>
+  <!--修改-->
+  <update id="updateShortAnswerAnswer" parameterType="shortAnswer">
+    update shortAnswer
+    set answer=#{answer}
+    where id = #{id}
+  </update>
 </mapper>

@@ -23,4 +23,15 @@ public class JudgeServiceImpl implements JudgeService {
         PageHelper.startPage(page, limit);
         return judgeDao.findAllJudges(name);
     }
+
+    @Override
+    public void updateJudgeAnswer(Judge judge) {
+        judgeDao.updateJudgeAnswer(judge);
+    }
+
+    @Override
+    public Judge QueryJudgeById(Integer id) {
+        Judge judge = judgeDao.QueryJudgeById(id);
+        return judge;
+    }
 }

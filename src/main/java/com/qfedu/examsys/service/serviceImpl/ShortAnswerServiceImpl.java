@@ -36,4 +36,14 @@ public class ShortAnswerServiceImpl implements ShortAnswerService {
 
         return shortAnswerDao.findAllShortAnswers(name);
     }
+
+    @Override
+    public ShortAnswer QueryShortAnswerById(Integer id) {
+        return shortAnswerDao.QueryShortAnswerById(id);
+    }
+
+    @Override
+    public void updateShortAnswerAnswer(ShortAnswer shortAnswer) {
+        shortAnswerDao.updateShortAnswerAnswer(shortAnswer);
+    }
 }

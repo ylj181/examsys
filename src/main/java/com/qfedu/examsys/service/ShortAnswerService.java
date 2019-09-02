@@ -11,4 +11,9 @@ public interface ShortAnswerService {
 
     public List<Judge> findAllShortAnswers(String name,Integer page, Integer limit);
 
+    // 根据id查询
+    ShortAnswer QueryShortAnswerById(Integer id);
+    //修改答案
+    void updateShortAnswerAnswer(ShortAnswer shortAnswer);
+
 }

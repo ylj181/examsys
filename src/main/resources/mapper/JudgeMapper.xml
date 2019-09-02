@@ -114,4 +114,17 @@
       <!--            </if>-->
     </where>
   </select>
+<!--  修改-->
+  <select id="updateJudgeAnswer" parameterType="judge">
+    update judge
+    set answer=#{answer}
+    where id = #{id}
+  </select>
+
+  <!--    根据id查询-->
+  <select id="QueryJudgeById" parameterType="int" resultType="judge">
+    select *
+    from judge
+    where id = #{id}
+  </select>
 </mapper>

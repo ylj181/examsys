@@ -114,8 +114,8 @@ $("#regEmail").blur(function(){
     if(null != emailVal && ""!=emailVal){
         var params={"email":emailVal};
        // alert(params);
-        $.post("user/validateEmail",params,function(data){
-            if(data=="success"){
+        $.post("user/verifyEmail",params,function(data){
+            if(data.info=="success"){
                regIsCommitEmail=true;
                $("#emailMsg").text("该邮箱可用").css("color","green");
             }else{
@@ -168,11 +168,11 @@ function commitRegForm(){
              
              $.ajax({
               
-                url:"user/insertUser",
+                url:"user/register",
                 data:$("#regForm").serialize(),
                 type:"POST",
                 success:function(data){
-                   if(data=='success'){
+                   if(data.info === 'success'){
                       //注册框消失
                       $("#reg").addClass("hidden");
                       
@@ -207,9 +207,9 @@ function commitLogin(){
         var params=$("#loginForm").serialize();
         // alert(params);
         // post要小写
-        $.post("/video/user/loginUser",params,function(data){
-        // alert(data);
-                 if(data=='success'){
+        $.post("user/userLogin",params,function(data){
+         alert(data.info);
+                 if(data.info=='success'){
                      
                       //登录框消失
                       $("#login").addClass("hidden");

@@ -1,10 +1,7 @@
 package com.qfedu.examsys.beforecontroller;
 
 import com.github.pagehelper.Page;
-import com.qfedu.examsys.pojo.JsonResult;
-import com.qfedu.examsys.pojo.Judge;
-import com.qfedu.examsys.pojo.Radio;
-import com.qfedu.examsys.pojo.Subject;
+import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.JudgeService;
 import com.qfedu.examsys.service.RadioService;
 import com.qfedu.examsys.service.ShortAnswerService;
@@ -39,14 +36,15 @@ public class ShowAllRJS {
 
     /**
      * 题库所有选择题展示
+     *
      * @param page
      * @param limit
      * @return
      */
     @RequestMapping("/listAllRadios.do")
     @ResponseBody
-    public Map<String, Object> findAllRadios(String name,Integer page, Integer limit) {
-        List<Radio> radioList = radioService.findAllRadios(name,page, limit);
+    public Map<String, Object> findAllRadios(String name, Integer page, Integer limit) {
+        List<Radio> radioList = radioService.findAllRadios(name, page, limit);
 
         long total = ((Page) radioList).getTotal();
         Map<String, Object> map = new HashMap<>();
@@ -60,6 +58,7 @@ public class ShowAllRJS {
 
     /**
      * 绑定下拉菜单展示学科名字
+     *
      * @return
      */
     @RequestMapping("/findSubjectName.do")
@@ -71,6 +70,7 @@ public class ShowAllRJS {
 
     /**
      * 展示所有判断题
+     *
      * @param name
      * @param page
      * @param limit
@@ -105,4 +105,75 @@ public class ShowAllRJS {
 
         return map;
     }
+
+    /**
+     * 根据id查选择题
+     * @param id
+     * @return
+     */
+    @RequestMapping("/queryRadio.do")
+    @ResponseBody
+    public JsonResult QueryById(Integer id) {
+        Radio radio = radioService.QueryById(id);
+        return new JsonResult(1, radio);
+    }
+
+    /**
+     * 修改选择题答案
+     */
+    @RequestMapping("/updateAnswerOfRadios.do")
+    @ResponseBody
+    public JsonResult updateAnswer(Radio radio) {
+        radioService.updateAnswer(radio);
+        return new JsonResult(1, null);
+    }
+
+    /**
+     * 修改判断题答案
+     * @param judge
+     * @return
+     */
+    @RequestMapping("updateAnswerOfJudge.do")
+    @ResponseBody
+    public JsonResult updateJudgeAnswer(Judge judge) {
+        judgeService.updateJudgeAnswer(judge);
+        return new JsonResult(1, null);
+    }
+
+    /**
+     * id查判断题
+     * @param id
+     * @return
+     */
+    @RequestMapping("/queryJudge.do")
+    @ResponseBody
+    public JsonResult QueryJudgeById(Integer id) {
+        Judge judge = judgeService.QueryJudgeById(id);
+        return new JsonResult(1, judge);
+    }
+
+    /**
+     * 修改简答题答案
+     * @param shortAnswer
+     * @return
+     */
+    @RequestMapping("updateAnswerOfShortAnswer.do")
+    @ResponseBody
+    public JsonResult updateJudgeAnswer(ShortAnswer shortAnswer) {
+        shortAnswerService.updateShortAnswerAnswer(shortAnswer);
+        return new JsonResult(1, null);
+    }
+
+    /**
+     * id 查简答题
+     * @param id
+     * @return
+     */
+    @RequestMapping("/queryShortAnswer.do")
+    @ResponseBody
+    public JsonResult QueryShortAnswerById(Integer id) {
+        ShortAnswer shortAnswer = shortAnswerService.QueryShortAnswerById(id);
+        return new JsonResult(1, shortAnswer);
+    }
+
 }

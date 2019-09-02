@@ -29,4 +29,8 @@ public interface ShortAnswerDao {
     // 查询所有简答题
     List<Judge> findAllShortAnswers(@Param("name") String name);
 
+    // 根据id查询
+    ShortAnswer QueryShortAnswerById(Integer id);
+    //修改答案
+    void updateShortAnswerAnswer(ShortAnswer shortAnswer);
 }

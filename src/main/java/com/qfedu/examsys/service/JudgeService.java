@@ -10,4 +10,8 @@ public interface JudgeService {
 
     List<Judge> findAllJudges(String name,Integer page, Integer limit);
 
+    void updateJudgeAnswer(Judge judge);
+
+    Judge QueryJudgeById(Integer id);
+
 }
