@@ -1,5 +1,6 @@
 package com.qfedu.examsys.aftercontroller;
 
+import com.qfedu.examsys.pojo.JsonResult;
 import com.qfedu.examsys.pojo.Subject;
 import com.qfedu.examsys.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,13 @@ public class SubjectController {
         }
 
         return map;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/findSubject.do")
+    @ResponseBody
+    public JsonResult courseAllList(){
+        List<Subject> list = subjectService.findSub();
+        return new JsonResult( 1,list );
     }
 }

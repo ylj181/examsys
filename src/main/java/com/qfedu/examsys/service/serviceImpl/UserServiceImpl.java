@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteByIdUser(List<Integer> id) {
+        userDao.deleteByIdUser( id );
+    }
+
+    @Override
     public User signInByTelephoneNumber(String telephoneNumber) {
         return userDao.signInByTelephoneNumber(telephoneNumber);
     }

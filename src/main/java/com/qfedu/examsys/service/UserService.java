@@ -18,6 +18,9 @@ public interface UserService {
     //根据用户Id查询用户信息
     public User findUserById(Integer id);
 
+    //批量删除
+    public void deleteByIdUser(List<Integer> id);
+
     //  通过手机号码登录
     public User signInByTelephoneNumber(String telephoneNumber);
 

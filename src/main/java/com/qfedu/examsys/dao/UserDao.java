@@ -1,8 +1,6 @@
 package com.qfedu.examsys.dao;
 
-
 import com.qfedu.examsys.pojo.User;
-
 import java.util.List;
 
 public interface UserDao {
@@ -27,10 +25,11 @@ public interface UserDao {
     //根据角色Id查询
     List<User> findAllRole(Integer rid);
 
-
     //根据用户Id查询用户信息
     User findUserById(Integer id);
 
+    //批量删除
+    void deleteByIdUser(List<Integer> id);
     //  通过手机号码登录
     public User signInByTelephoneNumber(String telephoneNumber);
 

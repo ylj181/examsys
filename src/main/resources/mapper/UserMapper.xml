@@ -132,6 +132,12 @@
     select * from user where id = #{id};
   </select>
 
+  <delete id="deleteByIdUser" parameterType="list">
+    delete from examsys.user where id in
+    <foreach collection="list" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
 <!--  通过手机号码登录  -->
   <select id="signInByTelephoneNumber" parameterType="String" resultType="user">
     select * from user where phone = #{telephoneNumber}
