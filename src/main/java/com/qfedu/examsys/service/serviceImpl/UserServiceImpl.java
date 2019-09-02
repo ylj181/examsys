@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         return userDao.findUserById(id);
     }
 
+    @Override
+    public User signInByTelephoneNumber(String telephoneNumber) {
+        return userDao.signInByTelephoneNumber(telephoneNumber);
+    }
+
 }
