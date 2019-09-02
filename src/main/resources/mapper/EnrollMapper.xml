@@ -15,7 +15,7 @@
 
 
     <!--向报名表中添加报名信息-->
-    <insert id="addEnrollInfo" parameterType="subject">
+    <insert id="addEnrollInfo" parameterType="map">
         insert into enroll(
         <trim suffixOverrides=",">
             <if test="uid != null">

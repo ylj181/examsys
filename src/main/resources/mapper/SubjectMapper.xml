@@ -56,6 +56,16 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <!--  陈曦创建 19.49-->
+  <resultMap id="subjectMapOne" type="subject">
+    <id column="id" property="id"></id>
+    <result column="name" property="name"></result>
+  </resultMap>
+  <select id="findAllSubjects" resultMap="subjectMapOne">
+    select *
+    from subject
+  </select>
+
   <!--查询所有的学科信息-->
   <select id="findAllSubject" resultType="subject">
     select * from subject

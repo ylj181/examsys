@@ -9,7 +9,7 @@ public interface UserService {
 
     public void insert(User record);
 
-    public List<User> findAllRole(Integer rid);
+    public List<User> findAllRole(Integer rid,Integer page,Integer limit);
 
     public void updatePassword(User user);
 

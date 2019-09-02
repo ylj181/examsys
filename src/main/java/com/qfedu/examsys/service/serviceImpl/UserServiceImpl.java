@@ -1,5 +1,6 @@
 package com.qfedu.examsys.service.serviceImpl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.UserDao;
 import com.qfedu.examsys.pojo.User;
 import com.qfedu.examsys.service.UserService;
@@ -26,7 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllRole(Integer rid) {
+    public List<User> findAllRole(Integer rid,Integer page,Integer limit) {
+        PageHelper.startPage( page,limit );
         List<User> userList = userDao.findAllRole( rid );
         return userList;
     }

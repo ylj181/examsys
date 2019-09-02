@@ -1,5 +1,8 @@
 package com.qfedu.examsys.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+// 对多数据导入处理
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ShortAnswer {
     private Integer id;
 
@@ -8,6 +11,16 @@ public class ShortAnswer {
     private String answer;
 
     private Integer subjectId;
+
+    private Subject subject;
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 
     public Integer getSubjectId() {
         return subjectId;

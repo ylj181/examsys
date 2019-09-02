@@ -12,6 +12,16 @@ public class Judge {
 
     private Integer subjectId;
 
+    private Subject subject;
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public Integer getSubjectId() {
         return subjectId;
     }

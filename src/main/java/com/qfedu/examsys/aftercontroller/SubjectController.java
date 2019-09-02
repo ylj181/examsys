@@ -4,6 +4,7 @@ import com.qfedu.examsys.pojo.Subject;
 import com.qfedu.examsys.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,6 +18,7 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
+    @CrossOrigin
     @RequestMapping("/subject/findAllSubject.do")
     @ResponseBody
     public Map<String,Object> findAllSubject(){

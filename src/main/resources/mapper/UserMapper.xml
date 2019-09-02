@@ -128,7 +128,7 @@
   </select>
 
   <!--根据用户Id查询用户信息-->
-  <select id="findUserById" parameterType="int" resultType="user">
+  <select id="findUserById" parameterType="int" resultMap="BaseResultMap">
     select * from user where id = #{id};
   </select>
 
