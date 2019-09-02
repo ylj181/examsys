@@ -64,10 +64,10 @@ public class TestPaperServiceImpl implements TestPaperService {
         List<ShortAnswer> shortAnswerList = null; // 准备ShortAnswes 随机题
 
         //随机获取radios 10道题
-        radioList = mapperUtils.getRandomList(radios, 9);
+        radioList = mapperUtils.getRandomList(radios, 10);
 
         // 随机获取 judges 10道题
-        judgeList = mapperUtils.getRandomList(judges, 9);
+        judgeList = mapperUtils.getRandomList(judges, 10);
 
         // 随机获取 shortAnswers 5道题
 
@@ -82,10 +82,14 @@ public class TestPaperServiceImpl implements TestPaperService {
     //生成考试卷子 并保存到eTest表 ————考试 需要讲师阅卷
     @Override
     public JsonResult getStudentExamMapper(Exam exam,String eTestName)  {
+
+        //试卷生成
         AllTestList allTestList = getTestMapper(1);
-
-        JsonResult jsonResult = saveMapper.saveMapper(allTestList, exam.getSubjectid(), exam.getId(), eTestName);
-
+        //试卷保存为json格式
+        saveMapper.saveMapper(allTestList, exam.getSubjectid(), exam.getId(), eTestName);
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setCode(1);
+        jsonResult.setInfo(allTestList);
         return  jsonResult;
     }
 

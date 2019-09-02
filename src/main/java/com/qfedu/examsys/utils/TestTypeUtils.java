@@ -99,7 +99,7 @@ public class TestTypeUtils {
         }
 
         map.put("eTestId",eTestid);
-        map.put("allTesttLists",allTestList);
+        map.put("allTesttLists",allTestLists);
 
         //return allTestLists;
 

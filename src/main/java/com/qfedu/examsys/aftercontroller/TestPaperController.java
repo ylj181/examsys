@@ -5,8 +5,14 @@ import com.qfedu.examsys.pojo.TestType;
 import com.qfedu.examsys.service.TestPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @Author Lei
@@ -33,12 +39,18 @@ public class TestPaperController {
         return  testPaperService.getStudentExamMapper(exam, eTestName);
     }
 
-    //用户测试练习使用的测试题 随机生成  需要学科Id
-    @ResponseBody
+    //用户测试练习使用的测试题 随机生成  需要学科Id保存到TestType
     @RequestMapping("/getTestMapper.do")
-    public JsonResult getTestMapper(TestType TestType){
+    public String getTestMapper(TestType TestType, Model model) throws IOException, ServletException {
 
-        return  testPaperService.getStudentTestMapper(TestType);
+        JsonResult studentTestMapper = testPaperService.getStudentTestMapper(TestType);
+
+        model.addAttribute("studentTestMapper",studentTestMapper);
+
+       //return "redirect:http://127.0.0.1:8020/examsys/TestMapper.html?sid=1";
+
+       return "redirect:http://127.0.0.1:8020/examsys/test.html?sid=1";
+      // return "forward:/TestMapper.html";
 
     }
 
