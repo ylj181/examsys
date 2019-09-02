@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class ExamController {
     }
 
 
-    @RequestMapping("exam/findExamById.do")
+    @RequestMapping("/exam/findExamById.do")
     @ResponseBody
     public Map<String,Object> findExamById(Integer id){
         Map<String, Object> map = new HashMap<>();
@@ -58,8 +59,5 @@ public class ExamController {
         }
 
         return map;
-
-
-
     }
 }
