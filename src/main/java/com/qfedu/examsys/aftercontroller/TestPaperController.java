@@ -18,7 +18,6 @@ import java.util.LinkedHashSet;
  * @Author Lei
  * @Date 2019-8-29 22:11
  */
-
 @Controller
 public class TestPaperController {
 
@@ -49,7 +48,7 @@ public class TestPaperController {
     @RequestMapping("/SaveTestMapper.do")
     public String SaveTestMapper(TestType TestType ) {
 
-//p_dbids    课程 p_qtypes 试题类型
+        //p_dbids    课程 p_qtypes 试题类型
         //判断同一个课程 不能选择同一种 类型的试题 如 A课程无法选择两种单选试题
         String p_dbids = TestType.getP_dbids();
         String[] split = p_dbids.split(",");
