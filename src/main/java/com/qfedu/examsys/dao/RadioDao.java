@@ -26,4 +26,8 @@ public interface RadioDao {
 
     // 查询所有选择题
     List<Radio> findAllRadios(@Param("name") String name);
+    // 根据id查询
+    Radio QueryById(Integer id);
+    //修改答案
+    void updateAnswer(Radio radio);
 }

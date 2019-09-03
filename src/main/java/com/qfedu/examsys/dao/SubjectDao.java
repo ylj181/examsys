@@ -24,4 +24,6 @@ public interface SubjectDao {
     //根据学科Id查询学科信息
     Subject findBySubjectId(Integer id);
 
+    List<Subject> findSub();
+
 }

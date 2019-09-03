@@ -5,15 +5,13 @@ import com.qfedu.examsys.pojo.JsonResult;
 import com.qfedu.examsys.pojo.User;
 import com.qfedu.examsys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -46,10 +44,12 @@ public class UserController {
     @CrossOrigin
     @RequestMapping("/loout.do")
     @ResponseBody
-    public JsonResult loout(HttpSession session){
-        session.removeAttribute( "user" );
-        session.invalidate();
-        return new JsonResult( 1,"退出成功，客官再来玩啊~~~" );
+    public JsonResult loout(Integer id ){
+        if (id != null){
+            return new JsonResult( 1, "退出成功，客官再来玩啊~~~" );
+        }
+        return new JsonResult( 0,"还没有进行登录" );
+
     }
 
     //注册  默认注册成为学生
@@ -67,6 +67,7 @@ public class UserController {
     }
 
     //管理员给老师进行注册 自动注册成老师
+    @CrossOrigin
     @RequestMapping("/addTeacher")
     @ResponseBody
     public JsonResult addTeacher(User record){
@@ -120,9 +121,12 @@ public class UserController {
     @ResponseBody
     public JsonResult findUserRid(Integer id){
         System.out.println(id);
-        User userById = userService.findUserById( id );
-        Integer rid = userById.getRid();
-        return new JsonResult( 1,rid );
+        if (id != null){
+            User userById = userService.findUserById( id );
+            Integer rid = userById.getRid();
+            return new JsonResult( 1,rid );
+        }
+        return new JsonResult( 0,"请先进行登录" );
     }
 
     /**
@@ -138,6 +142,13 @@ public class UserController {
         return new JsonResult( 1,user );
     }
 
+    @CrossOrigin
+    @RequestMapping("/deleteUserById.do")
+    @ResponseBody
+    public JsonResult deleteByIdUser(@RequestParam( "ids" )List<Integer> ids){
+        userService.deleteByIdUser( ids );
+        return new JsonResult( 1,null );
+    }
 
 
 }

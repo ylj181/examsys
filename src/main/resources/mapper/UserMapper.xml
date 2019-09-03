@@ -132,5 +132,26 @@
     select * from user where id = #{id};
   </select>
 
+  <delete id="deleteByIdUser" parameterType="list">
+    delete from examsys.user where id in
+    <foreach collection="list" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
+
+<!--    通过手机号码预注册   by: imlee   -->
+    <insert id="signUpFirst" parameterType="string">
+        insert into user (phone) values (#{telephoneNumber})
+    </insert>
+
+<!--    补充 用户名，密码   by: imlee   -->
+    <update id="signUp" parameterType="list">
+        update user set username = #{username}, password = #{password} where phone = #{telephoneNumber}
+    </update>
+
+<!--  通过手机号码登录  by: imlee   -->
+  <select id="signInByTelephoneNumber" parameterType="String" resultType="user">
+    select * from user where phone = #{telephoneNumber}
+  </select>
 
 </mapper>

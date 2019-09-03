@@ -10,7 +10,8 @@
     </style>
     <link rel="stylesheet" href="layui/css/layui.css"/>
     <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+
 </head>
 <body>
 
@@ -28,11 +29,17 @@
             </div>
             <button type="button" class="layui-btn" data-type="reload">搜索</button>
 
-            <button type="button" class="layui-btn" onclick="add()">添加</button>
+<!--            <button type="button" class="layui-btn" onclick="add()">添加</button>-->
+            <form action="import/importRadio.do"  method="post" enctype="multipart/form-data" onclick="checkData()">
+                <input type="file" name="upfile"  id="file"/>
+                <input type="submit" value="导入"/>
 
 
+
+            </form>
 
         </div>
+
         <!--				<div class="layui-inline">-->
         <!--					<label class="layui-form-label">结束日期</label>-->
         <!--					<div class="layui-input-inline">-->
@@ -43,15 +50,15 @@
 </div>
 <table class="layui-hide" id="demo" lay-filter="test"></table>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改答案</a>
 </script>
-</div>
 <script>
     layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function () {
         var laydate = layui.laydate //日期
             , laypage = layui.laypage //分页
             , layer = layui.layer //弹层
             , table = layui.table //表格
+            , upload = layui.upload
             , element = layui.element; //元素操作
         //  ;element.render(),
 
@@ -62,12 +69,24 @@
         // 	elem: '#test2'
         // });
         //执行一个 table 实例
-
         element.on('tab(demo)', function (data) {
             layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
                 tips: 1
             }); //
         });
+        // upload.render({
+        //     elem: '#test8'
+        //     ,url: 'import/importRadio.do'
+        //     ,auto: false
+        //     ,accept:'file'
+        //     //,multiple: true
+        //     ,bindAction: '#test9'
+        //     ,done: function(res){
+        //         console.log(res)
+        //     }
+        // });
+
+
         table.render({
             elem: '#demo'
             , id: "radioAll"
@@ -86,8 +105,9 @@
 
             } //开启分页
             , cols: [[ //表头
-                // {type: 'checkbox', fixed: 'left'},
-                {field: 'title', title: '题目', width: 300,height:200, sort: true, fixed: 'left'}
+                 // {type: 'checkbox', fixed: 'left'},
+                // {field: 'id', title: '序号', width: 300,height:200, sort: true, fixed: 'left'},
+                {field: 'title', title: '题目', width: 300,height:200, sort: true,fixed:'left'}
                 , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
                 , {field: 'choiceA', title: 'A选项', width: 200, sort: true}
                 , {field: 'choiceB', title: 'B选项', width: 200,sort: true}
@@ -102,31 +122,36 @@
         table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             var data = obj.data //获得当前行数据
                 , layEvent = obj.event; //获得 lay-event 对应的值
-            if (layEvent === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del(); //删除对应行（tr）的DOM结构
-                    layer.close(index);
-                    //向服务端发送删除指令
-                    $.ajax({
-                        type: "get",
-                        url: "video/delete.do?id=" + data.id,
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.code == 1) {
-                                table.reload('itemSS');
-                            } else {
-                                alert(data.info);
-                            }
-                        }
-                    })
-                });
-            } else if (layEvent === 'edit') {
+            // if (layEvent === 'del') {
+            //     layer.confirm('真的删除行么', function (index) {
+            //         obj.del(); //删除对应行（tr）的DOM结构
+            //         layer.close(index);
+            //         //向服务端发送删除指令
+            //         $.ajax({
+            //             type: "get",
+            //             url: "video/delete.do?id=" + data.id,
+            //             dataType: "json",
+            //             success: function (data) {
+            //                 if (data.code == 1) {
+            //                     table.reload('itemSS');
+            //                 } else {
+            //                     alert(data.info);
+            //                 }
+            //             }
+            //         })
+            //     });
+            // }
+           if(layEvent === 'edit') {
+                // alert(data.findIndex(item=== 'id'));
+               // alert(data.radioList.id)
+               alert(data.id);
                 //layer.msg('编辑操作');
                 layer.open({
                     type: 2 //此处以iframe举例
-                    , title: '项目信息维护'
+                    , title: '修改试题'
                     , area: ['800px', '600px']
-                    , content: 'updateItem.jsp?id=' + data.id
+                    , content: 'updateRadio.html?id=' +data.id
+
                 })
             }
         });
@@ -245,10 +270,5 @@
 
 </script>
 
-
-<script type="text/javascript">
-
-
-</script>
 </body>
 </html>

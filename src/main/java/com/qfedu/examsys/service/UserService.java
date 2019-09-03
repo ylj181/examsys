@@ -18,6 +18,39 @@ public interface UserService {
     //根据用户Id查询用户信息
     public User findUserById(Integer id);
 
+    //批量删除
+    public void deleteByIdUser(List<Integer> id);
 
+    /**
+     *          通过手机号码预注册
+     *
+     * @Author  imlee
+     *
+     * @param telephoneNumber
+     * @return
+     */
+    public int signUpFirst(String telephoneNumber);
+
+    /**
+     *          补充用户名和密码
+     *
+     * @Author  imlee
+     *
+     * @param username
+     * @param password
+     * @param telephoneNumber
+     * @return
+     */
+    public int signUp(String username, String password, String telephoneNumber);
+
+    /**
+     *          通过手机号码登录
+     *
+     * @Author  imlee
+     *
+     * @param telephoneNumber
+     * @return
+     */
+    public User signInByTelephoneNumber(String telephoneNumber);
 
 }

@@ -5,9 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
-@SpringBootApplication()
+@SpringBootApplication
 @MapperScan("com.qfedu.examsys.dao")
-@ServletComponentScan
+@ServletComponentScan("com.qfedu.examsys.aftercontroller")
 public class ExamsysApplication {
 
     public static void main(String[] args) {

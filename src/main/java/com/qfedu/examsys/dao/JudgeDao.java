@@ -26,4 +26,11 @@ public interface JudgeDao {
     void insertManyJudges(List<Judge> judges);
 
     List<Judge> findAllJudges(@Param("name") String name);
+
+
+    void updateJudgeAnswer(Judge judge);
+    // id 查
+    Judge QueryJudgeById(Integer id);
+
+
 }

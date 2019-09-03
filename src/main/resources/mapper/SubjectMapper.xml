@@ -68,7 +68,11 @@
 
   <!--查询所有的学科信息-->
   <select id="findAllSubject" resultType="subject">
-    select * from subject
+    select * from examsys.subject
+  </select>
+
+  <select id="findSub" resultType="subject" >
+    select s.id, s.name from examsys.subject s
   </select>
 
   <!--根据学科Id查询学科信息-->

@@ -15,7 +15,7 @@
     </style>
     <link rel="stylesheet" href="layui/css/layui.css"/>
     <script type="text/javascript" src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
 </head>
 <body>
 
@@ -33,11 +33,6 @@
                 </div>
             </div>
             <button type="button" class="layui-btn" data-type="reload">搜索</button>
-
-            <button type="button" class="layui-btn" onclick="add()">添加</button>
-
-
-
         </div>
         <!--				<div class="layui-inline">-->
         <!--					<label class="layui-form-label">结束日期</label>-->
@@ -49,7 +44,7 @@
 </div>
 <table class="layui-hide" id="demo" lay-filter="test"></table>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改补充答案</a>
 </script>
 </div>
 <script>
@@ -97,7 +92,7 @@
                 {field: 'title', title: '题目', width: 500,height:200, sort: true, fixed: 'left'}
                 , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
                 , {field: 'answer', title: '答案',width: 200, sort: true}
-                , {fixed: 'right', title:'操作',width: 100, align: 'center', toolbar: '#barDemo'}
+                , {fixed: 'right', title:'操作',width: 130, align: 'center', toolbar: '#barDemo'}
 
             ]]
         });
@@ -129,7 +124,7 @@
                     type: 2 //此处以iframe举例
                     , title: '项目信息维护'
                     , area: ['800px', '600px']
-                    , content: 'updateItem.jsp?id=' + data.id
+                    , content: 'updateShortAnswer.html?id=' + data.id
                 })
             }
         });

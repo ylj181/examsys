@@ -25,6 +25,7 @@ import java.util.Map;
  *  导入选择题，判断题，简答题
  */
 @Controller
+@RequestMapping("/import")
 public class ImportController {
 
     @Autowired
@@ -37,7 +38,7 @@ public class ImportController {
     private ShortAnswerService shortAnswerService;
 
 
-    @RequestMapping("/importRadio")
+    @RequestMapping("/importRadio.do")
     public String importExcelRadio(@RequestParam MultipartFile upfile) {
 
         // 获取上传文件的输入流对象
@@ -60,7 +61,7 @@ public class ImportController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "importRadio.html";
+        return "forward:/radios/listAllRadios.do";
     }
 
     @RequestMapping("/importJudge")

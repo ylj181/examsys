@@ -25,4 +25,15 @@ public class RadioServiceImpl implements RadioService {
         List<Radio> allRadios = radioDao.findAllRadios(name);
         return allRadios;
     }
+
+    @Override
+    public Radio QueryById(Integer id) {
+        Radio radio = radioDao.QueryById(id);
+        return radio;
+    }
+
+    @Override
+    public void updateAnswer(Radio radio) {
+        radioDao.updateAnswer(radio);
+    }
 }
