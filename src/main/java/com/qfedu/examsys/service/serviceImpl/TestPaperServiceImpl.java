@@ -124,7 +124,9 @@ public class TestPaperServiceImpl implements TestPaperService {
 
         JsonResult jsonResult =new JsonResult();
 
-        jsonResult.setInfo(testmapperList.get("allTesttLists"));
+        //jsonResult.setInfo(testmapperList.get("allTesttLists"));
+
+        jsonResult.setInfo(itemSelects.getId());
         jsonResult.setCode(1);
 
         return jsonResult;

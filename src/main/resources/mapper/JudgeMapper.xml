@@ -75,7 +75,7 @@
   findJudges集合查找 根据subjectId
   -->
   <select id="findJudges" parameterType="int" resultMap="BaseResultMap">
-    select * from examsys.judge where  examsys.judge.subjectId = #{subjectId}
+    select * from examsys.judge where  examsys.judge.subjectId = #{subjectId} 
   </select>
 
 

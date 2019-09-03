@@ -42,7 +42,7 @@
             #{begintime,jdbcType=TIMESTAMP}, #{p_name,jdbcType=VARCHAR}, #{p_duration,jdbcType=VARCHAR},
             #{eTestId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.TestType" >
+  <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.TestType"  useGeneratedKeys="true" keyProperty="id">
     insert into testType
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

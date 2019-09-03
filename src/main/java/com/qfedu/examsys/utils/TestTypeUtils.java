@@ -63,11 +63,13 @@ public class TestTypeUtils {
 
 
 
-        AllTestList allTestList = new AllTestList();
+        AllTestList allTestList = null;
 
         ArrayList<AllTestList> allTestLists = new ArrayList<>();
 
         for (int i = 0; i <types.length ; i++) {
+
+            allTestList=new AllTestList();
 
             Integer nameSubjectId = Integer.valueOf(names[i]);
 
