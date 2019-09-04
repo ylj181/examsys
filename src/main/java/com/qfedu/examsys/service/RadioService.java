@@ -13,6 +13,12 @@ public interface RadioService {
     Radio QueryById(Integer id);
     // 修改答案
     void updateAnswer(Radio radio);
+    // 总tiku
+    List<Radio> findAnythingRadios(Integer page, Integer limit);
+    // 修改 录入
+    void updateRecentType(Radio radio);
+    //  批量 录入
+    void updateRecentTypeByIds(List<Integer> ids);
 
 
 

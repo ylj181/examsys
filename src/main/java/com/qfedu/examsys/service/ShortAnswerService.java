@@ -16,4 +16,11 @@ public interface ShortAnswerService {
     //修改答案
     void updateShortAnswerAnswer(ShortAnswer shortAnswer);
 
+    // 总题库
+    List<ShortAnswer> findAnythingShortAnswer(Integer page, Integer limit);
+
+    // 修改 录入
+    void updateRecentType(ShortAnswer shortAnswer);
+    //  批量 录入
+    void updateRecentTypeByIds(List<Integer> ids);
 }

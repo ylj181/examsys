@@ -29,14 +29,36 @@
             </div>
             <button type="button" class="layui-btn" data-type="reload">搜索</button>
 
-<!--            <button type="button" class="layui-btn" onclick="add()">添加</button>-->
-            <form action="import/importRadio.do"  method="post" enctype="multipart/form-data" onclick="checkData()">
-                <input type="file" name="upfile"  id="file"/>
-                <input type="submit" value="导入"/>
+            <ul>
+                <li><div id="test10"></div></li>
+            </ul>
 
 
+            <script src="layui/layui.js" charset="utf-8"></script>
+            <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+            <script>
+                layui.use(['rate'], function(){
+                    var rate = layui.rate;
 
-            </form>
+                    //主题色
+                    rate.render({
+                        elem: '#test10'
+                        ,value: 3
+                        ,theme: '#FF8000' //自定义主题色
+                    });
+                });
+            </script>
+
+            <fieldset class="layui-elem-field site-demo-button" style="font-weight: bold;">
+                <div class="layui-btn-group">
+                    <input type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:window.location.href='ListAllRadios.html'" value="选择题">
+                    <input type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:window.location.href='ListAllJudges.html'" value="判断题">
+                    <input type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:window.location.href='ListAllShortAnswers.html'" value="简答题">
+                </div>
+            </fieldset>
+
+            <!--            <button type="button" class="layui-btn" onclick="add()">添加</button>-->
+
 
         </div>
 
@@ -109,10 +131,10 @@
                 // {field: 'id', title: '序号', width: 300,height:200, sort: true, fixed: 'left'},
                 {field: 'title', title: '题目', width: 300,height:200, sort: true,fixed:'left'}
                 , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
-                , {field: 'choiceA', title: 'A选项', width: 200, sort: true}
-                , {field: 'choiceB', title: 'B选项', width: 200,sort: true}
-                , {field: 'choiceC', title: 'C选项', width: 200, sort: true}
-                , {field: 'choiceD', title: 'D选项', width: 200, sort: true}
+                , {field: 'choiceA', title: 'A选项', width: 200, sort: true,templet:'#choiceATpl'}
+                , {field: 'choiceB', title: 'B选项', width: 200,sort: true,templet:'#choiceBTpl'}
+                , {field: 'choiceC', title: 'C选项', width: 200, sort: true,templet:'#choiceCTpl'}
+                , {field: 'choiceD', title: 'D选项', width: 200, sort: true,templet:'#choiceDTpl'}
                 , {field: 'answer', title: '答案', align: 'center',width: 100, sort: true}
                 , {fixed: 'right', title:'操作',width: 100, align: 'center', toolbar: '#barDemo'}
 
@@ -268,6 +290,38 @@
         })
     }
 
+</script>
+
+<script type="text/html" id="choiceATpl">
+    {{#  if(d.choiceA.indexOf("A.") !== -1){ }}
+    <span style="color: #f55a5a;">{{ d.choiceA }}</span>
+    {{#  } else { }}
+    {{ d.choiceA }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="choiceBTpl">
+    {{#  if(d.choiceB.indexOf("B.") !== -1){ }}
+    <span style="color: #f5590e;">{{ d.choiceB }}</span>
+    {{#  } else { }}
+    {{ d.choiceB }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="choiceCTpl">
+    {{#  if(d.choiceC.indexOf("C.") !== -1){ }}
+    <span style="color: #c7f51f;">{{ d.choiceC }}</span>
+    {{#  } else { }}
+    {{ d.choiceC }}
+    {{#  } }}
+</script>
+
+<script type="text/html" id="choiceDTpl">
+    {{#  if(d.choiceD.indexOf("D.") !== -1){ }}
+    <span style="color: #5e30f5;">{{ d.choiceD }}</span>
+    {{#  } else { }}
+    {{ d.choiceD }}
+    {{#  } }}
 </script>
 
 </body>

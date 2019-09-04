@@ -31,6 +31,12 @@ public interface JudgeDao {
     void updateJudgeAnswer(Judge judge);
     // id 查
     Judge QueryJudgeById(Integer id);
+    // 总题库
+    List<Judge> findAnythingJudges();
+
+    void updateJudgeRecentType(Judge judge);
+    // 批量录入 修改
+    void updateRecentTypeByIds(List<Integer> ids);
 
 
 }

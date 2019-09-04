@@ -115,8 +115,7 @@ public class ShowAllRJS {
     @ResponseBody
     public JsonResult QueryById(Integer id) {
         Radio radio = radioService.QueryById(id);
-        return new JsonResult(1, radio);
-    }
+        return new JsonResult(1, radio); }
 
     /**
      * 修改选择题答案
@@ -176,4 +175,12 @@ public class ShowAllRJS {
         return new JsonResult(1, shortAnswer);
     }
 
+
+    @RequestMapping("/listAllJudgesss.do")
+    @ResponseBody
+    public JsonResult findAllJudgessss(String name) {
+        List<Judge> allJudges = judgeService.findAllJudgessss(name);
+
+        return new JsonResult(1, allJudges);
+    }
 }

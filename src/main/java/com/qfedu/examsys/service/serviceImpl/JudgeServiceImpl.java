@@ -25,6 +25,11 @@ public class JudgeServiceImpl implements JudgeService {
     }
 
     @Override
+    public List<Judge> findAllJudgessss(String name) {
+        return judgeDao.findAllJudges(name);
+    }
+
+    @Override
     public void updateJudgeAnswer(Judge judge) {
         judgeDao.updateJudgeAnswer(judge);
     }
@@ -33,5 +38,21 @@ public class JudgeServiceImpl implements JudgeService {
     public Judge QueryJudgeById(Integer id) {
         Judge judge = judgeDao.QueryJudgeById(id);
         return judge;
+    }
+
+    @Override
+    public List<Judge> findAnythingJudge(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        return judgeDao.findAnythingJudges();
+    }
+
+    @Override
+    public void updateRecentType(Judge judge) {
+        judgeDao.updateJudgeRecentType(judge);
+    }
+
+    @Override
+    public void updateRecentTypeByIds(List<Integer> ids) {
+        judgeDao.updateRecentTypeByIds(ids);
     }
 }

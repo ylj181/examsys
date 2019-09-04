@@ -75,16 +75,16 @@
   findJudges集合查找 根据subjectId
   -->
   <select id="findJudges" parameterType="int" resultMap="BaseResultMap">
-    select * from examsys.judge where  examsys.judge.subjectId = #{subjectId} 
+    select * from examsys.judge where  examsys.judge.subjectId = #{subjectId} and judge.recentType = 1
   </select>
 
 
 <!--  批量导入判断题-->
   <insert id="insertManyJudges">
-    insert into judge(title, answer, subjectId)
+    insert into judge(title, answer, subjectId,recentType)
     values
     <foreach collection="list" item="judge" separator=",">
-      (#{judge.title},#{judge.answer},#{judge.subjectId})
+      (#{judge.title},#{judge.answer},#{judge.subjectId},0)
     </foreach>
   </insert>
 
@@ -104,7 +104,7 @@
   <select id="findAllJudges" parameterType="int" resultMap="judgeAllMap">
     select j.*, s.name
     from judge j
-    inner join subject s on j.subjectId = s.id
+    inner join subject s on j.subjectId = s.id and j.recentType =1
     <where>
       <if test="name!=null">
         name like "%${name}%"
@@ -127,4 +127,32 @@
     from judge
     where id = #{id}
   </select>
+
+
+
+  <select id="findAnythingJudges" parameterType="int" resultMap="judgeAllMap">
+    select j.*, s.name
+    from judge j
+           inner join subject s on j.subjectId = s.id and j.recentType =0
+  </select>
+  <!--    录入 更改状态-->
+  <select id="updateJudgeRecentType" parameterType="judge">
+    update judge
+    set recentType = 1
+    where id = #{id}
+
+  </select>
+
+  <update id="updateRecentTypeByIds" parameterType="list">
+    <!-- foreach 遍历
+        collenction 遍历的元素
+        Item 遍历的元素的临时变量名
+        open、close 遍历出来的数据，使用哪些指定非符号包裹
+        sepator 遍历的元素之间使用的分隔符
+     -->
+    update judge set recentType = 1 where id in
+    <foreach collection="list" item="id" open="(" close=")" separator="," >
+      #{id}
+    </foreach>
+  </update>
 </mapper>

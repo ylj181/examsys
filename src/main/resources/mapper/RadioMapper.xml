@@ -132,10 +132,10 @@
     时间8.29 18:00
     -->
     <insert id="insertMany">
-        insert into radio(subjectId, title, choiceA, choiceB, choiceC, choiceD, answer)
+        insert into radio(subjectId, title, choiceA, choiceB, choiceC, choiceD, answer,recentType)
         values
         <foreach collection="list" item="radio" separator=",">
-            (#{radio.subjectId},#{radio.title},#{radio.choiceA},#{radio.choiceB},#{radio.choiceC},#{radio.choiceD},#{radio.answer})
+            (#{radio.subjectId},#{radio.title},#{radio.choiceA},#{radio.choiceB},#{radio.choiceC},#{radio.choiceD},#{radio.answer},0)
         </foreach>
     </insert>
     <!--
@@ -146,7 +146,7 @@
     <select id="findRadios" parameterType="int" resultMap="BaseResultMap">
         select *
         from examsys.radio
-        where examsys.radio.subjectId = #{subjectId}
+        where examsys.radio.subjectId = #{subjectId} and radio.recentType = 1
     </select>
 
     <!--
@@ -162,6 +162,7 @@
         <result column="choiceC" property="choiceC"></result>
         <result column="choiceD" property="choiceD"></result>
         <result column="answer" property="answer"></result>
+        <result column="recentType" property="recentType"></result>
         <association property="subject" resultMap="com.qfedu.examsys.dao.SubjectDao.subjectMapOne">
 
         </association>
@@ -169,15 +170,28 @@
     <select id="findAllRadios" parameterType="int" resultMap="radioAllMap">
         select r.*, s.name
         from radio r
-        inner join subject s on r.subjectId = s.id
+        inner join subject s on r.subjectId = s.id and r.recentType =1
         <where>
             <if test="name!=null">
-                name like "%${name}%"
+               name like "%${name}%"
             </if>
             <!--            <if test="typename==null">-->
             <!--                and typename like "%1%"-->
             <!--            </if>-->
         </where>
+    </select>
+
+    <select id="findAnythingRadios" parameterType="int" resultMap="radioAllMap">
+        select r.*, s.name
+        from radio r
+        inner join subject s on r.subjectId = s.id and r.recentType =0
+    </select>
+<!--    录入 更改状态-->
+    <select id="updateRecentType" parameterType="radio">
+        update radio
+        set recentType = 1
+        where id = #{id}
+
     </select>
     <!--    根据id查询-->
     <select id="QueryById" parameterType="int" resultType="radio">
@@ -191,6 +205,18 @@
         set answer=#{answer}
         where id = #{id}
     </update>
-
+<!--    批量修改（录入）-->
+    <update id="updateRecentTypeByIds" parameterType="list">
+        <!-- foreach 遍历
+            collenction 遍历的元素
+            Item 遍历的元素的临时变量名
+            open、close 遍历出来的数据，使用哪些指定非符号包裹
+            sepator 遍历的元素之间使用的分隔符
+         -->
+        update radio set recentType = 1 where id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," >
+            #{id}
+        </foreach>
+    </update>
 
 </mapper>

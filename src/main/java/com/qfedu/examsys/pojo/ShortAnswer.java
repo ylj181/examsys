@@ -14,6 +14,8 @@ public class ShortAnswer {
 
     private Subject subject;
 
+    private Integer recentType;
+
     public Subject getSubject() {
         return subject;
     }

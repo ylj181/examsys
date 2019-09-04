@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="../static/layui/css/layui.css"/>
+    <script type="text/javascript" src="../static/layui/layui.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-1.12.2.min.js"></script>
 </head>
 <body>
-index
+
+<ul>
+    <li><div id="test10"></div></li>
+</ul>
+
+
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['rate'], function(){
+        var rate = layui.rate;
+
+        //主题色
+        rate.render({
+            elem: '#test10'
+            ,value: 3
+            ,theme: '#FF8000' //自定义主题色
+        });
+    });
+</script>
 </body>
 </html>

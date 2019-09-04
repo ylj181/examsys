@@ -30,4 +30,10 @@ public interface RadioDao {
     Radio QueryById(Integer id);
     //修改答案
     void updateAnswer(Radio radio);
+    // 总题库
+    List<Radio> findAnythingRadios();
+
+    void updateRecentType(Radio radio);
+    // 批量录入 修改
+    void updateRecentTypeByIds(List<Integer> ids);
 }

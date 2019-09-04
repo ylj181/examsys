@@ -74,7 +74,7 @@
   findShortAnswers集合查找 根据subjectId
   -->
   <select id="findShortAnswers" parameterType="int" resultMap="BaseResultMap">
-    select * from examsys.shortAnswer where  examsys.shortAnswer.subjectId =#{subjectId}
+    select * from examsys.shortAnswer where  examsys.shortAnswer.subjectId =#{subjectId} and  shortAnswer.recentType = 1
   </select>
 
   <!--
@@ -82,10 +82,10 @@
 时间8.30 15:00
 -->
   <insert id="insertManyShortAnswer">
-    insert into shortAnswer(title, answer, subjectId)
+    insert into shortAnswer(title, answer, subjectId,recentType)
     values
     <foreach collection="list" item="shortAnswer" separator=",">
-      (#{shortAnswer.title},#{shortAnswer.answer},#{shortAnswer.subjectId})
+      (#{shortAnswer.title},#{shortAnswer.answer},#{shortAnswer.subjectId},0)
     </foreach>
   </insert>
 
@@ -106,7 +106,7 @@
   <select id="findAllShortAnswers" parameterType="int" resultMap="ShortAnswerAllMap">
     select sa.*, s.name
     from shortAnswer sa
-    inner join subject s on sa.subjectId = s.id
+    inner join subject s on sa.subjectId = s.id and sa.recentType = 1
     <where>
       <if test="name!=null">
         name like "%${name}%"
@@ -128,5 +128,31 @@
     update shortAnswer
     set answer=#{answer}
     where id = #{id}
+  </update>
+
+  <select id="findAnythingShortAnswer" parameterType="int" resultMap="ShortAnswerAllMap">
+    select sa.*, s.name
+    from shortAnswer sa
+           inner join subject s on sa.subjectId = s.id and sa.recentType =0
+  </select>
+  <!--    录入 更改状态-->
+  <select id="updateShortAnswerRecentType" parameterType="shortAnswer">
+    update shortAnswer
+    set recentType = 1
+    where id = #{id}
+
+  </select>
+
+  <update id="updateRecentTypeByIds" parameterType="list">
+    <!-- foreach 遍历
+        collenction 遍历的元素
+        Item 遍历的元素的临时变量名
+        open、close 遍历出来的数据，使用哪些指定非符号包裹
+        sepator 遍历的元素之间使用的分隔符
+     -->
+    update shortAnswer set recentType = 1 where id in
+    <foreach collection="list" item="id" open="(" close=")" separator="," >
+      #{id}
+    </foreach>
   </update>
 </mapper>

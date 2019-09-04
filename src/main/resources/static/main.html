@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>在线考试系统</title>
+
+
+		<link rel="stylesheet" href="layui/css/layui.css" />
+      <script type="text/javascript" src="layui/layui.js" ></script>
+      <script type="text/javascript" src="js/jquery-1.12.2.min.js" ></script>
+
+      <style>
+        .layui-footer {
+          text-align: center;
+        }
+        .signOut {
+          cursor: pointer;
+        }
+				
+
+      </style>
+	</head>
+	<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">在线考试系统</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="exam.html" target="myframe">在线考试</a></li>
+      <li class="layui-nav-item"><a href="zguce.html" target="myframe">注册</a></li>
+      <li class="layui-nav-item"><a href="login.html" target="myframe">登录</a></li>
+      <li class="layui-nav-item"><a href="subjects.html" target="myframe">xxxx</a></li>
+<!--      <li class="layui-nav-item">-->
+<!--        <a href="javascript:;">其它系统</a>-->
+<!--        <dl class="layui-nav-child">-->
+<!--          <dd><a href="">邮件管理</a></dd>-->
+<!--          <dd><a href="">消息管理</a></dd>-->
+<!--          <dd><a href="">授权管理</a></dd>-->
+<!--        </dl>-->
+<!--      </li>-->
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <a>
+        
+            <span id="uname"></span>
+          </a>
+        </a>
+<!--        <dl class="layui-nav-child">-->
+<!--          <dd><a href="updateImage.html" target="myframe">修改头像</a></dd>-->
+<!--&lt;!&ndash;          <dd><a href="">基本资料</a></dd>&ndash;&gt;-->
+<!--&lt;!&ndash;          <dd><a href="">安全设置</a></dd>&ndash;&gt;-->
+<!--        </dl>-->
+      </li>
+      <li class="layui-nav-item"><a class="signOut" >安全退出</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul id="menu" class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed"  >
+          <a id="test2"></a>
+          <dl class="layui-nav-child"  id="test1" >
+            <dd>
+      			</dd>			
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <iframe name="myframe" width="100%" height="100%" frameborder="0">
+    </iframe>
+
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+  </div>
+</div>
+<script>
+//JavaScript代码区域
+
+
+layui.use('element', function(){
+  var element = layui.element;
+	var aaa = localStorage.getItem("user");
+	//var id = aaa.id;
+
+if(aaa != null){
+	var u = aaa.username;
+	$("#uname").html(u);
+  
+	$.ajax({
+	    type:"get",
+	    url:"http://localhost:8080/examsys/findPermission.do?rid="+aaa.rid,
+	    dataType:"json",
+	    success:function (data) {
+	        if (data.code == 1) {
+	            var infos = data.info;
+	            $(infos).each(function () {
+	                // var html = '<a value = "'+this.menu+'">'+this.name+'</option>';
+					
+					var html = '<a target="myframe">'+this.permission.name+'</a>';
+					$("#test2").append(html);
+					
+	            })
+	        }else {
+	            alert(data.info);
+	        }
+	    }
+	})
+	
+	
+	$.ajax({
+	    type:"get",
+	    url:"http://localhost:8080/examsys/findPermission2.do?rid="+aaa.rid,
+	    dataType:"json",
+	    success:function (data) {
+	        if (data.code == 1) {
+	            var infos = data.info;
+	            $(infos).each(function () {
+	                // var html = '<a value = "'+this.menu+'">'+this.name+'</option>';
+					
+					var html = '<dd>'+'<a href="'+this.permission.menu+'" target="myframe">'+this.permission.name+'</a>'+'</dd>';
+	                $("#test1").append(html);
+	            })
+	        }else {
+	            alert(data.info);
+	        }
+	    }
+	})
+	
+	
+}
+  $(".signOut").click(function () {
+		
+		if(aaa!=null){
+			
+    $.ajax({
+					type:"get",
+					url:"http://localhost:8080/examsys/loout.do?id="+aaa.id,
+					dataType: "json",
+					success: function (data) {
+				
+						localStorage.removeItem("user");
+						alert(data.info);
+						window.location.href = "main.html"
+				}	
+			})
+			
+		}else {
+			alert("还未进行登录");
+		}
+  });
+
+  function change() {
+    $.ajax({
+      type: "get",
+      url: "../adminQuery.do",
+      dataType: "json",
+      success: function (res) {
+        if (res.code == 0) {
+          $(".picture").attr("src", res.info.url)
+          $(".username").html(res.info.username)
+        }
+        element.render();
+      },
+      error: function () {
+        layer.alert("Ajax请求失败！")
+      }
+    });
+  }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -19,8 +19,18 @@ public class Radio {
     private String choiceD;
 
     private String answer;
+    // 新旧题库 0 1
+    private Integer recentType;
 
     private Subject subject;
+
+    public Integer getRecentType() {
+        return recentType;
+    }
+
+    public void setRecentType(Integer recentType) {
+        this.recentType = recentType;
+    }
 
     public Subject getSubject() {
         return subject;

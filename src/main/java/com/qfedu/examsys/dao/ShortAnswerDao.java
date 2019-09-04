@@ -33,4 +33,11 @@ public interface ShortAnswerDao {
     ShortAnswer QueryShortAnswerById(Integer id);
     //修改答案
     void updateShortAnswerAnswer(ShortAnswer shortAnswer);
+
+    // 总题库
+    List<ShortAnswer> findAnythingShortAnswer();
+
+    void updateShortAnswerRecentType(ShortAnswer shortAnswer);
+    // 批量录入 修改
+    void updateRecentTypeByIds(List<Integer> ids);
 }

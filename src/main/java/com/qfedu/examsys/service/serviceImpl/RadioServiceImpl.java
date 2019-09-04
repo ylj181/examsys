@@ -36,4 +36,22 @@ public class RadioServiceImpl implements RadioService {
     public void updateAnswer(Radio radio) {
         radioDao.updateAnswer(radio);
     }
+
+    @Override
+    public List<Radio> findAnythingRadios(Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+
+        List<Radio> anythingRadios = radioDao.findAnythingRadios();
+        return anythingRadios;
+    }
+
+    @Override
+    public void updateRecentType(Radio radio) {
+        radioDao.updateRecentType(radio);
+    }
+
+    @Override
+    public void updateRecentTypeByIds(List<Integer> ids) {
+        radioDao.updateRecentTypeByIds(ids);
+    }
 }

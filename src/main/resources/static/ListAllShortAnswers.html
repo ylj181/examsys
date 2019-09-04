@@ -33,6 +33,33 @@
                 </div>
             </div>
             <button type="button" class="layui-btn" data-type="reload">搜索</button>
+            <ul>
+                <li><div id="test10"></div></li>
+            </ul>
+
+
+            <script src="layui/layui.js" charset="utf-8"></script>
+            <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+            <script>
+                layui.use(['rate'], function(){
+                    var rate = layui.rate;
+
+                    //主题色
+                    rate.render({
+                        elem: '#test10'
+                        ,value: 3
+                        ,theme: '#FF8000' //自定义主题色
+                    });
+                });
+            </script>
+
+            <fieldset class="layui-elem-field site-demo-button" style="font-weight: bold;">
+                <div class="layui-btn-group">
+                    <input type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:window.location.href='ListAllRadios.html'" value="选择题">
+                    <input type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:window.location.href='ListAllJudges.html'" value="判断题">
+                    <input type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="javascript:window.location.href='ListAllShortAnswers.html'" value="简答题">
+                </div>
+            </fieldset>
         </div>
         <!--				<div class="layui-inline">-->
         <!--					<label class="layui-form-label">结束日期</label>-->
@@ -90,8 +117,8 @@
             , cols: [[ //表头
                 // {type: 'checkbox', fixed: 'left'},
                 {field: 'title', title: '题目', width: 500,height:200, sort: true, fixed: 'left'}
-                , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
-                , {field: 'answer', title: '答案',width: 200, sort: true}
+                , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>',}
+                , {field: 'answer', title: '答案',width: 200, sort: true,templet: '#answerTpl'}
                 , {fixed: 'right', title:'操作',width: 130, align: 'center', toolbar: '#barDemo'}
 
             ]]
@@ -241,6 +268,13 @@
         })
     }
 
+</script>
+<script type="text/html" id="answerTpl">
+    {{#  if(d.answer != null){ }}
+    <span style="color: #f55a5a;">{{ d.answer }}</span>
+    {{#  } else { }}
+    {{ d.answer }}
+    {{#  } }}
 </script>
 
 
