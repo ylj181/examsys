@@ -1,9 +1,11 @@
 package com.qfedu.examsys.service;
 
 import com.qfedu.examsys.pojo.AllTestList;
+import com.qfedu.examsys.pojo.ETest;
 import com.qfedu.examsys.pojo.TestType;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @Author Lei
@@ -24,4 +26,8 @@ public interface testTypeService {
     int updateByPrimaryKey(TestType record);
 
     AllTestList getAllTestList(String s) throws IOException;
+
+
+    List<ETest> findAlleTestByTId(Integer id);
+
 }

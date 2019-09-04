@@ -34,7 +34,7 @@ public class ETestServiceImpl implements ETestService {
 
     @Override
     public ETest selectByPrimaryKey(Integer id) {
-        return null;
+        return eTestDao.selectByPrimaryKey(id);
     }
 
     @Override

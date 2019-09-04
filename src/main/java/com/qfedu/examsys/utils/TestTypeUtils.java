@@ -81,16 +81,17 @@ public class TestTypeUtils {
 
                 allTestList.setRadioList(randomList);
 
-            }else if(types[i].equals("2")){ //表示选择了多选
+            }else if(types[i].equals("2")){ //表示选择判断
                 judgeList= mapperUtils.getRandomList(judgeDao.findJudges(nameSubjectId),count);
                 allTestList.setJudgeList(judgeList);
 
-            }else {
+            }else {//选择了简答
                 shortAnswerList= mapperUtils.getRandomList(shortAnswerDao.findShortAnswers(nameSubjectId),count);
                 allTestList.setAnswerList(shortAnswerList);
             }
 
             allTestLists.add(allTestList);
+
 
             JsonResult jsonResult = saveMapper.saveMapper(allTestList, nameSubjectId, null, testType.getP_name());
 

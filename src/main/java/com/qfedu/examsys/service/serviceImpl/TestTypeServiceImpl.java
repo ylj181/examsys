@@ -3,8 +3,10 @@ package com.qfedu.examsys.service.serviceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qfedu.examsys.dao.ETestDao;
+import com.qfedu.examsys.dao.TestTypeDao;
 import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.testTypeService;
+import com.qfedu.examsys.utils.WriteReadJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,12 @@ public class TestTypeServiceImpl implements testTypeService {
     @Autowired(required = false)
     private ETestDao eTestDao;
 
+    @Autowired(required = false)
+    private TestTypeDao testTypeDao;
+
+    @Autowired
+    private WriteReadJson writeReadJson;
+
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return 0;
@@ -35,12 +43,12 @@ public class TestTypeServiceImpl implements testTypeService {
 
     @Override
     public int insertSelective(TestType record) {
-        return 0;
+        return testTypeDao.insertSelective(record);
     }
 
     @Override
     public TestType selectByPrimaryKey(Integer id) {
-        return null;
+        return testTypeDao.selectByPrimaryKey(id);
     }
 
     @Override
@@ -56,50 +64,25 @@ public class TestTypeServiceImpl implements testTypeService {
 
     @Override
     public AllTestList getAllTestList(String s) throws IOException {
-        AllTestList allTestList = new AllTestList();
 
-        List<Radio> radioList=new ArrayList<>();
-        List<Judge> judgeList =new ArrayList<>();
-        List<ShortAnswer> shortAnswerList=new ArrayList<>();
+        return  writeReadJson.ReadJson(s);
+    }
+
+    //根据testType主键 查找eTest信息
+    @Override
+    public List<ETest> findAlleTestByTId(Integer id) {
+        List<ETest> eTests = new ArrayList<>();
+
+        String s = testTypeDao.selectByPrimaryKey(id).geteTestId();
 
         String[] split = s.split(",");
 
-        ObjectMapper objectMapper =new ObjectMapper();
-
-
-        for (int i = 0; i <split.length ; i++) {
-
-            Integer eid = Integer.parseInt(split[i]);
-            ETest eTest = eTestDao.selectByPrimaryKey(eid);
-            String judgejson = eTest.getJudgejson();
-            List<Judge> judges = objectMapper.readValue(judgejson,new TypeReference<List<Judge>>() { });
-
-            String shortanswerjson = eTest.getShortanswerjson();
-            List<ShortAnswer> shortAnswers = objectMapper.readValue(shortanswerjson,new TypeReference<List<ShortAnswer>>() { });
-
-            String radiojson = eTest.getRadiojson();
-            List<Radio> radios = objectMapper.readValue(radiojson,new TypeReference<List<Radio>>() { });
-
-            if(!judgejson.equals("null") && !judgejson.equals("[]")){
-
-                judgeList.addAll(judges);
-            }
-            if(!radiojson.equals("null") && !radiojson.equals("[]")){
-
-                radioList.addAll(radios);
-            }
-
-            if(!shortanswerjson.equals("null") && !shortanswerjson.equals("[]")){
-
-                shortAnswerList.addAll(shortAnswers);
-            }
-
+        for (int i = 0; i < split.length; i++) {
+            ETest eTest = eTestDao.selectByPrimaryKey(Integer.parseInt(split[i]));
+            eTests.add(eTest);
         }
 
-        allTestList.setAnswerList(shortAnswerList);
-        allTestList.setRadioList(radioList);
-        allTestList.setJudgeList(judgeList);
-        return allTestList;
+        return eTests;
     }
 
 }

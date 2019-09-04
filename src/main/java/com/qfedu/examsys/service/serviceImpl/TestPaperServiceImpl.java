@@ -120,6 +120,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 
 
         itemSelects.seteTestId(eTestId);
+
         testTypeDao.insertSelective(itemSelects);
 
         JsonResult jsonResult =new JsonResult();
