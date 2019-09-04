@@ -7,6 +7,8 @@ public class RolePermission {
 
     private Integer pid;
 
+    private Permission permission;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class RolePermission {
 
     public void setPid(Integer pid) {
         this.pid = pid;
+    }
+
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
     }
 }
