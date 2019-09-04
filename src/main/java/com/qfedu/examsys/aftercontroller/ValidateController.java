@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 /**
+ *      和验证码相关的后台接口
+ *
  * @Author imlee
  * @Date 2019-09-02 10:10
  */
@@ -32,14 +34,32 @@ public class ValidateController {
      *
      * @Author  imlee
      *
-     * @param telephoneNumber   用户的手机号码
+     * @param telephoneNumber   用户填写的手机号码
      * @return                  验证码发送成功的提示
      */
     @RequestMapping("/getCode.do")
     public JsonResult getCode(String telephoneNumber) {
 
+        //  判断是否填写手机号码
+        if (telephoneNumber == null) {
+            //  未填写手机号码，返回失败提示
+            return new JsonResult(0, "请输入手机号码！");
+        }
+
+        //  判断用户填写的手机号码是否合法
+        if (!telephoneNumber.matches("^1(([358]\\d)|66|77|99)\\d{8}$")) {
+            //  手机号码不合法，返回失败提示
+            return new JsonResult(0, "手机号码不合法，请重新输入！");
+        }
+
         //    将用的短信验证码保存到Redis中
         String validateCode = SendSms.sendMessage(telephoneNumber);
+
+        //  判断获取短信验证码是否出现异常
+        if (validateCode.length() != 6) {
+            //  说明返回的不是验证码，而是异常信息
+            return new JsonResult(0, validateCode);
+        }
 
         //  将短信验证码保存到 Redis 中，有效期为5分钟
         //  key  ： 手机号码
@@ -55,7 +75,7 @@ public class ValidateController {
      *
      * @Author  imlee
      *
-     * @param telephoneNumber   用户提交的电话号码
+     * @param telephoneNumber   用户填写的电话号码
      * @param telephoneCode     短信验证码
      * @return
      */
@@ -95,6 +115,16 @@ public class ValidateController {
         return new JsonResult(1, telephoneNumber);
     }
 
+    /**
+     *          注册账号第二步：设置用户名和密码
+     *
+     * @Author  imlee
+     * @param username          用户填写的用户名
+     * @param password          用户填写的密码
+     * @param telephoneNumber   用户填写的电话号码
+     * @param validate          用户填写的验证码
+     * @return
+     */
     @RequestMapping("/signUp.do")
     public JsonResult signUp(String username, String password, String telephoneNumber, String validate) {
 
