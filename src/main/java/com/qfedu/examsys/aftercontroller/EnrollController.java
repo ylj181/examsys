@@ -4,6 +4,7 @@ package com.qfedu.examsys.aftercontroller;
 import com.github.pagehelper.Page;
 import com.qfedu.examsys.pojo.Enroll;
 import com.qfedu.examsys.service.EnrollService;
+import com.qfedu.examsys.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,9 @@ public class EnrollController {
     @Autowired
     private EnrollService enrollService;
 
+    @Autowired
+    private ExamService examService;
+
     /**
      * 向报名表中添加报名信息
      * @param uid  用户Id
@@ -29,10 +33,10 @@ public class EnrollController {
     @CrossOrigin
     @RequestMapping("/enroll/addEnrollInfo.do")
     @ResponseBody
-    public Map<String,Object> addEnrollInfo(Integer uid,Integer eid){
+    public Map<String,Object> addEnrollInfo(Integer uid,Integer eid,Integer subjectid){
         Map<String, Object> map = new HashMap<>();
 
-        int i = enrollService.addEnrollInfo(uid, eid);
+        int i = enrollService.addEnrollInfo(uid, eid,subjectid);
 
         if (i > 0) {
             map.put("code",1);

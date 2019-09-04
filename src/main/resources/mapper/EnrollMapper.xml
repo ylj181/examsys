@@ -24,6 +24,9 @@
             <if test="eid != null">
                 eid,
             </if>
+            <if test="subjectid != null">
+                subjectId,
+            </if>
         </trim>
         ) values (
         <trim suffixOverrides=",">
@@ -32,6 +35,9 @@
             </if>
             <if test="eid != null">
                 #{eid},
+            </if>
+            <if test="subjectid != null">
+                #{subjectid},
             </if>
         </trim>
         )

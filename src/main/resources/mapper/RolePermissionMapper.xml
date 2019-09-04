@@ -66,4 +66,29 @@
       pid = #{pid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="showPermission" type="com.qfedu.examsys.pojo.RolePermission">
+    <id column="id" property="id"></id>
+    <result column="rid" property="rid"></result>
+    <result column="pid" property="pid"></result>
+    <collection property="permission" ofType="com.qfedu.examsys.pojo.Permission">
+    <id column="id" property="id"></id>
+    <result column="name" property="name"></result>
+    <result column="menu" property="menu"></result>
+    <result column="parentId" property="parentId"></result>
+    </collection>
+  </resultMap>
+  <select id="findPermission" resultMap="showPermission" parameterType="int">
+    select p.name ,p.menu from examsys.rolePermission r inner join examsys.permission p
+    on r.pid = p.id where r.rid = #{rid}
+
+  </select>
+
+  <select id="findPermission2" resultMap="showPermission" parameterType="int">
+    select distinct p.name ,p.menu from examsys.rolePermission r inner join examsys.permission p
+        on p.parentId = r.rid where r.rid = #{rid};
+  </select>
+
+
+
 </mapper>
