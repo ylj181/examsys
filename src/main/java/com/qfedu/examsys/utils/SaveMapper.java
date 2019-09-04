@@ -46,7 +46,7 @@ public class SaveMapper {
 
 
             //关联的exam
-            eTest.setEid(1);
+            eTest.setEid(eid);
 
             //考卷名称
             eTest.setName(eTestName);

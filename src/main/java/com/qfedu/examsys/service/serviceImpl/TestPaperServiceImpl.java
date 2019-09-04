@@ -84,7 +84,7 @@ public class TestPaperServiceImpl implements TestPaperService {
     public JsonResult getStudentExamMapper(Exam exam,String eTestName)  {
 
         //试卷生成
-        AllTestList allTestList = getTestMapper(1);
+        AllTestList allTestList = getTestMapper(exam.getSubjectid());
         //试卷保存为json格式
         saveMapper.saveMapper(allTestList, exam.getSubjectid(), exam.getId(), eTestName);
         JsonResult jsonResult = new JsonResult();

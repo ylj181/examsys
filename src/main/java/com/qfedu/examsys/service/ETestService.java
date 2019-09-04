@@ -20,4 +20,6 @@ public interface ETestService {
 
     int updateByPrimaryKey(ETest record);
 
+
+
 }

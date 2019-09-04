@@ -28,11 +28,11 @@ public class AnswerUtils {
     @Autowired
     private WriteReadJson writeReadJson;
 
-    public void savaAnswer(String answerInfo, Integer uid , Integer eTid, List<ETest> eTestList){
+    public void savaAnswer(String answerInfo, String shortAnswer,Integer uid , Integer eTid, List<ETest> eTestList){
         String[] split = answerInfo.split("-");
 
         String  judges ="";
-        String shorts ="";
+       /* String shorts ="";*/
         String radios ="";
 
         for (int i = 0; i <split.length ; i++) {
@@ -42,13 +42,13 @@ public class AnswerUtils {
             if(split[i].contains("J")){ //判断
                 judges+=split[i]+"-";
             }
-            if(split[i].contains("S")){ //简答
+            /*if(split[i].contains("S")){ //简答
                 shorts+=split[i]+"-";
-            }
+            }*/
         }
         String[] judgesSplit = judges.split("-");
 
-        String[] shortSplit = shorts.split("-");
+       // String[] shortSplit = shorts.split("-");
 
         String[] radioSplit = radios.split("-");
 
@@ -56,7 +56,7 @@ public class AnswerUtils {
         answer.setEtid(eTid);
         answer.setJudges(judges);
         answer.setRadios(radios);
-        answer.setShorts(shorts);
+       /* answer.setShorts(shorts);*/
         answer.setUid(uid);
 
         //总分
@@ -132,6 +132,7 @@ public class AnswerUtils {
 
         }
         answer.setScore(count);
+        answer.setShorts(shortAnswer);
 
         answerDao.insertSelective(answer);
     }

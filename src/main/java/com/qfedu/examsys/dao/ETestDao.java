@@ -18,4 +18,7 @@ public interface ETestDao {
 
     @Select("select count(1) from eTest")
     int  getCount();
+
+    //通过考场id  查询试卷 eTest
+    ETest findByeid(Integer eid);
 }

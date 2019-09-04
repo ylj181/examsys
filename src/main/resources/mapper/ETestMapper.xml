@@ -114,4 +114,8 @@
       shortAnswerJson = #{shortanswerjson,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findByeid" parameterType="int" resultMap="BaseResultMap">
+    select * from examsys.eTest where eid =#{eid}
+  </select>
 </mapper>
