@@ -32,7 +32,7 @@
             #{score,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{judges,jdbcType=VARCHAR},
             #{shorts,jdbcType=VARCHAR}, #{radios,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Answer">
+    <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Answer" useGeneratedKeys="true" keyProperty="id">
         insert into answer
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

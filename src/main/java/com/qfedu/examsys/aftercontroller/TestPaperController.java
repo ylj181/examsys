@@ -8,7 +8,6 @@ import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.service.testTypeService;
 import com.qfedu.examsys.utils.AnswerUtils;
 import com.qfedu.examsys.utils.WriteReadJson;
-import com.qfedu.examsys.utils.secToTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,9 +44,6 @@ public class TestPaperController {
     private AnswerUtils answerUtils;
 
     @Autowired(required = false)
-    private secToTime secToTime;
-
-    @Autowired(required = false)
     private ETestDao  eTestDao;
 
     @Autowired
@@ -70,6 +66,7 @@ public class TestPaperController {
         //试题存在 则返回已经存在的试题
         exam.setId(5);
         exam.setSubjectid(1);
+
         ETest byeid = eTestDao.findByeid(exam.getId());
 
         if(byeid!=null){
@@ -93,9 +90,9 @@ public class TestPaperController {
     @RequestMapping("/SaveTestMapper.do")
     public String SaveTestMapper(TestType TestType) {
 
-        String s = secToTime.secToTime(Integer.parseInt(TestType.getP_duration()) * 60);
+        Integer times = Integer.parseInt(TestType.getP_duration()) * 60;
 
-        TestType.setP_duration(s);
+        TestType.setP_duration(times.toString());
 
         //p_dbids    课程 p_qtypes 试题类型
         //判断同一个课程 不能选择同一种 类型的试题 如 A课程无法选择两种单选试题
@@ -179,10 +176,10 @@ public class TestPaperController {
 
 
         //开始保存试题答案  提供TestAnswer字符串
-        answerUtils.savaAnswer(TestAnswer,null,uid,null,alleTestByTId);
+        Answer answer = answerUtils.savaAnswer(TestAnswer, null, uid, null, alleTestByTId);
 
         jsonResult.setCode(1);
-        jsonResult.setInfo("添加完成");
+        jsonResult.setInfo(answer.getScore());
 
         return jsonResult;
     }

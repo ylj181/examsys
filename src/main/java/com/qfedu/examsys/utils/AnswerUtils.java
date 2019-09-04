@@ -28,8 +28,13 @@ public class AnswerUtils {
     @Autowired
     private WriteReadJson writeReadJson;
 
-    public void savaAnswer(String answerInfo, String shortAnswer,Integer uid , Integer eTid, List<ETest> eTestList){
-        String[] split = answerInfo.split("-");
+    public Answer savaAnswer(String answerInfo, String shortAnswer,Integer uid , Integer eTid, List<ETest> eTestList){
+
+        //  S 1- 234 &
+
+
+
+        String[] split = answerInfo.split("&");
 
         String  judges ="";
        /* String shorts ="";*/
@@ -37,20 +42,20 @@ public class AnswerUtils {
 
         for (int i = 0; i <split.length ; i++) {
             if(split[i].contains("R")){//单选
-                radios+=split[i]+"-";
+                radios+=split[i]+"&";
             }
             if(split[i].contains("J")){ //判断
-                judges+=split[i]+"-";
+                judges+=split[i]+"&";
             }
             /*if(split[i].contains("S")){ //简答
                 shorts+=split[i]+"-";
             }*/
         }
-        String[] judgesSplit = judges.split("-");
+        String[] judgesSplit = judges.split("&");
 
        // String[] shortSplit = shorts.split("-");
 
-        String[] radioSplit = radios.split("-");
+        String[] radioSplit = radios.split("&");
 
         Answer answer = new Answer();
         answer.setEtid(eTid);
@@ -110,30 +115,37 @@ public class AnswerUtils {
         if(radioList.size()!=0){
             for (int i = 0; i < radioList.size(); i++) {
                 String emp =radioSplit[i];
-                String R =emp.substring(emp.length()-1);
-                if( radioList.get(i).getAnswer().equals(R)){
-                    count+=5;
+
+              //  String R =emp.substring(emp.length()-1);
+                String[] split1 = emp.split("-");
+                //String R =emp.substring(split1[1]);
+                if( radioList.get(i).getAnswer().equals(split1[1])){
+                    count+=4;
                 }
             }
         }
         if(judgeList.size()!=0){
             for (int i = 0; i < judgeList.size(); i++) {
                 String emp = judgesSplit[i];
-                String J =emp.substring(emp.length()-2);
-                if( judgeList.get(i).getAnswer().equals(J)){
-                    count+=5;
+
+                String[] split1 = emp.split("-");
+                //String J =emp.substring(emp.length()-2);
+                if( judgeList.get(i).getAnswer().equals(split1[1])){
+                    count+=2;
                 }
             }
 
         }
 
         //简答题 另需判断
-        if(shortAnswerList.size()!=0){
 
-        }
         answer.setScore(count);
         answer.setShorts(shortAnswer);
 
         answerDao.insertSelective(answer);
+
+        return  answer;
+
+
     }
 }
