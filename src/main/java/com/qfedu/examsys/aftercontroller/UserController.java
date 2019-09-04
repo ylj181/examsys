@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -108,6 +107,7 @@ public class UserController {
     }
 
     //管理员删除指定id用户
+    @CrossOrigin
     @RequestMapping("/deleteByPrimaryKey.do")
     @ResponseBody
     public JsonResult deleteByPrimaryKey(Integer id){
@@ -149,6 +149,5 @@ public class UserController {
         userService.deleteByIdUser( ids );
         return new JsonResult( 1,null );
     }
-
 
 }
