@@ -9,7 +9,7 @@ import java.util.List;
 public interface EnrollDao {
 
     //向报名表中添加报名信息
-    public int addEnrollInfo(Integer uid,Integer eid);
+    public int addEnrollInfo(Integer uid,Integer eid,Integer subjectid);
 
 //    //根据报名时报名表中生成的id,展示本次考试的报名信息
 //    public Enroll selectEnrollById(Integer id);
@@ -19,5 +19,7 @@ public interface EnrollDao {
 
     //老师查看所有报名信息
     public List<Enroll> findAllEnrolls(Integer sid);
+
+
 
 }

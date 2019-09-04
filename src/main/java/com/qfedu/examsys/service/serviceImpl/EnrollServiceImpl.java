@@ -24,8 +24,8 @@ public class EnrollServiceImpl implements EnrollService {
      * @return  返回数据库受影响的行数
      */
     @Override
-    public int addEnrollInfo(Integer uid, Integer eid) {
-        return enrollDao.addEnrollInfo(uid, eid);
+    public int addEnrollInfo(Integer uid, Integer eid,Integer subjectid) {
+        return enrollDao.addEnrollInfo(uid, eid,subjectid);
     }
 
 
