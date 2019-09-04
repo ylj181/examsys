@@ -82,7 +82,6 @@ public class TestPaperServiceImpl implements TestPaperService {
     //生成考试卷子 并保存到eTest表 ————考试 需要讲师阅卷
     @Override
     public JsonResult getStudentExamMapper(Exam exam,String eTestName)  {
-
         //试卷生成
         AllTestList allTestList = getTestMapper(exam.getSubjectid());
         //试卷保存为json格式
