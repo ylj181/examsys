@@ -17,4 +17,7 @@ public interface EnrollDao {
     //查询指定学生所有的考试信息
     public List<Enroll> findAllEnroll(Integer uid);
 
+    //老师查看所有报名信息
+    public List<Enroll> findAllEnrolls(Integer sid);
+
 }

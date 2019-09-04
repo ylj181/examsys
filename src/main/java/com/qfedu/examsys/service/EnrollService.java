@@ -13,4 +13,7 @@ public interface EnrollService {
 
     //查询指定学生所有的报名信息
     public List<Enroll> findAllEnroll(Integer uid,Integer page,Integer limit);
+
+    //老师查看所有报名信息
+    public List<Enroll> findAllEnrolls(Integer sid,Integer page,Integer limit);
 }

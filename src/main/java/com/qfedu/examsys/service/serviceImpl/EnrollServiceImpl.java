@@ -6,6 +6,8 @@ import com.qfedu.examsys.pojo.Enroll;
 import com.qfedu.examsys.service.EnrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -49,6 +51,24 @@ public class EnrollServiceImpl implements EnrollService {
         List<Enroll> enrollList = enrollDao.findAllEnroll(uid);
 
         return enrollList;
+    }
+
+    /**
+     * 老师查看所有报名信息
+     * @param sid  学科Id
+     * @param page
+     * @param limit
+     * @return  报名信息集合
+     */
+    @CrossOrigin
+    @RequestMapping("/enroll/findAllEnrolls.do")
+    @Override
+    public List<Enroll> findAllEnrolls(Integer sid,Integer page,Integer limit) {
+        PageHelper.startPage(page,limit);
+
+        List<Enroll> allEnrolls = enrollDao.findAllEnrolls(sid);
+
+        return allEnrolls;
     }
 
 }

@@ -85,4 +85,22 @@ public class EnrollController {
 
         return map;
     }
+
+    @CrossOrigin
+    @RequestMapping("/enroll/findAllEnrolls.do")
+    @ResponseBody
+    public Map<String,Object> findAllEnrolls(Integer sid,Integer page,Integer limit) {
+        Map<String, Object> map = new HashMap<>();
+
+        List<Enroll> allEnrolls = enrollService.findAllEnrolls(sid,page, limit);
+
+        long total = ((Page) allEnrolls).getTotal();
+
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",total);
+        map.put("data",allEnrolls);
+
+        return map;
+    }
 }

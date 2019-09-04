@@ -47,6 +47,11 @@
         select * from enroll where uid = #{uid}
     </select>
 
+    <!--老师查看所有报名信息-->
+    <select id="findAllEnrolls" parameterType="int" resultMap="enrollMap">
+        select * from enroll where subjectId = #{sid}
+    </select>
+
 
 
 </mapper>
