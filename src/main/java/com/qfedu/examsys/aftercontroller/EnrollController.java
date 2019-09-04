@@ -90,6 +90,13 @@ public class EnrollController {
         return map;
     }
 
+    /**
+     * 查询某学科的所有报名信息
+     * @param sid  学科id
+     * @param page
+     * @param limit
+     * @return  map
+     */
     @CrossOrigin
     @RequestMapping("/enroll/findAllEnrolls.do")
     @ResponseBody
