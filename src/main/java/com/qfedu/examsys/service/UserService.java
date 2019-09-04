@@ -53,4 +53,14 @@ public interface UserService {
      */
     public User signInByTelephoneNumber(String telephoneNumber);
 
+    /**
+     *          通过手机号码重置密码
+     *
+     * @Author  imlee
+     * @param password          新密码
+     * @param telephoneNumber   手机号码
+     * @return
+     */
+    public int resetPassword(String password, String telephoneNumber);
+
 }

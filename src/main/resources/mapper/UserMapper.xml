@@ -154,4 +154,9 @@
     select * from user where phone = #{telephoneNumber}
   </select>
 
+<!--  通过手机号码重置密码  by: imlee -->
+  <update id="resetPassword" parameterType="list">
+    update user set password = #{password} where phone = #{telephoneNumber}
+  </update>
+
 </mapper>

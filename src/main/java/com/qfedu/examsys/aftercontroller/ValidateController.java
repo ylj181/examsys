@@ -47,7 +47,7 @@ public class ValidateController {
         }
 
         //  判断用户填写的手机号码是否合法
-        if (!telephoneNumber.matches("^1(([358]\\d)|66|77|99)\\d{8}$")) {
+        if (!telephoneNumber.matches("^1(([358]\\d)|66|76|77|99)\\d{8}$")) {
             //  手机号码不合法，返回失败提示
             return new JsonResult(0, "手机号码不合法，请重新输入！");
         }
@@ -68,6 +68,32 @@ public class ValidateController {
         redisTemplate.expire(telephoneNumber, 300, TimeUnit.SECONDS);
 
         return new JsonResult(1, "发送成功，请查收！");
+    }
+
+    /**
+     *          注册账号时，在用户输入用户名之后，输入框失去焦点后立即查询数据库中是否存在此用户名
+     *
+     * @Author imlee
+     * @param username
+     * @return      返回查询结果、提示信息
+     */
+    @RequestMapping("/checkName.do")
+    public JsonResult checkName(String username) {
+
+        User user = userService.login(username);
+        if (user == null) {
+
+            if (username.matches("^[1-9a-zA-Z]{3,12}$")) {
+
+                return new JsonResult(1, "用户名可以使用！");
+            } else {
+
+                return new JsonResult(0, "用户名不合法！");
+            }
+
+        }
+
+        return new JsonResult(0, "用户名已存在！");
     }
 
     /**
@@ -237,6 +263,75 @@ public class ValidateController {
 
         //  登录成功，返回 user 对象
         return new JsonResult(1, user);
+    }
+
+    /**
+     *          重置密码：第一步，查询手机号码是否存在
+     *
+     * @Author  imlee
+     * @param telephoneNumber   手机号码
+     * @param telephoneCode     短信验证码
+     * @return
+     */
+    @RequestMapping("/resetPasswordFirst.do")
+    public JsonResult resetPasswordFirst(String telephoneNumber, String telephoneCode) {
+
+
+        User user = userService.signInByTelephoneNumber(telephoneNumber);
+        if (user == null) {
+            return new JsonResult(0, "此号码未注册,请核对是否输入有误！");
+        }
+
+        //  按照 手机号码 + 短信验证码 重置密码
+        //      获取 保存在 redis 中的短信验证码
+        String code = redisTemplate.opsForValue().get(telephoneNumber);
+
+        //  判断短信验证码是否过期
+        if (code == null || code.equals("")) {
+
+            return new JsonResult(0, "验证码已过期，请重新获取！");
+
+        } else {
+            //  验证 用户输入的验证码和redis中保存的验证码是否一致
+            if (!telephoneCode.equals(code)) {
+                return new JsonResult(0, "验证码输入有误，请重新输入！");
+            }
+        }
+
+        return new JsonResult(1, telephoneNumber);
+    }
+
+    /**
+     *          重置密码：第二步，修改密码
+     *
+     * @Author imlee
+     * @param password          新密码
+     * @param validate          验证码
+     * @param telephoneNumber   手机号码
+     * @return
+     */
+    @RequestMapping("/resetPassword.do")
+    public JsonResult resetPassword(String password, String validate, String telephoneNumber) {
+
+        //  获取 redis 中保存的验证码文字
+        String codeStr = redisTemplate.opsForValue().get("codeStr");
+
+        //  首先验证 验证码（忽略大小写）
+        if (validate.equalsIgnoreCase(codeStr)) {
+
+            //  执行重置密码逻辑
+            int i = userService.resetPassword(password, telephoneNumber);
+
+            if (i != 1) {
+                return new JsonResult(0, "重置失败！");
+            }
+
+        } else {
+            //  验证码错误，返回提示
+            return new JsonResult(0, "验证码输入有误，请重新输入！");
+        }
+
+        return new JsonResult(1, "重置成功！");
     }
 
 }

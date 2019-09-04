@@ -73,4 +73,9 @@ public class UserServiceImpl implements UserService {
         return userDao.signInByTelephoneNumber(telephoneNumber);
     }
 
+    @Override
+    public int resetPassword(String password, String telephoneNumber) {
+        return userDao.resetPassword(password, telephoneNumber);
+    }
+
 }
