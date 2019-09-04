@@ -24,7 +24,6 @@ import java.util.List;
 @Component
 public class WriteReadJson {
 
-
     @Autowired(required = false)
     private ETestDao eTestDao;
 
