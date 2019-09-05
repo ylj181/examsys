@@ -136,6 +136,17 @@
     on et.eid = e.id
     INNER JOIN user u
     ON a.uid = u.id
-    where e.id = #{eid} and u.id = #{uid}
+    where e.id = #{eid} and u.id = #{uid} and status = 1
   </select>
+
+<!--    通过 试卷ID 查询所有未批改的答题信息    by: imlee   -->
+    <select id="findAnswerListByETid" parameterType="int" resultType="answer">
+        select * from answer where eTid = #{eTid} and status = 0
+    </select>
+
+<!--    阅卷后修改用户的成绩  by: imlee   -->
+    <update id="giveScore" parameterType="list">
+        update answer set score = score + #{score}, status = 1 where eTid = #{eTid} and uid = #{uid}
+    </update>
+
 </mapper>

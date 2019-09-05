@@ -21,4 +21,21 @@ public interface ETestDao {
 
     //通过考场id  查询试卷 eTest
     ETest findByeid(Integer eid);
+
+    /**
+     * @Author imlee
+     * @param eid
+     * @return
+     */
+    public Integer findETestIdByEid(int eid);
+
+    /**
+     *          阅卷完成，修改试卷状态
+     *
+     * @Author  imlee
+     * @param eTid  试卷ID
+     * @return      受影响的行数
+     */
+    public Integer changeStatus(Integer eTid);
+
 }

@@ -47,4 +47,14 @@ public class ETestServiceImpl implements ETestService {
         return 0;
     }
 
+    @Override
+    public Integer findETestIdByEid(int eid) {
+        return eTestDao.findETestIdByEid(eid);
+    }
+
+    @Override
+    public Integer changeStatus(Integer eTid) {
+        return eTestDao.changeStatus(eTid);
+    }
+
 }

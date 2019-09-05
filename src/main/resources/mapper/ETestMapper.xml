@@ -118,4 +118,15 @@
   <select id="findByeid" parameterType="int" resultMap="BaseResultMap">
     select * from examsys.eTest where eid =#{eid}
   </select>
+
+<!--  通过考试id查询eTest的id  by: imlee -->
+  <select id="findETestIdByEid" parameterType="int" resultType="int">
+    select id from eTest where eid = #{eid}
+  </select>
+
+<!--  阅卷完成，修改试卷状态 by: imlee   -->
+  <update id="changeStatus" parameterType="int">
+    update eTest set status = 1 where id = #{eTid}
+  </update>
+
 </mapper>

@@ -6,6 +6,8 @@ import com.qfedu.examsys.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AnswerServiceImpl implements AnswerService {
 
@@ -22,5 +24,15 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Answer selectAnswerByExamIdAndUserId(Integer eid,Integer uid) {
         return answerDao.selectAnswerByExamIdAndUserId(eid,uid);
+    }
+
+    @Override
+    public List<Answer> findAnswerListByETid(Integer eTid) {
+        return answerDao.findAnswerListByETid(eTid);
+    }
+
+    @Override
+    public Integer giveScore(Integer eTid, Integer uid, Integer score) {
+        return answerDao.giveScore(eTid, uid, score);
     }
 }
