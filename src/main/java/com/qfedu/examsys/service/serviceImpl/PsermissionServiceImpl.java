@@ -29,4 +29,27 @@ public class PsermissionServiceImpl implements PermissionService {
         return permissionDao.findByIdPermission2( parentId );
 
     }
+
+    @Override
+    public void updatePerTea(Permission permission) {
+         permissionDao.updatePerTea(permission);
+
+    }
+
+    @Override
+    public void updatePerStu(Permission permission) {
+        permissionDao.updatePerStu(permission);
+    }
+
+    @Override
+    public void deletePer(Permission permission) {
+        permissionDao.deletePer(permission);
+    }
+
+    @Override
+    public List<Permission> findPerZero(Permission permission) {
+        List<Permission> perZero = permissionDao.findPerZero(permission);
+
+        return perZero;
+    }
 }

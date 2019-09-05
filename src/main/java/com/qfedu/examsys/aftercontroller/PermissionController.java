@@ -36,4 +36,39 @@ public class PermissionController {
         List<Permission> permissionList = permissionService.findByIdPermission2( parentId );
         return new JsonResult( 1,permissionList );
     }
+
+
+//    <!--    修改权限为教师所属-->
+    @RequestMapping("/updatePerTea.do")
+    @ResponseBody
+    public JsonResult updatePerTea(Permission permission) {
+        permissionService.updatePerTea(permission);
+        return new JsonResult(1, null);
+    }
+
+//    <!--    修改权限为学生所属-->
+    @RequestMapping("/updatePerStu.do")
+    @ResponseBody
+    public JsonResult updatePerStu(Permission permission) {
+        permissionService.updatePerStu(permission);
+        return new JsonResult(1, null);
+    }
+
+//     <!-- 修改 （删除）其权限( 隐藏为0不展示) -->
+    @RequestMapping("/deletePer.do")
+    @ResponseBody
+    public JsonResult deletePer(Permission permission) {
+        permissionService.deletePer(permission);
+        return new JsonResult(1, null);
+    }
+
+//    <!--    查看parentId为0的 功能 为添加准备-->
+    @RequestMapping("/findPerZero.do")
+    @ResponseBody
+    public JsonResult findPerZero(Permission permission) {
+        List<Permission> perZero = permissionService.findPerZero(permission);
+        return new JsonResult(1, perZero);
+    }
+
+
 }
