@@ -18,6 +18,10 @@ public interface PermissionDao {
 
     int updateByPrimaryKey(Permission record);
 
+    Permission findByIdPermission(Integer id);
+
+    List<Permission> findByIdPermission2(Integer parentId);
+
     List<Permission> findAlls(Permission permission);
 
 }

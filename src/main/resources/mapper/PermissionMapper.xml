@@ -56,6 +56,15 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="findByIdPermission" parameterType="int" resultType="com.qfedu.examsys.pojo.Permission">
+    select * from examsys.permission where id = #{id};
+  </select>
+
+  <select id="findByIdPermission2" parameterType="int" resultType="com.qfedu.examsys.pojo.Permission">
+    select * from examsys.permission where parentId = #{parentId};
+  </select>
+
+
   <select id="findAlls"  resultType="permission" parameterType="int">
     select * from permission
   </select>
