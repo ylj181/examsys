@@ -141,6 +141,8 @@ public class AnswerUtils {
 
         answer.setScore(count);
         answer.setShorts(shortAnswer);
+        answer.setUid(uid);
+        answer.setEtid(eTid);
 
         answerDao.insertSelective(answer);
 

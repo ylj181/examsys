@@ -61,13 +61,17 @@ public class TestPaperController {
     @CrossOrigin
     @RequestMapping("/getExamMapper.do")
     @ResponseBody
-    public JsonResult getPaperTest(Exam exam,String eTestName,Integer uid) throws IOException {
+    // eId
+    // sId
+    //eName
+    public JsonResult getPaperTest(Integer eId,Integer sId,String eName,Integer uid) throws IOException {
 
         JsonResult jsonResult = new JsonResult();
 
         //试题存在 则返回已经存在的试题
-        exam.setId(5);
-        exam.setSubjectid(1);
+        Exam exam = new Exam();
+        exam.setId(eId);
+        exam.setSubjectid(sId);
 
         ETest byeid = eTestDao.findByeid(exam.getId());
 
@@ -98,7 +102,7 @@ public class TestPaperController {
 
         }
 
-        JsonResult studentExamMapper = testPaperService.getStudentExamMapper(exam, eTestName);
+        JsonResult studentExamMapper = testPaperService.getStudentExamMapper(exam, eName);
 
         return studentExamMapper;
     }
@@ -168,7 +172,8 @@ public class TestPaperController {
     @ResponseBody
     @CrossOrigin
     @RequestMapping("/saveTestAnswer.do")
-    public JsonResult saveTestAnswer(String TestAnswer,Integer testTypeId,Integer uid){
+   // public JsonResult saveTestAnswer(String TestAnswer,Integer testTypeId,Integer uid){
+    public JsonResult saveTestAnswer(String TestAnswer,Integer testTypeId,Integer uId){
 
         JsonResult jsonResult = new JsonResult();
 
@@ -194,7 +199,7 @@ public class TestPaperController {
 
 
         //开始保存试题答案  提供TestAnswer字符串
-        Answer answer = answerUtils.savaAnswer(TestAnswer, null, uid, null, alleTestByTId);
+        Answer answer = answerUtils.savaAnswer(TestAnswer, null, uId, null, alleTestByTId);
 
         jsonResult.setCode(1);
         jsonResult.setInfo(answer.getScore());
@@ -209,22 +214,22 @@ public class TestPaperController {
      *
      * @param TestAnswer 单选值 字符串格式 以‘-’间隔
      * @param shortAnswer  简答题 字符串格式 以‘-’间隔
-     * @param uid 用户id
-     * @param eTid 考场id
+     * @param uId 用户id
+     * @param eId 考场id
      * @return
      */
     @CrossOrigin
     @ResponseBody
     @RequestMapping("/saveExamAnswer.do")
-    public JsonResult saveExamAnswer(String TestAnswer,String shortAnswer,Integer uid,Integer eTid){
+    public JsonResult saveExamAnswer(String TestAnswer,String shortAnswer,Integer uId,Integer eId){
 
-        ETest byeid = eTestDao.findByeid(5);
+        ETest byeid = eTestDao.findByeid(eId);
 
         ArrayList<ETest> eTests = new ArrayList<>();
 
         eTests.add(byeid);
 
-        answerUtils.savaAnswer(TestAnswer,shortAnswer,uid,eTid,eTests);
+        answerUtils.savaAnswer(TestAnswer,shortAnswer,uId,eId,eTests);
 
         JsonResult jsonResult = new JsonResult();
 
@@ -260,10 +265,7 @@ public class TestPaperController {
             jsonResult.setCode(1);
 
         }
-
         return jsonResult;
-
-
     }
 
 }
