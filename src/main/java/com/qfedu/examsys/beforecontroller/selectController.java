@@ -38,8 +38,8 @@ public class selectController {
 
     @RequestMapping("/ListAnythingRadios.do")
     @ResponseBody
-    public Map<String, Object> findAllRadios(Integer page, Integer limit) {
-        List<Radio> radioList = radioService.findAnythingRadios(page, limit);
+    public Map<String, Object> findAllRadios(String name,Integer page, Integer limit) {
+        List<Radio> radioList = radioService.findAnythingRadios(name,page, limit);
 
         long total = ((Page) radioList).getTotal();
         Map<String, Object> map = new HashMap<>();
@@ -77,8 +77,8 @@ public class selectController {
 
     @RequestMapping("/ListAnythingJudges.do")
     @ResponseBody
-    public Map<String, Object> findAllJudges(Integer page, Integer limit) {
-        List<Judge> judgeList = judgeService.findAnythingJudge(page, limit);
+    public Map<String, Object> findAllJudges(String name,Integer page, Integer limit) {
+        List<Judge> judgeList = judgeService.findAnythingJudge(name,page, limit);
 
         long total = ((Page) judgeList).getTotal();
         Map<String, Object> map = new HashMap<>();
@@ -116,8 +116,8 @@ public class selectController {
 
     @RequestMapping("/ListAnythingShortAnswer.do")
     @ResponseBody
-    public Map<String, Object> findAllShortAnswer(Integer page, Integer limit) {
-        List<ShortAnswer> shortAnswerList = shortAnswerService.findAnythingShortAnswer(page, limit);
+    public Map<String, Object> findAllShortAnswer(String name,Integer page, Integer limit) {
+        List<ShortAnswer> shortAnswerList = shortAnswerService.findAnythingShortAnswer(name,page, limit);
 
         long total = ((Page) shortAnswerList).getTotal();
         Map<String, Object> map = new HashMap<>();

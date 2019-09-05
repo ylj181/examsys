@@ -134,6 +134,14 @@
     select j.*, s.name
     from judge j
            inner join subject s on j.subjectId = s.id and j.recentType =0
+    <where>
+      <if test="name!=null">
+        name like "%${name}%"
+      </if>
+      <!--            <if test="typename==null">-->
+      <!--                and typename like "%1%"-->
+      <!--            </if>-->
+    </where>
   </select>
   <!--    录入 更改状态-->
   <select id="updateJudgeRecentType" parameterType="judge">

@@ -17,7 +17,7 @@ public interface JudgeService {
 
     Judge QueryJudgeById(Integer id);
     // 总题库
-    List<Judge> findAnythingJudge(Integer page, Integer limit);
+    List<Judge> findAnythingJudge(String name,Integer page, Integer limit);
 
     // 修改 录入
     void updateRecentType(Judge judge);

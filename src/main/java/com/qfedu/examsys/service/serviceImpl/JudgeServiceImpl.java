@@ -41,9 +41,9 @@ public class JudgeServiceImpl implements JudgeService {
     }
 
     @Override
-    public List<Judge> findAnythingJudge(Integer page, Integer limit) {
+    public List<Judge> findAnythingJudge(String name,Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        return judgeDao.findAnythingJudges();
+        return judgeDao.findAnythingJudges(name);
     }
 
     @Override

@@ -185,6 +185,14 @@
         select r.*, s.name
         from radio r
         inner join subject s on r.subjectId = s.id and r.recentType =0
+        <where>
+            <if test="name!=null">
+                name like "%${name}%"
+            </if>
+            <!--            <if test="typename==null">-->
+            <!--                and typename like "%1%"-->
+            <!--            </if>-->
+        </where>
     </select>
 <!--    录入 更改状态-->
     <select id="updateRecentType" parameterType="radio">

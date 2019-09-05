@@ -68,4 +68,6 @@
   <select id="findAlls"  resultType="permission" parameterType="int">
     select * from permission
   </select>
+
+
 </mapper>

@@ -32,7 +32,7 @@ public interface JudgeDao {
     // id 查
     Judge QueryJudgeById(Integer id);
     // 总题库
-    List<Judge> findAnythingJudges();
+    List<Judge> findAnythingJudges(@Param("name") String name);
 
     void updateJudgeRecentType(Judge judge);
     // 批量录入 修改

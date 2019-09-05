@@ -54,7 +54,7 @@
 </div>
 <table class="layui-hide" id="demo" lay-filter="test"></table>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改答案</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">查看详情</a>
 </script>
 <script>
     layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function () {
@@ -110,13 +110,11 @@
             } //开启分页
             , cols: [[ //表头
                  // {type: 'checkbox', fixed: 'left'},
-                // {field: 'id', title: '序号', width: 300,height:200, sort: true, fixed: 'left'},
-                // {field: 'title', title: '题目', width: 300,height:200, sort: true,fixed:'left'}
-                , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
-                , {field: 'name', title: '名字', width: 200, sort: true,templet:'#choiceATpl'}
-                , {field: 'radioJson', title: '选择题', width: 200,sort: true,templet:'#choiceBTpl'}
-                , {field: 'judgeJson', title: '判断题', width: 200, sort: true,templet:'#choiceCTpl'}
-                , {field: 'shortAnswerJson', title: '简答题', width: 200, sort: true,templet:'#choiceDTpl'}
+                {field: 'subject', title: '所属科目', width: 300,height:200, sort: true, fixed: 'left',templet:'<div>{{d.subject.name}}</div>'},
+                {field: 'name', title: '名字', width: 300,height:200, sort: true}
+               , {field: 'radiojson', title: '选择题', width: 200,sort: true}
+               , {field: 'judgejson', title: '判断题', width: 200, sort: true,templet:'#choiceCTpl'}
+               , {field: 'shortanswerjson', title: '简答题', width: 200, sort: true,templet:'#choiceDTpl'}
                 , {fixed: 'right', title:'操作',width: 100, align: 'center', toolbar: '#barDemo'}
 
             ]]
@@ -147,13 +145,12 @@
            if(layEvent === 'edit') {
                 // alert(data.findIndex(item=== 'id'));
                // alert(data.radioList.id)
-               alert(data.id);
                 //layer.msg('编辑操作');
                 layer.open({
                     type: 2 //此处以iframe举例
-                    , title: '修改试题'
+                    , title: '查看试卷'
                     , area: ['800px', '600px']
-                    , content: 'updateRadio.html?id=' +data.id
+                    , content: 'updateETest.html?id=' +data.id
 
                 })
             }

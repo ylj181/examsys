@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>修改选择题</title>
+    <style type="text/css">
+
+
+        h3 {
+            text-align: center;
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+</head>
+
+<body>
+<div>
+    <h3>选择题修改答案</h3>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">题目</label>
+            <div class="layui-input-block">
+                <input type="text" readonly="readonly" name="name" lay-verify="required|title" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属科目</label>
+            <div class="layui-input-block">
+                <select name="subjectid" id="subjectName" disabled="true">
+
+                    <option value=""></option></select>
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择题</label>
+            <div class="layui-input-block">
+                <textarea style="height: 250px;width: 500px;" type="text" readonly="readonly" name="radiojson" lay-verify="required|choiceA" autocomplete="off"
+                          class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">判断题</label>
+            <div class="layui-input-block">
+                <textarea style="height: 250px;width: 500px;" type="text" readonly="readonly" name="judgejson" lay-verify="required|choiceA" autocomplete="off"
+                          class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">简答题</label>
+            <div class="layui-input-block">
+                <textarea style="height: 250px;width: 500px;" type="text" readonly="readonly" name="shortAnswerjson" lay-verify="required|choiceA" autocomplete="off"
+                          class="layui-input"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+<!--                <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer
+            , form = layui.form;
+
+
+        $.ajax({
+            type: "get",
+            url: "queryAlleTests.do"+ window.location.search,   // el表达式,param el中内置对象，存储路径中提交的参数
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    //表单初始赋值
+                    form.val('example', data.info);
+                } else {
+                    alert(data.info);
+                }
+            }
+        });
+
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            // JSON.stringify 将js对象转为json格式的字符串
+            // data.field 表单中提交的数据
+//                    layer.alert(JSON.stringify(data.field), {
+//                        title: '最终的提交信息'
+//                    })
+            $.ajax({
+                type: "post",
+                url: "radios/updateAnswerOfRadios.do"+window.location.search,
+                data: data.field,
+                dataType: "json",
+                success: function (data) {  //{code:1,info:....}
+                    if (data.code == 1) {
+                        var t = parent.layui.table;
+                        t.reload('radioAll');// 重新加载页面,demo 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    } else {
+                        alert(data.info);
+                    }
+                }
+            })
+
+
+            // 阻止默认的提交
+            return false;
+        });
+
+        //layer.msg('Hello World');
+    });
+
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "radios/findSubjectName.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+                        var html = '<option value ="' + this.id + '">' + this.name + '</option>';
+                        $("#subjectName").append(html)
+                    })
+                } else {
+                    alert(data.info);
+                }
+            }
+        })
+    })
+
+</script>
+
+
+</body>
+
+</html>

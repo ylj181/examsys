@@ -1,6 +1,8 @@
 package com.qfedu.examsys.aftercontroller;
+import com.github.pagehelper.Page;
 import com.qfedu.examsys.dao.*;
 import com.qfedu.examsys.pojo.*;
+import com.qfedu.examsys.service.ETestService;
 import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.service.testTypeService;
 import com.qfedu.examsys.utils.AnswerUtils;
@@ -49,6 +51,9 @@ public class TestPaperController {
 
     @Autowired(required = false)
     private JudgeDao judgeDao;
+
+    @Autowired
+    private ETestService eTestService;
 
     @Autowired(required = false)
     private EnrollDao enrollDao;
@@ -271,5 +276,27 @@ public class TestPaperController {
         }
         return jsonResult;
     }
+
+    @RequestMapping("/listAllETest.do")
+    @ResponseBody
+    public Map<String, Object> findAllRadios(Integer page, Integer limit) {
+        List<ETest> eTestList = eTestService.findAlls(page, limit);
+
+        long total = ((Page) eTestList).getTotal();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0); // 结合layui的表格组件，0表示成功
+        map.put("msg", "");
+        map.put("count", total);// 表中总记录数
+        map.put("data", eTestList); // 获取到的分页数据
+
+        return map;
+    }
+
+    @RequestMapping("/queryAlleTests.do")
+    @ResponseBody
+    public JsonResult QueryById(Integer id) {
+        ETest eTest = eTestService.QueryById(id);
+        return new JsonResult(1, eTest); }
+
 
 }

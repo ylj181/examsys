@@ -38,10 +38,10 @@ public class RadioServiceImpl implements RadioService {
     }
 
     @Override
-    public List<Radio> findAnythingRadios(Integer page, Integer limit) {
+    public List<Radio> findAnythingRadios(String name,Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
 
-        List<Radio> anythingRadios = radioDao.findAnythingRadios();
+        List<Radio> anythingRadios = radioDao.findAnythingRadios(name);
         return anythingRadios;
     }
 

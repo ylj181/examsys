@@ -41,4 +41,7 @@ public interface ETestService {
      */
     public Integer changeStatus(Integer eTid);
 
+
+    ETest QueryById(Integer id);
+
 }

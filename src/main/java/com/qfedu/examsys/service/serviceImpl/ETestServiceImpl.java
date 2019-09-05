@@ -61,6 +61,11 @@ public class ETestServiceImpl implements ETestService {
     }
 
     @Override
+    public ETest QueryById(Integer id) {
+        return eTestDao.QueryById(id);
+    }
+
+    @Override
     public List<ETest> findAlls( Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
          return eTestDao.findAlls();

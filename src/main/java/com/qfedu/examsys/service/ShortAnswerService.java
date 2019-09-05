@@ -17,7 +17,7 @@ public interface ShortAnswerService {
     void updateShortAnswerAnswer(ShortAnswer shortAnswer);
 
     // 总题库
-    List<ShortAnswer> findAnythingShortAnswer(Integer page, Integer limit);
+    List<ShortAnswer> findAnythingShortAnswer(String name,Integer page, Integer limit);
 
     // 修改 录入
     void updateRecentType(ShortAnswer shortAnswer);

@@ -31,7 +31,7 @@ public interface RadioDao {
     //修改答案
     void updateAnswer(Radio radio);
     // 总题库
-    List<Radio> findAnythingRadios();
+    List<Radio> findAnythingRadios(@Param("name") String name);
 
     void updateRecentType(Radio radio);
     // 批量录入 修改

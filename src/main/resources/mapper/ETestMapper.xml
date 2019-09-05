@@ -147,4 +147,10 @@
     update eTest set status = 1 where id = #{eTid}
   </update>
 
+  <select id="QueryById" parameterType="int" resultType="eTest">
+    select *
+    from eTest
+    where id = #{id}
+  </select>
+
 </mapper>

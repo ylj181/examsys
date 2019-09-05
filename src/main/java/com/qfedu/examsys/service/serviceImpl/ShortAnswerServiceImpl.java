@@ -49,9 +49,9 @@ public class ShortAnswerServiceImpl implements ShortAnswerService {
 
 
     @Override
-    public List<ShortAnswer> findAnythingShortAnswer(Integer page, Integer limit) {
+    public List<ShortAnswer> findAnythingShortAnswer(String name,Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-        return shortAnswerDao.findAnythingShortAnswer();
+        return shortAnswerDao.findAnythingShortAnswer(name);
     }
 
     @Override

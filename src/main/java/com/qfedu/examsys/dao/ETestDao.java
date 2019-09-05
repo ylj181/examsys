@@ -43,4 +43,6 @@ public interface ETestDao {
 
 
     List<ETest> findAlls();
+    // 根据id查
+    ETest QueryById(Integer id);
 }

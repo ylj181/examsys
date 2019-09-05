@@ -35,7 +35,7 @@ public interface ShortAnswerDao {
     void updateShortAnswerAnswer(ShortAnswer shortAnswer);
 
     // 总题库
-    List<ShortAnswer> findAnythingShortAnswer();
+    List<ShortAnswer> findAnythingShortAnswer(@Param("name") String name);
 
     void updateShortAnswerRecentType(ShortAnswer shortAnswer);
     // 批量录入 修改
