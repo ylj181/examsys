@@ -14,6 +14,8 @@ public class Exam {
 
     private Subject subject;
 
+    private ETest eTest;
+
     public Integer getId() {
         return id;
     }
@@ -52,5 +54,13 @@ public class Exam {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public ETest geteTest() {
+        return eTest;
+    }
+
+    public void seteTest(ETest eTest) {
+        this.eTest = eTest;
     }
 }
