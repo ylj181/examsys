@@ -28,7 +28,7 @@ public class AnswerUtils {
     @Autowired
     private WriteReadJson writeReadJson;
 
-    public Answer savaAnswer(String answerInfo, String shortAnswer,Integer uid , Integer eTid, List<ETest> eTestList){
+    public Answer savaAnswer(String answerInfo, String shortAnswer,Integer uId , Integer eTid, List<ETest> eTestList){
 
         //  S 1- 234 &
 
@@ -62,7 +62,7 @@ public class AnswerUtils {
         answer.setJudges(judges);
         answer.setRadios(radios);
        /* answer.setShorts(shorts);*/
-        answer.setUid(uid);
+        answer.setUid(uId);
 
         //总分
         Integer count =0;
@@ -141,7 +141,7 @@ public class AnswerUtils {
 
         answer.setScore(count);
         answer.setShorts(shortAnswer);
-        answer.setUid(uid);
+        answer.setUid(uId);
         answer.setEtid(eTid);
 
         answerDao.insertSelective(answer);

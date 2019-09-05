@@ -54,8 +54,6 @@ public class TestPaperController {
     private EnrollDao enrollDao;
 
 
-
-
     //试卷信息生成 并保存到eTest  需要管理员开启exam 考场 Exam exam  设置考卷名称
     //正常code 为1 返回etest对象
     @CrossOrigin
@@ -64,7 +62,8 @@ public class TestPaperController {
     // eId
     // sId
     //eName
-    public JsonResult getPaperTest(Integer eId,Integer sId,String eName,Integer uid) throws IOException {
+    ////127.0.0.1:8020/examsys/ExamMapper.html?eId=5&sId=1&eName=测试&uId=1
+    public JsonResult getPaperTest(Integer eId,Integer sId,String eName,Integer uId) throws IOException {
 
         JsonResult jsonResult = new JsonResult();
 
@@ -78,7 +77,7 @@ public class TestPaperController {
         //判断用户是否报名了该场考试
 
         boolean flag =false;
-        List<Enroll> allEnroll = enrollDao.findAllEnroll(uid);
+        List<Enroll> allEnroll = enrollDao.findAllEnroll(uId);
         for (Enroll enroll : allEnroll) {
             if(enroll.getEid()==byeid.getEid()){
                 flag=true;
@@ -223,18 +222,19 @@ public class TestPaperController {
     @RequestMapping("/saveExamAnswer.do")
     public JsonResult saveExamAnswer(String TestAnswer,String shortAnswer,Integer uId,Integer eId){
 
+
         ETest byeid = eTestDao.findByeid(eId);
 
         ArrayList<ETest> eTests = new ArrayList<>();
 
         eTests.add(byeid);
 
-        answerUtils.savaAnswer(TestAnswer,shortAnswer,uId,eId,eTests);
+        answerUtils.savaAnswer(TestAnswer,shortAnswer,uId,byeid.getId(),eTests);
 
         JsonResult jsonResult = new JsonResult();
 
         jsonResult.setCode(1);
-        jsonResult.setInfo("提交完毕");
+        jsonResult.setInfo("考试提交完毕");
         return jsonResult;
 
     }
