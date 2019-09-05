@@ -2,6 +2,8 @@ package com.qfedu.examsys.service;
 
 import com.qfedu.examsys.pojo.ETest;
 
+import java.util.List;
+
 /**
  * @Author Lei
  * @Date 2019-8-30 21:31
@@ -26,6 +28,9 @@ public interface ETestService {
      * @return
      */
     public Integer findETestIdByEid(int eid);
+    List<ETest> findAlls(Integer page, Integer limit);
+
+
 
     /**
      *          阅卷完成，修改试卷状态

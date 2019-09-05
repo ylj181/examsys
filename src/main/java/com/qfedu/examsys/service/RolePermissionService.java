@@ -13,5 +13,6 @@ public interface RolePermissionService {
 
     public List<Permission> findPermission2(Integer rid);
 
+    public List<Permission> findAlls(Permission permission);
 
 }

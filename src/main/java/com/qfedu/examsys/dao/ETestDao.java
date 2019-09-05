@@ -3,6 +3,8 @@ package com.qfedu.examsys.dao;
 import com.qfedu.examsys.pojo.ETest;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 public interface ETestDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -38,4 +40,7 @@ public interface ETestDao {
      */
     public Integer changeStatus(Integer eTid);
 
+
+
+    List<ETest> findAlls();
 }

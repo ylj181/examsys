@@ -119,6 +119,24 @@
     select * from examsys.eTest where eid =#{eid}
   </select>
 
+  <resultMap id="eTestMap" type="eTest">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="subjectId" property="subjectid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="judgeJson" property="judgejson" jdbcType="VARCHAR" />
+    <result column="radioJson" property="radiojson" jdbcType="VARCHAR" />
+    <result column="shortAnswerJson" property="shortanswerjson" jdbcType="VARCHAR" />
+    <association property="subject" resultMap="com.qfedu.examsys.dao.SubjectDao.subjectMapTwo">
+
+    </association>
+  </resultMap>
+  <select id="findAlls" parameterType="int" resultMap="eTestMap">
+    select e.*, s.name as sname,s.id as sid
+    from eTest e
+    inner join subject s on e.subjectId = s.id
+  </select>
+
 <!--  通过考试id查询eTest的id  by: imlee -->
   <select id="findETestIdByEid" parameterType="int" resultType="int">
     select id from eTest where eid = #{eid}

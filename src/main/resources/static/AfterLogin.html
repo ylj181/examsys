@@ -72,7 +72,7 @@
         </style>
     </head>
     <body>
-        <img src="layui/images/T2@)33IMLI@R2UG9EO7OD4U.png" id="bg">
+        <img src="layui/images/back1.png" id="bg">
         <form class="layui-form" action="" method="post" onsubmit="return false;">
             <div class="container">
 
@@ -151,7 +151,8 @@
                         dataType:"json",
                         success:function(data){
                             if(data.code == 1){
-                                localStorage.setItem("user",data.info);
+                                localStorage.setItem("user",JSON.stringify(data.info));
+                                var c = localStorage.getItem("user");
                                 window.location.href = "main.html";
                             } else {
                                 alert(data.info)

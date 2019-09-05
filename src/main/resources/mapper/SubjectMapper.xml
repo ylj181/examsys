@@ -61,6 +61,12 @@
     <id column="id" property="id"></id>
     <result column="name" property="name"></result>
   </resultMap>
+
+<!--  映射etest-->
+  <resultMap id="subjectMapTwo" type="subject">
+    <id column="sid" property="id"></id>
+    <result column="sname" property="name"></result>
+  </resultMap>
   <select id="findAllSubjects" resultMap="subjectMapOne">
     select *
     from subject

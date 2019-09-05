@@ -15,6 +15,16 @@ public class ETest {
 
     private String shortanswerjson;
 
+    private Subject subject;
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public Integer getId() {
         return id;
     }

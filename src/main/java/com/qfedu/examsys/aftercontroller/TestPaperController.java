@@ -1,9 +1,11 @@
 package com.qfedu.examsys.aftercontroller;
+import com.github.pagehelper.Page;
 import com.qfedu.examsys.dao.ETestDao;
 import com.qfedu.examsys.dao.JudgeDao;
 import com.qfedu.examsys.dao.RadioDao;
 import com.qfedu.examsys.dao.TestTypeDao;
 import com.qfedu.examsys.pojo.*;
+import com.qfedu.examsys.service.ETestService;
 import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.service.testTypeService;
 import com.qfedu.examsys.utils.AnswerUtils;
@@ -15,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author Lei
@@ -54,6 +54,9 @@ public class TestPaperController {
 
     @Autowired(required = false)
     private JudgeDao judgeDao;
+
+    @Autowired
+    private ETestService eTestService;
 
 
     //试卷信息生成 并保存到eTest  需要管理员开启exam 考场 Exam exam  设置考卷名称
@@ -247,5 +250,19 @@ public class TestPaperController {
 
 
     }
+
+    @RequestMapping("/listAllETest.do")
+    @ResponseBody
+    public Map<String, Object> findAllRadios(Integer page, Integer limit) {
+        List<ETest> eTestList = eTestService.findAlls(page, limit);
+        long total = ((Page) eTestList).getTotal();
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0); // 结合layui的表格组件，0表示成功
+        map.put("msg", "");
+        map.put("count", total);// 表中总记录数
+        map.put("data", eTestList); // 获取到的分页数据
+
+        return map;
+}
 
 }

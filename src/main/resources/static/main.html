@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>在线考试系统</title>
+		<title>考试后台管理</title>
 
 
 		<link rel="stylesheet" href="layui/css/layui.css" />
@@ -16,30 +16,26 @@
         .signOut {
           cursor: pointer;
         }
-				
-
       </style>
 	</head>
-	<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-  <div class="layui-header">
-    <div class="layui-logo">在线考试系统</div>
+	<body class="layui-layout-body ">
+<div class="layui-layout layui-layout-admin ">
+  <div class="layui-header layui-bg-cyan">
+    <div class="layui-logo">考试后台管理</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
-    <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="exam.html" target="myframe">在线考试</a></li>
-      <li class="layui-nav-item"><a href="zguce.html" target="myframe">注册</a></li>
-      <li class="layui-nav-item"><a href="login.html" target="myframe">登录</a></li>
-      <li class="layui-nav-item"><a href="subjects.html" target="myframe">xxxx</a></li>
-<!--      <li class="layui-nav-item">-->
-<!--        <a href="javascript:;">其它系统</a>-->
-<!--        <dl class="layui-nav-child">-->
-<!--          <dd><a href="">邮件管理</a></dd>-->
-<!--          <dd><a href="">消息管理</a></dd>-->
-<!--          <dd><a href="">授权管理</a></dd>-->
-<!--        </dl>-->
-<!--      </li>-->
+    <ul class="layui-nav layui-layout-left ">
+      <li class="layui-nav-item"><a href="">首页</a></li>
+      <li class="layui-nav-item"><a href="">用户管理</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="http://1.xiehou.applinzi.com/dist/index.html#/login">邂逅之恋</a></dd>
+          <dd><a href="">爱学习视频管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
     </ul>
-    <ul class="layui-nav layui-layout-right">
+    <ul class="layui-nav layui-layout-right ">
       <li class="layui-nav-item">
         <a href="javascript:;">
           <a>
@@ -57,10 +53,10 @@
     </ul>
   </div>
   
-  <div class="layui-side layui-bg-black">
-    <div class="layui-side-scroll">
+  <div class="layui-side layui-bg-black ">
+    <div class="layui-side-scroll layui-bg-cyan">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul id="menu" class="layui-nav layui-nav-tree"  lay-filter="test">
+      <ul id="menu" class="layui-nav layui-nav-tree layui-bg-cyan"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed"  >
           <a id="test2"></a>
           <dl class="layui-nav-child"  id="test1" >
@@ -88,7 +84,8 @@
 
 layui.use('element', function(){
   var element = layui.element;
-	var aaa = localStorage.getItem("user");
+	var json = localStorage.getItem("user");
+	var aaa = JSON.parse(json);
 	//var id = aaa.id;
 
 if(aaa != null){
@@ -149,7 +146,7 @@ if(aaa != null){
 				
 						localStorage.removeItem("user");
 						alert(data.info);
-						window.location.href = "main.html"
+						window.location.href = "AfterLogin.html"
 				}	
 			})
 			
@@ -177,7 +174,7 @@ if(aaa != null){
   }
 
 });
-
+myframe.location.href = "back.html"
 </script>
 
 </body>

@@ -25,7 +25,7 @@ layui.define(['layer', 'table'], function (exports) {
             var doneCallback = param.done;
             var tNodes = data;
             // 补上id和pid字段
-            for (var i = 0; i < tNodes.sizes; i++) {
+            for (var i = 0; i < tNodes.length; i++) {
                 var tt = tNodes[i];
                 if (!tt.id) {
                     if (!param.treeIdName) {

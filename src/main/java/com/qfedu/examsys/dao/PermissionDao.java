@@ -3,6 +3,8 @@ package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.Permission;
 
+import java.util.List;
+
 public interface PermissionDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -15,4 +17,7 @@ public interface PermissionDao {
     int updateByPrimaryKeySelective(Permission record);
 
     int updateByPrimaryKey(Permission record);
+
+    List<Permission> findAlls(Permission permission);
+
 }

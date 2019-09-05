@@ -37,4 +37,11 @@ public class RolePermissionController {
         return new JsonResult( 1,permissionList2 );
     }
 
+    @RequestMapping("/findAlls.do")
+    @ResponseBody
+    public JsonResult findAlls(Permission permission){
+        List<Permission> alls = rolePermissionService.findAlls(permission);
+        return new JsonResult(1, alls);
+    }
+
 }

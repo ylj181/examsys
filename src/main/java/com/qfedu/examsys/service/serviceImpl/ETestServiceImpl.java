@@ -1,10 +1,13 @@
 package com.qfedu.examsys.service.serviceImpl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.ETestDao;
 import com.qfedu.examsys.pojo.ETest;
 import com.qfedu.examsys.service.ETestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author Lei
@@ -55,6 +58,12 @@ public class ETestServiceImpl implements ETestService {
     @Override
     public Integer changeStatus(Integer eTid) {
         return eTestDao.changeStatus(eTid);
+    }
+
+    @Override
+    public List<ETest> findAlls( Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+         return eTestDao.findAlls();
     }
 
 }
