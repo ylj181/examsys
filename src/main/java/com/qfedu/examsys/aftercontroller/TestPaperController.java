@@ -1,11 +1,6 @@
 package com.qfedu.examsys.aftercontroller;
-import com.github.pagehelper.Page;
-import com.qfedu.examsys.dao.ETestDao;
-import com.qfedu.examsys.dao.JudgeDao;
-import com.qfedu.examsys.dao.RadioDao;
-import com.qfedu.examsys.dao.TestTypeDao;
+import com.qfedu.examsys.dao.*;
 import com.qfedu.examsys.pojo.*;
-import com.qfedu.examsys.service.ETestService;
 import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.service.testTypeService;
 import com.qfedu.examsys.utils.AnswerUtils;
@@ -55,8 +50,10 @@ public class TestPaperController {
     @Autowired(required = false)
     private JudgeDao judgeDao;
 
-    @Autowired
-    private ETestService eTestService;
+    @Autowired(required = false)
+    private EnrollDao enrollDao;
+
+
 
 
     //试卷信息生成 并保存到eTest  需要管理员开启exam 考场 Exam exam  设置考卷名称
@@ -64,7 +61,9 @@ public class TestPaperController {
     @CrossOrigin
     @RequestMapping("/getExamMapper.do")
     @ResponseBody
-    public JsonResult getPaperTest(Exam exam,String eTestName) throws IOException {
+    public JsonResult getPaperTest(Exam exam,String eTestName,Integer uid) throws IOException {
+
+        JsonResult jsonResult = new JsonResult();
 
         //试题存在 则返回已经存在的试题
         exam.setId(5);
@@ -72,11 +71,26 @@ public class TestPaperController {
 
         ETest byeid = eTestDao.findByeid(exam.getId());
 
+        //判断用户是否报名了该场考试
+
+        boolean flag =false;
+        List<Enroll> allEnroll = enrollDao.findAllEnroll(uid);
+        for (Enroll enroll : allEnroll) {
+            if(enroll.getEid()==byeid.getEid()){
+                flag=true;
+            }
+        }
+
+        if(flag==false){
+         jsonResult.setCode(2);
+            jsonResult.setInfo("没有报名该场考试");
+            return jsonResult;
+
+        }
+
         if(byeid!=null){
 
             AllTestList objectAllTest = writeReadJson.getObjectAllTest(byeid.getRadiojson(), byeid.getJudgejson(), byeid.getShortanswerjson());
-
-            JsonResult jsonResult = new JsonResult();
 
             jsonResult.setInfo(objectAllTest);
             jsonResult.setCode(1);
@@ -140,7 +154,7 @@ public class TestPaperController {
         return allTestList;
     }
 
-    //获取测试试题选择信息 testType
+    //获取测试  试题选择信息 testType
     @CrossOrigin
     @ResponseBody
     @RequestMapping("/getTestTypeInfo.do")
@@ -161,7 +175,8 @@ public class TestPaperController {
         //用户生成的试题 判断单选题个数
         List<ETest> alleTestByTId = testTypeService.findAlleTestByTId(testTypeId);
 
-       TestType testType = testTypeService.selectByPrimaryKey(testTypeId);
+
+      /* TestType testType = testTypeService.selectByPrimaryKey(testTypeId);
         String p_qnums = testType.getP_qnums();
         String[] split1 = p_qnums.split(",");
         int count =0;
@@ -175,7 +190,7 @@ public class TestPaperController {
             jsonResult.setInfo("请添加完试题");
             jsonResult.setCode(-1);
             return jsonResult;
-        }
+        }*/
 
 
         //开始保存试题答案  提供TestAnswer字符串
@@ -250,19 +265,5 @@ public class TestPaperController {
 
 
     }
-
-    @RequestMapping("/listAllETest.do")
-    @ResponseBody
-    public Map<String, Object> findAllRadios(Integer page, Integer limit) {
-        List<ETest> eTestList = eTestService.findAlls(page, limit);
-        long total = ((Page) eTestList).getTotal();
-        Map<String, Object> map = new HashMap<>();
-        map.put("code", 0); // 结合layui的表格组件，0表示成功
-        map.put("msg", "");
-        map.put("count", total);// 表中总记录数
-        map.put("data", eTestList); // 获取到的分页数据
-
-        return map;
-}
 
 }
