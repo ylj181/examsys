@@ -74,36 +74,40 @@ public class TestPaperController {
 
         ETest byeid = eTestDao.findByeid(exam.getId());
 
-        //判断用户是否报名了该场考试
+
+        if(byeid==null){//没有就生成该考场的试卷
+            jsonResult  = testPaperService.getStudentExamMapper(exam, eName);
+
+            byeid=eTestDao.findByeid(exam.getId());
+        }
 
         boolean flag =false;
-        List<Enroll> allEnroll = enrollDao.findAllEnroll(uId);
-        for (Enroll enroll : allEnroll) {
-            if(enroll.getEid()==byeid.getEid()){
-                flag=true;
+        if(byeid!=null){
+            //判断用户是否报名了该场考试
+            List<Enroll> allEnroll = enrollDao.findAllEnroll(uId);
+            for (Enroll enroll : allEnroll) {
+                if(enroll.getEid()==byeid.getEid()){
+                    flag=true;
+                }
             }
         }
 
         if(flag==false){
-         jsonResult.setCode(2);
+            jsonResult.setCode(2);
             jsonResult.setInfo("没有报名该场考试");
             return jsonResult;
 
         }
 
-        if(byeid!=null){
+        if(byeid!=null){//有该考场的试卷就返回
 
             AllTestList objectAllTest = writeReadJson.getObjectAllTest(byeid.getRadiojson(), byeid.getJudgejson(), byeid.getShortanswerjson());
 
             jsonResult.setInfo(objectAllTest);
             jsonResult.setCode(1);
             return  jsonResult;
-
         }
-
-        JsonResult studentExamMapper = testPaperService.getStudentExamMapper(exam, eName);
-
-        return studentExamMapper;
+        return jsonResult;
     }
 
     //保存用户测试练习使用的测试题 随机生成  需要学科Id保存到TestType
