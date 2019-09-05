@@ -114,9 +114,8 @@
                 // {field: 'title', title: '题目', width: 300,height:200, sort: true,fixed:'left'}
                 , {field: 'subject', title: '所属科目', width: 100, templet: '<div>{{d.subject.name}}</div>'}
                 , {field: 'name', title: '名字', width: 200, sort: true,templet:'#choiceATpl'}
-                , {field: 'radioJson', title: '选择题', width: 200,sort: true,templet: function(d){
-            return d.radioJson[0]}},
-                 {field: 'judgeJson', title: '判断题', width: 200, sort: true,templet:'#choiceCTpl'}
+                , {field: 'radioJson', title: '选择题', width: 200,sort: true,templet:'#choiceBTpl'}
+                , {field: 'judgeJson', title: '判断题', width: 200, sort: true,templet:'#choiceCTpl'}
                 , {field: 'shortAnswerJson', title: '简答题', width: 200, sort: true,templet:'#choiceDTpl'}
                 , {fixed: 'right', title:'操作',width: 100, align: 'center', toolbar: '#barDemo'}
 
