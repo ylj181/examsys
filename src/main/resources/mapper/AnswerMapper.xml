@@ -136,7 +136,7 @@
     on et.eid = e.id
     INNER JOIN user u
     ON a.uid = u.id
-    where e.id = #{eid} and u.id = #{uid} and status = 1
+    where e.id = #{eid} and u.id = #{uid} and et.status = 1
   </select>
 
 <!--    通过 试卷ID 查询所有未批改的答题信息    by: imlee   -->

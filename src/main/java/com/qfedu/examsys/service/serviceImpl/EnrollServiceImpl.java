@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -69,6 +70,23 @@ public class EnrollServiceImpl implements EnrollService {
         List<Enroll> allEnrolls = enrollDao.findAllEnrolls(sid);
 
         return allEnrolls;
+    }
+
+    /**
+     * 根据用户Id、学科Id、报名时间查询报名信息
+     * @param uid  用户Id
+     * @param subjectId  学科Id
+     * @param createtime  报名时间
+     * @return  Enroll集合
+     */
+    @Override
+    public List<Enroll> findEnrollsByUidAndSubjectIdAndCreatetime(Integer uid, Integer subjectId, Date createtime,Integer page,Integer limit) {
+
+        PageHelper.startPage(page,limit);
+
+        List<Enroll> enrolls = enrollDao.findEnrollsByUidAndSubjectIdAndCreatetime(uid, subjectId, createtime);
+
+        return enrolls;
     }
 
 }

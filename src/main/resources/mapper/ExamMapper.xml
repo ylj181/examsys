@@ -90,4 +90,9 @@
     <select id="findExamById" parameterType="int" resultMap="BaseResultMap">
         select * from exam where id = #{id}
     </select>
+
+    <!--根据学科Id查询所有的考试信息-->
+    <select id="findExamsBySubjectId" parameterType="int" resultMap="BaseResultMap">
+        select * from exam where subjectId = #{subjectId}
+    </select>
 </mapper>

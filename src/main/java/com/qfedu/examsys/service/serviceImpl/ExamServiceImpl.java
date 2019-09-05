@@ -37,4 +37,19 @@ public class ExamServiceImpl implements ExamService {
 
         return exam;
     }
+
+    /**
+     * 根据学科Id查询所有的考试信息
+     * @param subjectId  学科Id
+     * @return  Exam对象集合
+     */
+    @Override
+    public List<Exam> findExamsBySubjectId(Integer subjectId,Integer page,Integer limit) {
+
+        PageHelper.startPage(page,limit);
+
+        List<Exam> exams = examDao.findExamsBySubjectId(subjectId);
+
+        return exams;
+    }
 }

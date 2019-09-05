@@ -24,4 +24,8 @@ public interface ExamDao {
     //根据考试表的Id查询对应的考试信息
     Exam findExamById(Integer id);
 
+    //根据学科Id查询所有的考试信息
+    List<Exam> findExamsBySubjectId(Integer subjectId);
+
+
 }

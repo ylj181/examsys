@@ -60,4 +60,22 @@ public class ExamController {
 
         return map;
     }
+
+    @CrossOrigin
+    @RequestMapping("/exam/findExamsBySubjectId.do")
+    @ResponseBody
+    public Map<String,Object> findExamsBySubjectId(Integer subjectId, Integer page,Integer limit){
+        Map<String, Object> map = new HashMap<>();
+
+        List<Exam> exams = examService.findExamsBySubjectId(subjectId, page, limit);
+
+        long total = ((Page) exams).getTotal();
+
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",total);
+        map.put("data",exams);
+
+        return map;
+    }
 }

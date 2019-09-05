@@ -2,6 +2,7 @@ package com.qfedu.examsys.service;
 
 import com.qfedu.examsys.pojo.Enroll;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EnrollService {
@@ -16,4 +17,7 @@ public interface EnrollService {
 
     //老师查看所有报名信息
     public List<Enroll> findAllEnrolls(Integer sid,Integer page,Integer limit);
+
+    //根据用户Id、学科Id、报名时间查询报名信息
+    public List<Enroll> findEnrollsByUidAndSubjectIdAndCreatetime(Integer uid, Integer subjectId, Date createtime,Integer page,Integer limit);
 }
