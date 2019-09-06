@@ -50,6 +50,9 @@ public class ImportController {
                 throw new RuntimeException("请选择文件");
 
             }
+            if (!filename.matches("^.+\\.(?i)(xls)$")){
+                return "redirect:/ListAnythingRadios.html";
+            }
             List<Map<String, Object>> list = ExcelUtils.readExcel(filename, inputStream);
 
             ObjectMapper objectMapper = new ObjectMapper();
@@ -93,6 +96,7 @@ public class ImportController {
         try {
             InputStream inputStream = upfile.getInputStream();
             String filename = upfile.getOriginalFilename();
+
             List<Map<String, Object>> list = ExcelUtils.readExcel(filename, inputStream);
 
             ObjectMapper objectMapper = new ObjectMapper();
