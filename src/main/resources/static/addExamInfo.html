@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title>添加考试信息</title>
+    <style type="text/css">
+
+
+    </style>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+</head>
+
+<body>
+<div>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">课程选择</label>
+            <div class="layui-input-inline">
+                <select id="test3" name="subjectid">
+                    <option value="">请选择课程</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-inline">
+                <input name="starttime" type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-inline">
+                <input name="endtime" type="text" class="layui-input" id="test6" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'laydate','form'], function () {
+
+        var layer = layui.layer
+            , form = layui.form,
+            laydate = layui.laydate;
+
+        //自定义验证规则
+        // form.verify({
+        //     time: [
+        //         /^[1-9]\d{0,5}$/
+        //         , '时长格式不对'
+        //     ]
+        //
+        // });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            // JSON.stringify 将js对象转为json格式的字符串
+            // data.field 表单中提交的数据
+//                    layer.alert(JSON.stringify(data.field), {
+//                        title: '最终的提交信息'
+//                    })
+            $.ajax({
+                type: "post",
+                url: "addExamInfo.do",
+                data: data.field,
+                dataType: "json",
+                success: function (data) {  //{code:1,info:....}
+                    if (data.code == 1) {
+                        var t = parent.layui.table;
+                        t.reload('examInfo');// 重新加载页面,demo 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    } else {
+                        alert(data.info);
+                    }
+                }
+            })
+
+
+            // 阻止默认的提交
+            return false;
+        });
+        laydate.render({
+            elem: '#test5'
+            ,type: 'datetime'
+        });
+        laydate.render({
+            elem: '#test6'
+            ,type: 'datetime'
+        });
+        //layer.msg('Hello World');
+    });
+
+
+    $(function () {
+        $.ajax({
+            type: "post",
+            url: "radios/findSubjectName.do",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 1) {
+                    var infos = data.info;
+                    $(infos).each(function () {
+                        var html = '<option value ="' + this.id + '">' + this.name + '</option>';
+                        $("#test3").append(html)
+                    })
+                } else {
+                    alert(data.info);
+                }
+            }
+        })
+    })
+
+</script>
+
+
+</body>
+
+</html>

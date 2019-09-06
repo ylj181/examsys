@@ -30,5 +30,7 @@ public interface ExamDao {
     //根据学科Id查询所有的考试信息
     List<Exam> findExamsBySubjectId2(Integer subjectId);
 
+    void addExamInfo(Exam exam);
+
 
 }

@@ -52,4 +52,9 @@ public class ExamServiceImpl implements ExamService {
 
         return exams;
     }
+
+    @Override
+    public void addExamInfo(Exam exam) {
+        examDao.addExamInfo(exam);
+    }
 }

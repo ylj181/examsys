@@ -6,12 +6,13 @@
         <result column="subjectId" property="subjectid" jdbcType="INTEGER"/>
         <result column="startTime" property="starttime" jdbcType="TIMESTAMP"/>
         <result column="endTime" property="endtime" jdbcType="TIMESTAMP"/>
-        <association property="subject" column="subjectId" select="com.qfedu.examsys.dao.SubjectDao.findBySubjectId"></association>
+        <association property="subject" column="subjectId"
+                     select="com.qfedu.examsys.dao.SubjectDao.findBySubjectId"></association>
         <association property="eTest" column="id" select="com.qfedu.examsys.dao.ETestDao.findByeid"></association>
     </resultMap>
     <sql id="Base_Column_List">
-    id, subjectId, startTime, endTime
-  </sql>
+        id, subjectId, startTime, endTime
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -19,15 +20,16 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from exam
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete
+        from exam
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="com.qfedu.examsys.pojo.Exam">
-    insert into exam (id, subjectId, startTime,
-                      endTime)
-    values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP},
-            #{endtime,jdbcType=TIMESTAMP})
-  </insert>
+        insert into exam (id, subjectId, startTime,
+                          endTime)
+        values (#{id,jdbcType=INTEGER}, #{subjectid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP},
+                #{endtime,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="com.qfedu.examsys.pojo.Exam">
         insert into exam
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -75,30 +77,43 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.qfedu.examsys.pojo.Exam">
-    update exam
-    set subjectId = #{subjectid,jdbcType=INTEGER},
-        startTime = #{starttime,jdbcType=TIMESTAMP},
-        endTime = #{endtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+        update exam
+        set subjectId = #{subjectid,jdbcType=INTEGER},
+            startTime = #{starttime,jdbcType=TIMESTAMP},
+            endTime   = #{endtime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 
     <!--查询所有的考试信息-->
     <select id="findAllExams" resultMap="BaseResultMap">
-        select * from exam
+        select *
+        from exam
     </select>
 
     <!--根据考试表的Id查询对应的考试信息-->
     <select id="findExamById" parameterType="int" resultMap="BaseResultMap">
-        select * from exam where id = #{id}
+        select *
+        from exam
+        where id = #{id}
     </select>
 
     <!--根据学科Id查询所有的考试信息-->
     <select id="findExamsBySubjectId" parameterType="int" resultMap="BaseResultMap">
-        select * from exam where subjectId = #{subjectId}
+        select *
+        from exam
+        where subjectId = #{subjectId}
     </select>
 
     <!--根据学科Id查询所有的考试信息-->
     <select id="findExamsBySubjectId2" parameterType="int" resultMap="BaseResultMap">
-        select * from exam where subjectId = #{subjectId}
+        select *
+        from exam
+        where subjectId = #{subjectId}
     </select>
+
+    <insert id="addExamInfo" parameterType="exam">
+        insert into examsys.exam(id, subjectId, startTime, endTime)
+        values (null,#{subjectId},#{startTime},#{endTime})
+
+    </insert>
 </mapper>

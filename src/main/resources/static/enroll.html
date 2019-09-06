@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考试报名</title>
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+	<script type="text/javascript" src="js/jquery.form.min.js"></script>
+	<script type="text/javascript" src="js/layer.js"></script>
+	<link rel="stylesheet" type="text/css" href="layui/css/font.css"/>
+	
+	<script>
+		// $.ajax({
+		// 	type:"get",
+		// 	url:"http://localhost:8080/examsys/subject/findAllSubject.do",
+		// 	dataType:"json",
+		// 	success:function(data){
+		// 		if(data.code == 1){
+		// 			var html = '<option value="">请选择学科</option>';
+		// 			$("#sid").append($(html))
+		// 			
+		// 			var infos = data.info;
+		// 			$(infos).each(function(){
+		// 				var html = '<option value="' + this.id + '">' + this.name + '</option>';
+		// 				$("#sid").append($(html))
+		// 			})
+		// 		}
+		// 	}
+		// })
+	</script>
+	
+</head>
+<body>
+	<div id="content">
+		<div class="layui-form searchDiv">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<div class="layui-input-block ys">
+						<select name="subjectId" id="sid" lay-filter="subject"></select>
+					</div>
+				</div>
+				<button type="button" class="layui-btn query" data-type="reload">查询</button>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="layui-form searchDiv">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<button type="button" class="layui-btn" onclick="add()">添加</button>
+			</div>
+		</div>
+	</div>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+	
+
+	
+<script>
+	$.ajax({
+		type:"get",
+		url:"http://localhost:8080/examsys/subject/findAllSubject.do",
+		dataType:"json",
+		success:function(data){
+			if(data.code == 1){
+				var html = '<option value="">请选择学科</option>';
+				$("#sid").append($(html))
+				
+				var infos = data.info;
+				$(infos).each(function(){
+					var html = '<option value="' + this.id + '">' + this.name + '</option>';
+					$("#sid").append($(html))
+				})
+			}
+		}
+	})
+	
+    layui.use(['table', 'layer','form', 'laydate','element', 'carousel','upload','laypage'], function () {
+        var table = layui.table
+			, laydate = layui.laydate
+			, element = layui.element
+            , layer = layui.layer
+			, laypage = layui.laypage
+            , form = layui.form;
+
+
+        table.render({
+            elem: '#test'
+			, id: "examInfo"
+            , url: 'http://localhost:8080/examsys/exam/findAllExams.do'
+            , title: '考试信息表'
+			// , id:'aa'
+            , cols: [[
+                  {field: 'id', title: '序号', width: 100, align: 'center'}
+                , {
+                    title: '学科', width: 200, templet: function (a) {
+                        return a.subject.name;
+                    }, align: 'center'
+                  }
+				,{
+					title: '考试名称', width: 200, templet: function (a) {
+						return a.eTest.name;
+				    }, align: 'center'
+				 }
+                , {field: 'starttime', title: '开始时间', width: 300, align: 'center'}
+                , {field: 'endtime', title: '结束时间', width: 300, align: 'center'}
+                , {field: 'right', width: 150, align: 'center', toolbar: '#barDemo'}
+            ]]
+            , page: true
+        });
+		
+		
+		var $ = layui.$,active = {
+			reload:function(){
+				
+				var subjectid = $("#sid").val()
+				
+				//执行重载
+				table.reload('test',{
+					url:"http://localhost:8080/examsys/exam/findExamsBySubjectId.do"
+					,page:{
+						curr:1
+					}
+					,where:{
+						subjectId:subjectid
+					}
+					
+				});
+			}
+		};
+		
+		$('.query').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+		
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            // var data = obj.data;
+			//
+			// var user = localStorage.getItem("user");
+			// var userJson = JSON.parse(user);
+			// var uid = userJson.id;
+			// var exam = localStorage.getItem()
+        });
+    });
+
+</script>
+	<script type="text/javascript">
+		function add() {
+			layer.open({
+				type: 2 //此处以iframe举例
+				, title: '添加员工'
+				, area: ['800px', '600px']
+				, content: 'addExamInfo.html'
+			})
+		}
+
+	</script>
+</body>
+</html>

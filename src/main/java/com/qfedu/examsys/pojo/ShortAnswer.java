@@ -16,6 +16,14 @@ public class ShortAnswer {
 
     private Integer recentType;
 
+    public Integer getRecentType() {
+        return recentType;
+    }
+
+    public void setRecentType(Integer recentType) {
+        this.recentType = recentType;
+    }
+
     public Subject getSubject() {
         return subject;
     }
