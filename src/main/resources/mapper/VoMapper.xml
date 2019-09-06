@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.examsys.dao.VoDao">
+    <select id="findBySidAndEtId" parameterType="map" resultType="vo">
+        SELECT u.username as username,s.name as subjectname,et.name as etname,a.score as score
+from answer a
+INNER JOIN user u
+on a.uid = u.id
+INNER JOIN eTest et
+on a.eTid = et.id
+INNER JOIN subject s
+on et.subjectid = s.id
+where et.subjectId = #{sid} and et.id = #{etid}
+    </select>
+</mapper>

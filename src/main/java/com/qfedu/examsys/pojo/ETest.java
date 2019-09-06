@@ -17,6 +17,8 @@ public class ETest {
 
     private Subject subject;
 
+    private Integer status;
+
     public Subject getSubject() {
         return subject;
     }
@@ -79,5 +81,13 @@ public class ETest {
 
     public void setShortanswerjson(String shortanswerjson) {
         this.shortanswerjson = shortanswerjson == null ? null : shortanswerjson.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

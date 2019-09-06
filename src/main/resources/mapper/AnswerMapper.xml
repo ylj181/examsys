@@ -149,4 +149,14 @@
         update answer set score = score + #{score}, status = 1 where eTid = #{eTid} and uid = #{uid}
     </update>
 
+    <!--根据uid和eTid查询信息-->
+    <select id="findOneByuidAndeTid" parameterType="map" resultType="answer">
+        select * from examsys.answer where eTid=#{eTid} and uid=#{uid};
+    </select>
+
+    <!--通过uid和eTid 修改字段radios-->
+    <update id="updateByuidAndeTid" parameterType="map">
+        update examsys.answer set radios = #{oneAnswerRadio} where eTid=#{eTid} and uid=#{uid};
+    </update>
+
 </mapper>

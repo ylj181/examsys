@@ -42,6 +42,9 @@ public interface ETestService {
      */
     public Integer changeStatus(Integer eTid);
 
+    //通过试卷的Id查询试卷状态信息
+    Integer findETestById(Integer id);
+
 
     ETest QueryById(Integer id);
 

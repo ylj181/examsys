@@ -7,6 +7,7 @@
         <result column="startTime" property="starttime" jdbcType="TIMESTAMP"/>
         <result column="endTime" property="endtime" jdbcType="TIMESTAMP"/>
         <association property="subject" column="subjectId" select="com.qfedu.examsys.dao.SubjectDao.findBySubjectId"></association>
+        <association property="eTest" column="id" select="com.qfedu.examsys.dao.ETestDao.findByeid"></association>
     </resultMap>
     <sql id="Base_Column_List">
     id, subjectId, startTime, endTime
@@ -93,6 +94,11 @@
 
     <!--根据学科Id查询所有的考试信息-->
     <select id="findExamsBySubjectId" parameterType="int" resultMap="BaseResultMap">
+        select * from exam where subjectId = #{subjectId}
+    </select>
+
+    <!--根据学科Id查询所有的考试信息-->
+    <select id="findExamsBySubjectId2" parameterType="int" resultMap="BaseResultMap">
         select * from exam where subjectId = #{subjectId}
     </select>
 </mapper>

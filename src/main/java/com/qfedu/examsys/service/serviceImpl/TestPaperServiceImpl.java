@@ -66,8 +66,8 @@ public class TestPaperServiceImpl implements TestPaperService {
         //随机获取radios 10道题
         radioList = mapperUtils.getRandomList(radios, 10);
 
-        // 随机获取 judges 10道题
-        judgeList = mapperUtils.getRandomList(judges, 10);
+        // 随机获取 judges 5 道题
+        judgeList = mapperUtils.getRandomList(judges, 5);
 
         // 随机获取 shortAnswers 5道题
 

@@ -9,6 +9,7 @@
     <result column="judgeJson" property="judgejson" jdbcType="VARCHAR" />
     <result column="radioJson" property="radiojson" jdbcType="VARCHAR" />
     <result column="shortAnswerJson" property="shortanswerjson" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, eid, subjectId, name, judgeJson, radioJson, shortAnswerJson
@@ -159,6 +160,10 @@
     select *
     from eTest
     where id = #{id}
+  </select>
+
+  <select id="findETestById" parameterType="int" resultType="int">
+    select status from eTest where id = #{id}
   </select>
 
 </mapper>

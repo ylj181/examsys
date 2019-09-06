@@ -60,6 +60,18 @@ public class ETestServiceImpl implements ETestService {
         return eTestDao.changeStatus(eTid);
     }
 
+    /**
+     * 通过试卷的Id查询试卷状态信息
+     * @param id   试卷Id
+     * @return  返回试卷状态
+     */
+    @Override
+    public Integer findETestById(Integer id) {
+
+        Integer status = eTestDao.findETestById(id);
+        return status;
+    }
+
     @Override
     public ETest QueryById(Integer id) {
         return eTestDao.QueryById(id);

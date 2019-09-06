@@ -58,6 +58,9 @@ public class TestPaperController {
     @Autowired(required = false)
     private EnrollDao enrollDao;
 
+    @Autowired(required = false)
+    private ExamDao examDao;
+
 
     //试卷信息生成 并保存到eTest  需要管理员开启exam 考场 Exam exam  设置考卷名称
     //正常code 为1 返回etest对象
@@ -233,6 +236,7 @@ public class TestPaperController {
 
 
         ETest byeid = eTestDao.findByeid(eId);
+
 
         ArrayList<ETest> eTests = new ArrayList<>();
 

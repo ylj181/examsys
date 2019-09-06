@@ -57,6 +57,8 @@ public class AnswerUtils {
 
         String[] radioSplit = radios.split("&");
 
+        Answer answer1 = answerDao.findOneByuidAndeTid(uId, eTid);
+
         Answer answer = new Answer();
         answer.setEtid(eTid);
         answer.setJudges(judges);
@@ -144,7 +146,11 @@ public class AnswerUtils {
         answer.setUid(uId);
         answer.setEtid(eTid);
 
-        answerDao.insertSelective(answer);
+        //answerDao.insertSelective(answer);
+
+        answer.setId(answer1.getId());
+        answerDao.updateByPrimaryKeySelective(answer);
+
 
         return  answer;
 
