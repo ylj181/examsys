@@ -141,14 +141,14 @@ public class TestPaperController {
         }
         if(strings.size()!=split.length){
 
-            return "redirect:http://127.0.0.1:8020/examsys/OptionTest.html?flag="+-1;
+            return "redirect:http://127.0.0.1:8848/examsys/OptionTest.html?flag="+-1;
         }
         JsonResult studentTestMapper = testPaperService.getStudentTestMapper(TestType);
 
        //获取testTypeId
         String testTypeId = studentTestMapper.getInfo().toString();
 
-        return "redirect:http://127.0.0.1:8020/examsys/TestMapper.html?testTypeId="+testTypeId;
+        return "redirect:http://127.0.0.1:8848/examsys/TestMapper.html?testTypeId="+testTypeId;
         //return studentTestMapper;
     }
 
