@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.ETest;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public interface ETestDao {
 
 
 
-    List<ETest> findAlls();
+    List<ETest> findAlls(@Param("name") String name);
     // 根据id查
     ETest QueryById(Integer id);
 }

@@ -66,9 +66,9 @@ public class ETestServiceImpl implements ETestService {
     }
 
     @Override
-    public List<ETest> findAlls( Integer page, Integer limit) {
+    public List<ETest> findAlls( String name,Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
-         return eTestDao.findAlls();
+         return eTestDao.findAlls(name);
     }
 
 }

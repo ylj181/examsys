@@ -133,8 +133,16 @@
   </resultMap>
   <select id="findAlls" parameterType="int" resultMap="eTestMap">
     select e.*, s.name as sname,s.id as sid
-    from eTest e
-    inner join subject s on e.subjectId = s.id
+    from examsys.eTest e
+    inner join examsys.subject s on e.subjectId = s.id
+    <where>
+      <if test="name!=null">
+        s.name like "%${name}%"
+      </if>
+      <!--            <if test="typename==null">-->
+      <!--                and typename like "%1%"-->
+      <!--            </if>-->
+    </where>
   </select>
 
 <!--  通过考试id查询eTest的id  by: imlee -->

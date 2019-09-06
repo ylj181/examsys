@@ -279,8 +279,8 @@ public class TestPaperController {
 
     @RequestMapping("/listAllETest.do")
     @ResponseBody
-    public Map<String, Object> findAllRadios(Integer page, Integer limit) {
-        List<ETest> eTestList = eTestService.findAlls(page, limit);
+    public Map<String, Object> findAllRadios(String name,Integer page, Integer limit) {
+        List<ETest> eTestList = eTestService.findAlls(name,page, limit);
 
         long total = ((Page) eTestList).getTotal();
         Map<String, Object> map = new HashMap<>();

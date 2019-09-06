@@ -28,7 +28,8 @@ public interface ETestService {
      * @return
      */
     public Integer findETestIdByEid(int eid);
-    List<ETest> findAlls(Integer page, Integer limit);
+
+    List<ETest> findAlls(String name,Integer page, Integer limit);
 
 
 
